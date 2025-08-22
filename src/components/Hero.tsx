@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
         loop
         playsInline
         className="absolute w-full h-full object-cover"
-        poster="/images/boat.jpg"
+        poster="/images/mito-camp.jpg"
       >
         <source src="/videos/hero-langkwi.mp4" type="video/mp4" />
         Your browser does not support the video tag.

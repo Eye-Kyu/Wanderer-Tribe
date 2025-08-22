@@ -26,7 +26,7 @@ export default function Header() {
     >
       <Link href="/">
         <Image
-          src="/logo.png"
+          src="/images/Wanderer logo 1.png"
           alt="Wanderer Tribe Logo"
           width={180}
           height={60}
