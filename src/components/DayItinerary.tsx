@@ -90,7 +90,7 @@ const itemVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut", delay: i * 0.2 },
+    transition: { duration: 0.8, delay: i * 0.2 }, // Removed 'ease' string
   }),
 };
 
@@ -176,7 +176,7 @@ export default function DayItinerary() {
         }
         transition={{ duration: 0.7, ease: "easeInOut" }}
       >
-        Journey Through Malaysia's Wonders
+        Journey Through the Wonders of Malaysia
         <motion.div
           className="w-24 h-1 bg-gradient-to-r from-[#D27D2D] to-[#008080] mx-auto mt-3 rounded"
           initial={{ scaleX: 0 }}

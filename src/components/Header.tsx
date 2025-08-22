@@ -2,12 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion"; // Explicit named exports
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [, setIsHovered] = useState(false);
 
   // Track scroll direction and hide/show header
   useMotionValueEvent(scrollY, "change", (current) => {

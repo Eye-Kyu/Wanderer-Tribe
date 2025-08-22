@@ -18,12 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+      <head></head>
       <body className={inter.className}>
         <Header />
         <main className="min-h-screen pt-16">{children}</main>
