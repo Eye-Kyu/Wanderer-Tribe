@@ -10,7 +10,7 @@ import CallToAction from "@/components/CallToAction";
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
+    <main className="overflow-hidden space-y-9">
       {/* 1. Hero Section */}
       <Hero />
 

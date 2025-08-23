@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
     >
       {/* Video Background */}

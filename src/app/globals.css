@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Stardom;
+  src: url("/Wandere-Tribe/wanderer/public/fonts/Stardom_Complete/Fonts/OTF/Stardom-Regular.otf");
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -40,6 +45,9 @@ body {
   background-color: #FAF9F6; /* neutral */
   color: #333333; /* textDark */
   font-family: 'Montserrat', sans-serif; /* body */
+}
+h1,h2,h3 {
+  font-family: Stardom;
 }
 
 
