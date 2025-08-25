@@ -28,8 +28,8 @@ export default function DestinationsShowcase() {
           Explore Our Signature Destinations
         </h2>
         <p className="text-textDark/80 max-w-2xl mx-auto">
-          Handpicked luxury experiences across Asia, Africa, and Europe —
-          immerse yourself in the extraordinary.
+          Handpicked luxury experiences across Asia, Africa, and Europe. Immerse
+          yourself in the extraordinary.
         </p>
       </div>
 

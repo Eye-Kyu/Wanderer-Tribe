@@ -45,7 +45,14 @@ export default function Navbar() {
         onMouseLeave={() => setHoveredMenu(null)}
         className="relative"
       >
-        <span className="cursor-pointer hover:text-primary">Destinations</span>
+        <Link
+          href="/Destinations"
+          className="cursor-pointer hover:text-[#D27D2D]"
+        >
+          <span className="cursor-pointer hover:text-[#D27D2D]">
+            Destinations
+          </span>
+        </Link>
         <AnimatePresence>
           {hoveredMenu === "destinations" && (
             <motion.div
@@ -59,8 +66,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaGlobeEurope />
                   <Link
-                    href="/destinations/europe"
-                    className="hover:text-primary"
+                    href="/Destinations/europe"
+                    className="hover:text-[#D27D2D]"
                   >
                     Europe
                   </Link>
@@ -68,8 +75,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaGlobeAfrica />
                   <Link
-                    href="/destinations/africa"
-                    className="hover:text-primary"
+                    href="/Destinations/africa"
+                    className="hover:text-[#D27D2D]"
                   >
                     Africa
                   </Link>
@@ -77,8 +84,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaGlobeAsia />
                   <Link
-                    href="/destinations/asia"
-                    className="hover:text-primary"
+                    href="/Destinations/asia"
+                    className="hover:text-[#D27D2D]"
                   >
                     Asia
                   </Link>
@@ -94,7 +101,14 @@ export default function Navbar() {
         onMouseLeave={() => setHoveredMenu(null)}
         className="relative"
       >
-        <span className="cursor-pointer hover:text-primary">Experiences</span>
+        <Link
+          href="/Experiences"
+          className="cursor-pointer hover:text-[#D27D2D]"
+        >
+          <span className="cursor-pointer hover:text-[#D27D2D]">
+            Experiences
+          </span>
+        </Link>
         <AnimatePresence>
           {hoveredMenu === "experiences" && (
             <motion.div
@@ -108,8 +122,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaSpa />
                   <Link
-                    href="/experiences/wellness"
-                    className="hover:text-primary"
+                    href="/Experiences/wellness"
+                    className="hover:text-[#D27D2D]"
                   >
                     Wellness Retreats
                   </Link>
@@ -117,8 +131,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaHiking />
                   <Link
-                    href="/experiences/adventure"
-                    className="hover:text-primary"
+                    href="/Experiences/adventure"
+                    className="hover:text-[#D27D2D]"
                   >
                     Adventure Travel
                   </Link>
@@ -126,8 +140,8 @@ export default function Navbar() {
                 <li className="flex items-center space-x-2">
                   <FaGem />
                   <Link
-                    href="/experiences/luxury"
-                    className="hover:text-primary"
+                    href="/Experiences/luxury"
+                    className="hover:text-[#D27D2D]"
                   >
                     Luxury Escapes
                   </Link>
@@ -139,12 +153,12 @@ export default function Navbar() {
       </li>
 
       <li>
-        <Link href="/about" className="hover:text-primary">
+        <Link href="/about" className="hover:text-[#D27D2D]">
           About
         </Link>
       </li>
       <li>
-        <Link href="/contact" className="hover:text-primary">
+        <Link href="/contact" className="hover:text-[#D27D2D]">
           Contact
         </Link>
       </li>
@@ -160,17 +174,20 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
         {/* Logo */}
-        <Image
-          src="/images/Wanderer logo 1.png"
-          alt="wanderer-tribe-logo"
-          width={100}
-          height={30}
-        />
+
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/Wanderer logo 1.png"
+            alt="wanderer-tribe-logo"
+            width={100}
+            height={30}
+          />
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks}
-          <button className="bg-primary text-white px-5 py-2 rounded-full hover:opacity-90 transition">
+          <button className="bg-[#D27D2D] text-white px-5 py-2 rounded-full hover:opacity-90 transition">
             Book Now
           </button>
         </div>
@@ -193,7 +210,7 @@ export default function Navbar() {
             className="md:hidden bg-white text-black px-6 py-4 space-y-4"
           >
             {navLinks}
-            <button className="w-full bg-primary text-white py-2 rounded-full">
+            <button className="w-full bg-[#D27D2D] text-white py-2 rounded-full">
               Book Now
             </button>
           </motion.div>

@@ -24,7 +24,7 @@ const ActivityList: React.FC = () => {
         </h2>
         <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
           From luxury safaris in Africa to cultural explorations in Asia and
-          romantic getaways in Europe — each journey is designed to immerse you
+          romantic getaways in Europe. Each journey is designed to immerse you
           in unforgettable memories.
         </p>
 
