@@ -4,7 +4,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 1,
         name: "Yoga & Meditation Retreat in Bali",
-        image: "/images/wellness/bali-yoga.jpg",
+        image: "/images/bali-yoga.jpeg",
         location: "Bali, Indonesia",
         duration: "7 Days",
         highlights: ["Daily yoga sessions", "Guided meditation", "Organic meals"],
@@ -16,7 +16,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 2,
         name: "Ayurvedic Spa Retreat in Kerala",
-        image: "/images/wellness/kerala-ayurveda.jpg",
+        image: "/images/kerala-ayurveda.jpeg",
         location: "Kerala, India",
         duration: "6 Days",
         highlights: ["Ayurvedic treatments", "Detox programs", "Herbal therapies"],
@@ -28,19 +28,19 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 3,
         name: "Thermal Spa in Iceland",
-        image: "/images/wellness/iceland-spa.jpg",
+        image: "/images/iceland-spa.jpeg",
         location: "Reykjavik, Iceland",
         duration: "5 Days",
         highlights: ["Hot springs", "Geothermal pools", "Nordic sauna"],
         description:
-            "Relax in Iceland’s geothermal hot springs, natural saunas, and experience unique spa treatments.",
+            "Relax in Iceland's geothermal hot springs, natural saunas, and experience unique spa treatments.",
         tips: ["Bring swimwear and towel", "Book treatments in advance"],
         tags: ["Spa", "Relaxation", "Nature"],
     },
     {
         id: 4,
         name: "Luxury Wellness Resort in Costa Rica",
-        image: "/images/wellness/costa-rica-resort.jpg",
+        image: "/images/costa-rica-resort.jpeg",
         location: "Costa Rica",
         duration: "6 Days",
         highlights: ["Organic cuisine", "Yoga & Pilates", "Rainforest walks"],
@@ -52,7 +52,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 5,
         name: "Hot Spring Healing in Japan",
-        image: "/images/wellness/japan-onsen.jpg",
+        image: "/images/japan-onsen.jpeg",
         location: "Kyoto & Hakone, Japan",
         duration: "5 Days",
         highlights: ["Onsen baths", "Zen gardens", "Traditional ryokan stay"],
@@ -64,7 +64,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 6,
         name: "Mindfulness Retreat in Thailand",
-        image: "/images/wellness/thailand-mindfulness.jpg",
+        image: "/images/thailand-mindfulness.jpeg",
         location: "Chiang Mai, Thailand",
         duration: "7 Days",
         highlights: ["Mindfulness workshops", "Temple visits", "Meditation"],
@@ -76,7 +76,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 7,
         name: "Holistic Detox in Portugal",
-        image: "/images/wellness/portugal-detox.jpg",
+        image: "/images/portugal-detox.jpeg",
         location: "Algarve, Portugal",
         duration: "5 Days",
         highlights: ["Juice cleanses", "Holistic therapies", "Beach walks"],
@@ -88,7 +88,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 8,
         name: "Luxury Spa Resort in Switzerland",
-        image: "/images/wellness/switzerland-spa.jpg",
+        image: "/images/switzerland-spa.jpeg",
         location: "Zermatt, Switzerland",
         duration: "6 Days",
         highlights: ["Alpine spa treatments", "Yoga & wellness", "Mountain views"],
@@ -100,7 +100,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 9,
         name: "Forest Bathing Retreat in Japan",
-        image: "/images/wellness/japan-forest.jpg",
+        image: "/images/japan-forest.jpeg",
         location: "Nagano, Japan",
         duration: "4 Days",
         highlights: ["Shinrin-yoku (forest bathing)", "Guided walks", "Meditation"],
@@ -112,7 +112,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 10,
         name: "Luxury Detox & Spa in Morocco",
-        image: "/images/wellness/morocco-spa.jpg",
+        image: "/images/morocco-spa.jpeg",
         location: "Marrakech, Morocco",
         duration: "5 Days",
         highlights: ["Hammam treatments", "Aromatherapy", "Meditation sessions"],

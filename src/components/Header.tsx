@@ -153,12 +153,12 @@ export default function Navbar() {
       </li>
 
       <li>
-        <Link href="/about" className="hover:text-[#D27D2D]">
+        <Link href="/About" className="hover:text-[#D27D2D]">
           About
         </Link>
       </li>
       <li>
-        <Link href="/contact" className="hover:text-[#D27D2D]">
+        <Link href="/Contact" className="hover:text-[#D27D2D]">
           Contact
         </Link>
       </li>

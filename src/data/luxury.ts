@@ -4,7 +4,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 1,
         name: "Maldives Overwater Villa Stay",
-        image: "/images/luxury/maldives-villa.jpg",
+        image: "/images/maldives-villa.jpg",
         location: "Maldives",
         duration: "5 Days",
         highlights: ["Private villa", "Infinity pool", "Sunset dining"],
@@ -16,7 +16,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 2,
         name: "Private Yacht in the French Riviera",
-        image: "/images/luxury/french-riviera-yacht.jpg",
+        image: "/images/french-riviera-yacht.jpg",
         location: "French Riviera, France",
         duration: "7 Days",
         highlights: ["Yacht cruising", "Monte Carlo", "Coastal towns"],
@@ -28,7 +28,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 3,
         name: "Safari Lodge in South Africa",
-        image: "/images/luxury/south-africa-lodge.jpg",
+        image: "/images/south-africa-lodge.jpg",
         location: "Sabi Sands, South Africa",
         duration: "5 Days",
         highlights: ["Private game drives", "Gourmet dining", "Spa treatments"],
