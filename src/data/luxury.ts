@@ -4,7 +4,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 1,
         name: "Maldives Overwater Villa Stay",
-        image: "/images/maldives-villa.jpg",
+        image: "/images/luxury/maldives-villa.jpeg",
         location: "Maldives",
         duration: "5 Days",
         highlights: ["Private villa", "Infinity pool", "Sunset dining"],
@@ -16,7 +16,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 2,
         name: "Private Yacht in the French Riviera",
-        image: "/images/french-riviera-yacht.jpg",
+        image: "/images/luxury/french-riviera-yacht.jpeg",
         location: "French Riviera, France",
         duration: "7 Days",
         highlights: ["Yacht cruising", "Monte Carlo", "Coastal towns"],
@@ -28,7 +28,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 3,
         name: "Safari Lodge in South Africa",
-        image: "/images/south-africa-lodge.jpg",
+        image: "/images/luxury/south-africa-lodge.jpeg",
         location: "Sabi Sands, South Africa",
         duration: "5 Days",
         highlights: ["Private game drives", "Gourmet dining", "Spa treatments"],
@@ -40,7 +40,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 4,
         name: "Luxury Train Journey in India",
-        image: "/images/luxury/india-train.jpg",
+        image: "/images/luxury/india-train.jpeg",
         location: "Rajasthan, India",
         duration: "6 Days",
         highlights: ["Palatial train cabins", "Heritage sites", "Fine dining"],
@@ -52,7 +52,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 5,
         name: "Private Island in Fiji",
-        image: "/images/luxury/fiji-island.jpg",
+        image: "/images/luxury/fiji-island.jpeg",
         location: "Fiji",
         duration: "6 Days",
         highlights: ["Secluded beaches", "Private chef", "Snorkeling"],
@@ -64,7 +64,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 6,
         name: "Five-Star Spa Retreat in Bali",
-        image: "/images/luxury/bali-spa.jpg",
+        image: "/images/luxury/bali-spa.jpeg",
         location: "Bali, Indonesia",
         duration: "5 Days",
         highlights: ["Luxury spa treatments", "Yoga sessions", "Infinity pool"],
@@ -76,7 +76,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 7,
         name: "Ski Chalet in Aspen",
-        image: "/images/luxury/aspen-chalet.jpg",
+        image: "/images/luxury/aspen-chalet.jpeg",
         location: "Aspen, USA",
         duration: "7 Days",
         highlights: ["Private chalet", "Ski slopes", "Fine dining"],
@@ -88,7 +88,7 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 8,
         name: "Wine Tasting in Bordeaux",
-        image: "/images/luxury/bordeaux-wine.jpg",
+        image: "/images/luxury/bordeaux-wine.jpeg",
         location: "Bordeaux, France",
         duration: "4 Days",
         highlights: ["Private vineyards", "Gourmet meals", "Chateau tours"],
@@ -100,19 +100,19 @@ export const LuxuryExperiences: Experience[] = [
     {
         id: 9,
         name: "Luxury Safari Cruise in Botswana",
-        image: "/images/luxury/botswana-cruise.jpg",
+        image: "/images/luxury/botswana-cruise.jpeg",
         location: "Okavango Delta, Botswana",
         duration: "5 Days",
         highlights: ["Delta cruise", "Wildlife photography", "Exclusive lodge"],
         description:
-            "Explore Botswana’s waterways on a luxury safari cruise with intimate wildlife encounters.",
+            "Explore Botswana's waterways on a luxury safari cruise with intimate wildlife encounters.",
         tips: ["Bring binoculars and camera", "Book early for peak season"],
         tags: ["Safari", "Luxury", "Nature"],
     },
     {
         id: 10,
         name: "Private Desert Camp in Dubai",
-        image: "/images/luxury/dubai-desert.jpg",
+        image: "/images/luxury/dubai-desert.jpeg",
         location: "Dubai, UAE",
         duration: "3 Days",
         highlights: ["Luxury desert camp", "Camel rides", "Gourmet meals"],

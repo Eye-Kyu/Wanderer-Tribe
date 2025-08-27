@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -20,92 +19,112 @@ const experiencesOverview = [
     id: "wellness",
     title: "Wellness Retreats",
     description:
-      "Immerse yourself in serene environments and rejuvenate your mind, body, and soul. From yoga retreats in Bali to spa escapes in Morocco, wellness experiences offer the perfect blend of relaxation, mindfulness, and holistic healing.",
-    image: "/images/experiences/wellness-hero.jpg",
+      "Rejuvenate with sunrise yoga on Bali’s cliffside retreats or unwind in Morocco’s ancient hammams. These sanctuaries blend mindfulness, nature, and holistic healing for a soulful escape.",
+    image: "/images/bali-yoga.jpeg",
     link: "/Experiences/wellness",
     features: [
       { icon: FaSpa, text: "Luxury Spas & Hammams" },
       { icon: FaLeaf, text: "Nature & Healing Retreats" },
       { icon: GiMeditation, text: "Yoga & Meditation" },
     ],
+    featured: "Bali, Indonesia",
   },
   {
     id: "adventure",
     title: "Adventure Travel",
     description:
-      "For the thrill-seekers and explorers, adventure travel takes you off the beaten path. Hike through majestic mountains, dive into pristine waters, or embark on extreme sports across the globe. Every experience is designed to challenge and inspire.",
-    image: "/images/experiences/adventure-hero.jpg",
+      "Conquer the Inca Trail’s rugged peaks, dive into the Great Barrier Reef’s depths, or soar with a skydive over the Swiss Alps. Each journey ignites your spirit with challenge and awe.",
+    image: "/images/adventure/inca-trail.jpeg",
     link: "/Experiences/adventure",
     features: [
       { icon: FaMountain, text: "Mountain & Hiking Adventures" },
       { icon: FaWater, text: "Water Sports & Diving" },
       { icon: FaParachuteBox, text: "Extreme & Aerial Sports" },
     ],
+    featured: "Peru, South America",
   },
   {
     id: "luxury",
     title: "Luxury Escapes",
     description:
-      "Indulge in the finest accommodations, exclusive experiences, and breathtaking destinations. Luxury escapes are crafted for comfort, elegance, and unforgettable memories, whether it’s a private villa in the Maldives or a curated city adventure in Europe.",
-    image: "/images/experiences/luxury-hero.jpg",
+      "Savor a private villa sunset in the Maldives or a Bordeaux wine tasting in a chateau. These escapes offer bespoke elegance, from 5-star suites to curated cultural immersions.",
+    image: "/images/luxury/bordeaux-wine.jpeg",
     link: "/Experiences/luxury",
     features: [
       { icon: FaGem, text: "Exclusive Experiences" },
       { icon: FaCocktail, text: "Fine Dining & Cocktails" },
       { icon: FaHotel, text: "5-Star Accommodations" },
     ],
+    featured: "Maldives, Indian Ocean",
   },
 ];
 
 export default function ExperiencesPage() {
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto space-y-32">
+    <section
+      className="relative min-h-screen bg-[#FAF9F6] py-24 px-6 max-w-7xl mx-auto space-y-20"
+      style={{
+        backgroundImage: "url('/images/faint-map-pattern.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundBlendMode: "overlay",
+        opacity: 0.95,
+      }}
+    >
       <motion.h1
-        className="text-5xl md:text-6xl font-heading text-center mb-12"
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
+        className="font-heading text-4xl md:text-5xl text-center text-gray-800 mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       >
         Explore Experiences
       </motion.h1>
 
       {experiencesOverview.map((exp, idx) => {
         const isEven = idx % 2 === 0;
+        const isAdventure = exp.id === "adventure";
+        const flexReverse = isAdventure ? !isEven : isEven;
+
         return (
           <motion.div
             key={exp.id}
-            className={`flex flex-col lg:flex-row items-center ${
-              !isEven ? "lg:flex-row-reverse" : ""
-            } gap-10`}
+            className={`relative overflow-hidden rounded-2xl bg-white/90 border border-gray-200/30 backdrop-blur-sm ${
+              flexReverse ? "pr-8 md:pl-16" : "pl-8 md:pr-16"
+            } flex flex-col md:flex-row items-center gap-10 py-10`}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.2 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: idx * 0.1 }}
+            style={{
+              clipPath: "polygon(0 0, 100% 5%, 100% 95%, 0 100%)",
+              background: "linear-gradient(135deg, #ffffff80, #faf9f680)",
+            }}
           >
-            {/* Image */}
-            <div className="relative w-full lg:w-1/2 h-64 sm:h-96 rounded-xl overflow-hidden shadow-lg">
-              <Image
-                src={exp.image}
-                alt={exp.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-
             {/* Text */}
-            <div className="lg:w-1/2 flex flex-col justify-center space-y-6 text-center lg:text-left">
-              <h2 className="text-4xl md:text-5xl font-semibold text-[#2D5BD2]">
+            <div className="w-full md:w-1/2 flex flex-col justify-center space-y-6 text-center md:text-left">
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#D27D2D]">
                 {exp.title}
               </h2>
               <p className="text-gray-700 leading-relaxed">{exp.description}</p>
+              <div className="text-sm text-gray-500 italic">
+                Featured: {exp.featured}
+              </div>
 
               {/* Feature Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 {exp.features.map((feature, i) => (
                   <div
                     key={i}
-                    className="flex items-center space-x-3 p-4 rounded-xl bg-gray-100"
+                    className="flex items-center space-x-3 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300"
                   >
-                    <feature.icon className="text-[#2D5BD2] w-6 h-6" />
-                    <span className="text-gray-800 font-medium">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <feature.icon className="text-[#008080] w-6 h-6" />
+                    </motion.div>
+                    <span className="text-gray-800 text-base font-medium">
                       {feature.text}
                     </span>
                   </div>
@@ -114,10 +133,24 @@ export default function ExperiencesPage() {
 
               <Link
                 href={exp.link}
-                className="inline-block bg-[#2D5BD2] text-white px-6 py-3 rounded-full hover:opacity-90 transition self-center lg:self-start mt-6"
+                className="inline-block bg-[#D27D2D] text-white px-6 py-3 rounded-full hover:bg-[#B5661F] transition-colors duration-200 mt-6 relative group"
               >
-                Explore {exp.title}
+                <span className="relative z-10">
+                  Chart Your {exp.title} Path
+                </span>
+                <span className="absolute inset-0 bg-gray-200/20 rounded-full -z-10 transform scale-0 group-hover:scale-100 transition-transform duration-300"></span>
               </Link>
+            </div>
+
+            {/* Image */}
+            <div className="relative w-full md:w-1/2 h-64 md:h-96 rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src={exp.image}
+                alt={exp.title}
+                fill
+                className="object-cover brightness-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF9F6]/70 to-transparent"></div>
             </div>
           </motion.div>
         );

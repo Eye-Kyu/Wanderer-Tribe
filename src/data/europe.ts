@@ -19,7 +19,7 @@ export const Destinations: Destination[] = [
     {
         id: 1,
         name: "Paris, France",
-        image: "/images/europe/paris.jpg",
+        image: "/images/paris.jpeg",
         duration: "5 Days",
         region: "Western Europe",
         description: "The city of light, romance, and art.",
@@ -39,7 +39,7 @@ export const Destinations: Destination[] = [
     {
         id: 2,
         name: "Rome, Italy",
-        image: "/images/europe/rome.jpg",
+        image: "/images/rome.jpeg",
         duration: "6 Days",
         region: "Southern Europe",
         description: "Ancient ruins blended with vibrant street life.",
@@ -60,7 +60,7 @@ export const Destinations: Destination[] = [
     {
         id: 3,
         name: "Santorini, Greece",
-        image: "/images/europe/santorini.jpg",
+        image: "/images/greece.jpeg",
         duration: "4 Days",
         region: "Southern Europe",
         description: "Iconic white-washed villages and breathtaking sunsets.",
@@ -79,7 +79,7 @@ export const Destinations: Destination[] = [
     {
         id: 4,
         name: "Barcelona, Spain",
-        image: "/images/europe/barcelona.jpg",
+        image: "/images/barcelona.jpeg",
         duration: "5 Days",
         region: "Southern Europe",
         description: "A vibrant city of art, beaches, and Catalan culture.",
@@ -92,14 +92,14 @@ export const Destinations: Destination[] = [
             { day: "Day 5", details: "Shopping and departure" }
         ],
         whyVisit: "Barcelona is the perfect mix of culture, architecture, and fun.",
-        culture: "Catalan identity, tapas, flamenco, and Gaudí’s masterpieces.",
+        culture: "Catalan identity, tapas, flamenco, and Gaudí's masterpieces.",
         tips: ["Watch your belongings on La Rambla.", "Try authentic paella."],
         tags: ["Beach", "Culture", "Architecture", "Nightlife"]
     },
     {
         id: 5,
         name: "Zurich & Interlaken, Switzerland",
-        image: "/images/europe/switzerland.jpg",
+        image: "/images/switzerland.jpeg",
         duration: "6 Days",
         region: "Central Europe",
         description: "A haven of mountains, lakes, and adventure sports.",
@@ -120,7 +120,7 @@ export const Destinations: Destination[] = [
     {
         id: 6,
         name: "Berlin, Germany",
-        image: "/images/europe/berlin.jpg",
+        image: "/images/berlin.jpeg",
         duration: "4 Days",
         region: "Central Europe",
         description: "A city where modern art meets turbulent history.",
@@ -131,7 +131,7 @@ export const Destinations: Destination[] = [
             { day: "Day 3", details: "Day trip to Potsdam" },
             { day: "Day 4", details: "Brandenburg Gate and departure" }
         ],
-        whyVisit: "Berlin is Europe’s hub for history and counterculture.",
+        whyVisit: "Berlin is Europe's hub for history and counterculture.",
         culture: "Progressive art, reunification history, and techno music.",
         tips: ["Get a Welcome Card for transport.", "Explore street art areas."],
         tags: ["History", "Nightlife", "Culture", "Art"]
@@ -139,7 +139,7 @@ export const Destinations: Destination[] = [
     {
         id: 7,
         name: "Oslo & Fjords, Norway",
-        image: "/images/europe/norway.jpg",
+        image: "/images/norway.jpeg",
         duration: "5 Days",
         region: "Northern Europe",
         description: "Majestic fjords and Nordic charm.",
@@ -159,7 +159,7 @@ export const Destinations: Destination[] = [
     {
         id: 8,
         name: "Prague, Czech Republic",
-        image: "/images/europe/prague.jpg",
+        image: "/images/prague.jpeg",
         duration: "4 Days",
         region: "Eastern Europe",
         description: "A fairytale city of castles, bridges, and beer.",
@@ -178,7 +178,7 @@ export const Destinations: Destination[] = [
     {
         id: 9,
         name: "Amsterdam, Netherlands",
-        image: "/images/europe/amsterdam.jpg",
+        image: "/images/amsterdam.jpeg",
         duration: "5 Days",
         region: "Western Europe",
         description: "A city of canals, bicycles, and liberal spirit.",
@@ -198,7 +198,7 @@ export const Destinations: Destination[] = [
     {
         id: 10,
         name: "Dubrovnik, Croatia",
-        image: "/images/europe/dubrovnik.jpg",
+        image: "/images/dubrovnik.jpeg",
         duration: "4 Days",
         region: "Southern Europe",
         description: "The Pearl of the Adriatic, with medieval walls and beaches.",
@@ -217,15 +217,15 @@ export const Destinations: Destination[] = [
     {
         id: 11,
         name: "Edinburgh, Scotland",
-        image: "/images/europe/edinburgh.jpg",
+        image: "/images/edinburgh.jpeg",
         duration: "5 Days",
         region: "Northern Europe",
         description: "A gothic capital of castles, whisky, and festivals.",
-        highlights: ["Edinburgh Castle", "Arthur’s Seat", "Royal Mile"],
+        highlights: ["Edinburgh Castle", "Arthur's Seat", "Royal Mile"],
         itinerary: [
             { day: "Day 1", details: "Arrival and stroll along the Royal Mile" },
             { day: "Day 2", details: "Visit Edinburgh Castle" },
-            { day: "Day 3", details: "Hike up Arthur’s Seat" },
+            { day: "Day 3", details: "Hike up Arthur's Seat" },
             { day: "Day 4", details: "Scottish whisky tasting" },
             { day: "Day 5", details: "Festival or market and departure" }
         ],
@@ -237,7 +237,7 @@ export const Destinations: Destination[] = [
     {
         id: 12,
         name: "Lisbon, Portugal",
-        image: "/images/europe/lisbon.jpg",
+        image: "/images/lisbon.jpeg",
         duration: "5 Days",
         region: "Southern Europe",
         description: "A charming coastal city with hills, trams, and fado music.",

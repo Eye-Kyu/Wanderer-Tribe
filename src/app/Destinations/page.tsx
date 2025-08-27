@@ -52,7 +52,7 @@ export default function Destinations() {
         cost: "$2,500",
         locations: "Paris",
         activities: "Eiffel Tower Visit, Louvre Museum, Seine River Cruise",
-        image: "/images/paris.jpg",
+        image: "/images/paris.jpeg",
       },
       {
         name: "Rome, Italy",
@@ -62,7 +62,7 @@ export default function Destinations() {
         cost: "$2,800",
         locations: "Rome",
         activities: "Colosseum Tour, Vatican Museums, Trastevere Dining",
-        image: "/images/rome.jpg",
+        image: "/images/rome.jpeg",
       },
       {
         name: "Barcelona, Spain",
@@ -72,7 +72,7 @@ export default function Destinations() {
         cost: "$3,000",
         locations: "Barcelona",
         activities: "Sagrada Familia, Park Güell, La Rambla",
-        image: "/images/barcelona.jpg",
+        image: "/images/barcelona.jpeg",
       },
       {
         name: "Amsterdam, Netherlands",
@@ -82,7 +82,7 @@ export default function Destinations() {
         cost: "$2,700",
         locations: "Amsterdam",
         activities: "Canal Cruise, Van Gogh Museum, Anne Frank House",
-        image: "/images/amsterdam.jpg",
+        image: "/images/amsterdam.jpeg",
       },
       {
         name: "Venice, Italy",
@@ -92,7 +92,7 @@ export default function Destinations() {
         cost: "$2,900",
         locations: "Venice",
         activities: "Gondola Ride, St. Mark's Square, Doge's Palace",
-        image: "/images/venice.jpg",
+        image: "/images/venice.jpeg",
       },
     ],
     Africa: [
@@ -104,7 +104,7 @@ export default function Destinations() {
         cost: "$3,200",
         locations: "Maasai Mara",
         activities: "Game Drives, Hot Air Balloon, Maasai Village Visit",
-        image: "/images/maasai-mara.jpg",
+        image: "/images/africa/maasai-mara.jpeg",
       },
       {
         name: "Cape Town, South Africa",
@@ -114,7 +114,7 @@ export default function Destinations() {
         cost: "$3,500",
         locations: "Cape Town",
         activities: "Table Mountain, Robben Island, Wine Tasting",
-        image: "/images/cape-town.jpg",
+        image: "/images/africa/cape-town.jpeg",
       },
       {
         name: "Serengeti, Tanzania",
@@ -124,7 +124,7 @@ export default function Destinations() {
         cost: "$4,000",
         locations: "Serengeti",
         activities: "Wildlife Safari, Ngorongoro Crater, Cultural Tours",
-        image: "/images/serengeti.jpg",
+        image: "/images/africa/serengeti.jpeg",
       },
       {
         name: "Victoria Falls, Zambia/Zimbabwe",
@@ -134,7 +134,7 @@ export default function Destinations() {
         cost: "$3,300",
         locations: "Victoria Falls",
         activities: "Boat Cruise, Devil's Pool, Helicopter Tour",
-        image: "/images/victoria-falls.jpg",
+        image: "/images/africa/victoria-falls.jpeg",
       },
       {
         name: "Marrakech, Morocco",
@@ -144,7 +144,7 @@ export default function Destinations() {
         cost: "$3,100",
         locations: "Marrakech",
         activities: "Jemaa el-Fna, Bahia Palace, Sahara Excursion",
-        image: "/images/marrakech.jpg",
+        image: "/images/africa/lalibela.jpeg",
       },
     ],
     Asia: [
@@ -156,7 +156,7 @@ export default function Destinations() {
         cost: "$3,800",
         locations: "Kyoto",
         activities: "Fushimi Inari Shrine, Bamboo Forest, Tea Ceremony",
-        image: "/images/kyoto.jpg",
+        image: "/images/asia/kyoto.jpeg",
       },
       {
         name: "Tsushima, Japan",
@@ -166,7 +166,7 @@ export default function Destinations() {
         cost: " $3,500",
         locations: "Tsushima",
         activities: "Hiking, Historical Sites, Coastal Views",
-        image: "/images/tsushima.jpg",
+        image: "/images/tsushima.jpeg",
       },
       {
         name: "Mount Fuji, Japan",
@@ -176,7 +176,7 @@ export default function Destinations() {
         cost: "$2,900",
         locations: "Mount Fuji",
         activities: "Hiking, Lake Kawaguchi, Onsen Visit",
-        image: "/images/mount-fuji.jpg",
+        image: "/images/mount-fuji.jpeg",
       },
       {
         name: "Shibuya, Japan",
@@ -186,7 +186,7 @@ export default function Destinations() {
         cost: "$3,400",
         locations: "Shibuya",
         activities: "Shibuya Crossing, Harajuku, Meiji Shrine",
-        image: "/images/shibuya.jpg",
+        image: "/images/shibuya.jpeg",
       },
       {
         name: "Bali, Indonesia",
@@ -196,7 +196,7 @@ export default function Destinations() {
         cost: "$3,700",
         locations: "Bali",
         activities: "Ubud Monkey Forest, Tanah Lot, Beach Relaxation",
-        image: "/images/bali.jpg",
+        image: "/images/bali.jpeg",
       },
     ],
   };
