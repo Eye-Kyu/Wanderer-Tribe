@@ -25,10 +25,10 @@ export default function DestinationsShowcase() {
     <section className="py-16 bg-beige">
       
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="font-heading text-4xl md:text-5xl text-primary mb-4">
+        <h2 className="font-heading  text-primary mb-4">
           Explore Our Signature Destinations
         </h2>
-        <p className="text-textDark/80 max-w-2xl mx-auto">
+        <p className="text-textDark/80 max-w-2xl mx-auto ">
           Handpicked luxury experiences across Asia, Africa, and Europe. Immerse
           yourself in the extraordinary.
         </p>
@@ -51,10 +51,10 @@ export default function DestinationsShowcase() {
               className="object-cover w-full h-72 group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-500 flex flex-col justify-center items-center text-center p-6">
-              <h3 className="text-3xl font-heading text-white mb-2">
+              <h3 className=" font-heading text-white mb-2">
                 {d.continent}
               </h3>
-              <p className="text-white/80">{d.tagline}</p>
+              <p className="text-white/80 extra ">{d.tagline}</p>
             </div>
           </motion.div>
         ))}

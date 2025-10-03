@@ -35,8 +35,8 @@ export default function Testimonials() {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4">
-          Unforgettable Travel Experiences
+        <h2 className="md: pb-4 font-bold mb-4">
+         Do not Just Take our Word For It
         </h2>
         <p className="max-w-3xl mx-auto text-base md:text-lg mb-12">
           Our customer&apos;s feedback is essential in building a great reputation

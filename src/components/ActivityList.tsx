@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+// --- Activities ---
 const activities = [
   { title: "African Safaris", desc: "Witness the Big Five in their natural habitat with luxury lodges under starlit skies.", image: "/images/africa/serengeti.jpeg" },
   { title: "Tropical Beaches", desc: "Relax on pristine white sands and turquoise waters in secluded destinations.", image: "/images/asia/maldives.jpeg" },
@@ -20,23 +21,61 @@ const activities = [
   { title: "Adventure Sports", desc: "Dive, ski, paraglide, or surf in world-renowned adventure destinations.", image: "/images/adventure/costa-rica-rafting.jpeg" },
 ];
 
-export default function ActivityList(): JSX.Element {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+// --- Responsive Hook ---
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
+// --- Mobile Version (1 card per page) ---
+function MobileCarousel({ isInView }: { isInView: boolean }) {
+  return (
+    <div className="flex flex-col gap-8">
+      {activities.map((activity, idx) => (
+        <motion.article
+          key={idx}
+          className="w-full p-4 bg-white rounded-2xl shadow-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: idx * 0.05, duration: 0.6 }}
+        >
+          <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden">
+            <Image
+              src={activity.image}
+              alt={activity.title}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+          <h3 className="text-lg font-semibold mb-1 text-gray-900">
+            {activity.title}
+          </h3>
+          <p className="text-gray-600 text-sm">{activity.desc}</p>
+        </motion.article>
+      ))}
+    </div>
+  );
+}
+
+// --- Desktop Version (carousel w/ pagination) ---
+function DesktopCarousel({ isInView }: { isInView: boolean }) {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [pageWidth, setPageWidth] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
   const CARDS_PER_PAGE = 4;
-  const CARD_WIDTH = 336; // ~21rem
-  const GAP_PX = 24; // gap between cards (Tailwind gap-6 ≈ 24px)
+  const CARD_WIDTH = 336;
+  const GAP_PX = 24;
 
-  // measure width of one "page"
   useEffect(() => {
-    const measure = () => {
-      setPageWidth(CARDS_PER_PAGE * (CARD_WIDTH + GAP_PX));
-    };
+    const measure = () => setPageWidth(CARDS_PER_PAGE * (CARD_WIDTH + GAP_PX));
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
@@ -46,18 +85,15 @@ export default function ActivityList(): JSX.Element {
 
   const scrollToPage = (page: number) => {
     if (!scrollRef.current || pageWidth === 0) return;
-    const container = scrollRef.current;
     const target = page * pageWidth;
-    container.scrollTo({ left: target, behavior: "smooth" });
+    scrollRef.current.scrollTo({ left: target, behavior: "smooth" });
     setCurrentPage(page);
   };
 
-  // Track scroll to sync pagination
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollRef.current || pageWidth === 0) return;
-      const container = scrollRef.current;
-      const newPage = Math.round(container.scrollLeft / pageWidth);
+      const newPage = Math.round(scrollRef.current.scrollLeft / pageWidth);
       setCurrentPage(newPage);
     };
     const el = scrollRef.current;
@@ -66,11 +102,76 @@ export default function ActivityList(): JSX.Element {
   }, [pageWidth]);
 
   return (
+    <>
+      <div ref={scrollRef} className="flex gap-6 px-4 pb-6 overflow-hidden scroll-smooth">
+        {activities.map((activity, idx) => (
+          <motion.article
+            key={idx}
+            className="w-[21rem] flex-shrink-0 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition"
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: idx * 0.04, duration: 0.6 }}
+          >
+            <div className="relative w-full h-[22rem] mb-4 rounded-lg overflow-hidden">
+              <Image
+                src={activity.image}
+                alt={activity.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 90vw, 21rem"
+              />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+              {activity.title}
+            </h3>
+            <p className="text-gray-600 text-sm">{activity.desc}</p>
+          </motion.article>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-6 space-x-2">
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => scrollToPage(i)}
+            className={`w-3 h-3 rounded-full transition ${
+              i === currentPage ? "bg-wanderer-teal" : "bg-gray-400"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Arrows */}
+      <div className="absolute bottom-8 right-8 flex gap-4 z-30">
+        <button
+          onClick={() => scrollToPage(Math.max(currentPage - 1, 0))}
+          className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={() => scrollToPage(Math.min(currentPage + 1, totalPages - 1))}
+          className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+    </>
+  );
+}
+
+// --- Main Component ---
+export default function ActivityList(): JSX.Element {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isMobile = useIsMobile(1024); // breakpoint at 1024px
+
+  return (
     <section
       id="activities"
       ref={sectionRef}
       className="relative py-20 bg-beige w-full"
-      aria-label="Handpicked experiences carousel"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -78,7 +179,6 @@ export default function ActivityList(): JSX.Element {
         transition={{ duration: 0.9, ease: "easeOut" }}
         className="w-full px-6 text-center mx-auto"
       >
-        {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-heading text-gray-900 mb-6">
           Handpicked Experiences
         </h2>
@@ -88,70 +188,11 @@ export default function ActivityList(): JSX.Element {
           immerse you in unforgettable memories.
         </p>
 
-        {/* Carousel */}
-        <div
-          ref={scrollRef}
-          className="relative flex gap-6 px-4 pb-6 overflow-hidden scroll-smooth"
-        >
-          {activities.map((activity, idx) => (
-            <motion.article
-              key={idx}
-              className="activity-card w-[21rem] flex-shrink-0 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition"
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: idx * 0.04, duration: 0.6 }}
-            >
-              <div className="relative w-full h-[22rem] mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src={activity.image}
-                  alt={activity.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 90vw, 21rem"
-                  priority={idx < 3}
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                {activity.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {activity.desc}
-              </p>
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Pagination dots */}
-        <div className="flex justify-center mt-6 space-x-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollToPage(i)}
-              className={`w-3 h-3 rounded-full transition ${
-                i === currentPage ? "bg-wanderer-teal" : "bg-gray-400"
-              }`}
-              aria-label={`Go to page ${i + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
-        <div className="absolute bottom-8 right-8 flex gap-4 z-30">
-          <button
-            onClick={() => scrollToPage(Math.max(currentPage - 1, 0))}
-            aria-label="Previous page"
-            className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => scrollToPage(Math.min(currentPage + 1, totalPages - 1))}
-            aria-label="Next page"
-            className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
+        {isMobile ? (
+          <MobileCarousel isInView={isInView} />
+        ) : (
+          <DesktopCarousel isInView={isInView} />
+        )}
       </motion.div>
     </section>
   );

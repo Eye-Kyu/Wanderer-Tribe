@@ -26,8 +26,8 @@ const hotels = [
 export default function HotelShowcase() {
   return (
     <section className="py-16 bg-beige">
-      <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="font-heading text-4xl md:text-5xl text-[#D2691E] mb-4">
+      <div className="max-w-7xl mx-auto text-center mb-12 z-40">
+        <h2 className="font-heading  text-[#D2691E] mb-4">
           Stays That Stay With You
         </h2>
         <p className="text-[#333333]/80 max-w-2xl mx-auto">
@@ -60,7 +60,7 @@ export default function HotelShowcase() {
               <h3 className="font-heading text-xl text-[#D2691E] mb-2">
                 {hotel.name}
               </h3>
-              <p className="text-[#333333]/80">{hotel.highlight}</p>
+              <p className="text-[#333333]/80 extra">{hotel.highlight}</p>
             </div>
           </motion.div>
         ))}
