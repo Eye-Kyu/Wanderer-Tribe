@@ -1,7 +1,8 @@
 "use client";
-import { useInView, motion } from "framer-motion"; // Corrected import
+import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 const Hero: React.FC = () => {
   const scrollToNext = () => {
@@ -20,25 +21,25 @@ const Hero: React.FC = () => {
       className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute w-full h-full object-cover"
-        poster="/images/mito-camp.jpg"
-      >
-        <source src="/videos/hero-langkwi.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {/* YouTube Background Video */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2">
+          <iframe
+            className="w-full h-full pointer-events-none"
+            src="https://www.youtube.com/embed/nl8p6tIV_k0?autoplay=1&mute=1&loop=1&playlist=nl8p6tIV_k0&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
+            title="Background Video"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
 
-      {/* Luxury Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/20 to-black/30 z-10" />
 
       {/* Hero Content */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center text-center px-4"
+        className="absolute inset-0 flex items-center justify-center text-center px-4 z-20"
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 1, ease: "easeOut" }}
@@ -57,14 +58,19 @@ const Hero: React.FC = () => {
             adventurer.
           </p>
 
+          
           <div className="flex gap-4 justify-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#D27D2D] to-[#008080] text-white px-8 py-3 rounded-xl shadow-lg hover:opacity-90 transition"
-            >
-              <button>Book Your Journey</button>
-            </motion.div>
+            <Link href="/Contact">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-[#D27D2D] to-[#008080] text-white px-8 py-3 rounded-xl shadow-lg hover:opacity-90 transition"
+              >
+                <button>Book Your Journey</button>
+              </motion.div>
+            </Link>
+
+            <Link href="/Destinations">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -72,6 +78,7 @@ const Hero: React.FC = () => {
             >
               <button>Explore Destinations</button>
             </motion.div>
+             </Link> 
           </div>
         </div>
       </motion.div>
@@ -87,7 +94,7 @@ const Hero: React.FC = () => {
           repeat: Infinity,
           repeatType: "reverse",
         }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer text-center"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer text-center z-20"
       >
         <ChevronDown className="w-8 h-8 text-white/80 mx-auto" />
         <p className="text-sm text-white/70 mt-2 tracking-wide font-body">

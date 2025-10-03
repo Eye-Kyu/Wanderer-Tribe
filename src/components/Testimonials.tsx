@@ -1,75 +1,74 @@
-// src/components/Testimonials.tsx
 "use client";
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 const testimonials = [
   {
-    name: "Aisha K., Kenya",
-    text: "From the moment I landed, everything was perfectly organized. The team made sure every little detail was taken care of, from my accommodation to excursions. I felt pampered and at ease the entire time.",
+    name: "Peter Biko",
+    location: "Luanda, Angola",
+    text: "I recently booked a trip to Thailand with this travel agency and I couldn&apos;t have been happier with my experience.",
+    image: "/images/Avatar1.png",
   },
   {
-    name: "Liam T., UK",
-    text: "I was amazed by how seamlessly luxury and authenticity were blended. The trip felt unique, not cookie-cutter, and every activity was tailored to my preferences. The attention to detail was exceptional.",
-  },
-  {
-    name: "Priya S., India",
-    text: "This was a dream vacation that exceeded every expectation. The service was warm and personal, and the itinerary balanced adventure with relaxation beautifully.",
-  },
-  {
-    name: "Marco R., Italy",
-    text: "I felt like royalty the entire trip. Every transfer, every meal, every experience felt curated with care. It’s rare to find such seamless service.",
-  },
-  {
-    name: "Sophia L., Canada",
-    text: "The balance of adventure and comfort was extraordinary. Every day felt new and exciting, but I was always at ease knowing every detail was handled.",
+    name: "Jennifer and Mark",
+    location: "San Francisco",
+    text: "My husband and I have been using this travel agency for 2 years now and they have never disappointed us.",
+    image: "/images/Avatar2.png",
   },
 ];
 
-// Duplicate testimonials for seamless looping
-const loopTestimonials = [...testimonials, ...testimonials];
-
 export default function Testimonials() {
   return (
-    <section className="relative min-h-[70vh] py-20 px-8 overflow-hidden bg-gradient-to-b from-neutral-100 via-neutral-50 to-neutral-100">
-      {/* Diagonal luxury background pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.07] animate-drift"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(135deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 40px)",
-          backgroundSize: "200% 200%",
-        }}
-      />
+    <section className="relative py-20 px-6 md:px-12">
+      {/* ✅ Background image with Next.js <Image /> */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/testimonial-back.jpg"
+          alt="Cape Town background"
+          fill
+          priority
+          className="object-cover object-center"
+          quality={100}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
-      <div className="relative z-10">
-        <h2 className="font-heading text-4xl text-primary mb-12 text-center">
-          Traveler Experiences
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-teal mx-auto mt-2" />
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          Unforgettable Travel Experiences
         </h2>
+        <p className="max-w-3xl mx-auto text-base md:text-lg mb-12">
+          Our customer&apos;s feedback is essential in building a great reputation
+          and maintaining excellent service. By listening to our customer&apos;s
+          needs, we can improve our offerings and provide an exceptional travel
+          experience.
+        </p>
 
-        {/* Carousel container */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: ["0%", "-100%"] }}
-            transition={{
-              repeat: Infinity,
-              duration: 25, // Adjust speed
-              ease: "linear",
-            }}
-          >
-            {loopTestimonials.map((t, i) => (
-              <div
-                key={i}
-                className="min-w-[40%] bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-md"
-              >
-                <p className="text-textDark text-base italic mb-6 leading-relaxed">
-                  {t.text}
-                </p>
-                <p className="text-primary font-semibold">{t.name}</p>
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="bg-white text-gray-800 p-6 md:p-8 rounded-xl shadow-lg relative"
+            >
+              <p className="text-base md:text-lg italic mb-6">{t.text}</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 relative rounded-full overflow-hidden">
+                  <Image
+                    src={t.image}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-wanderer-teal">{t.name}</p>
+                  <p className="text-sm text-gray-500">{t.location}</p>
+                </div>
               </div>
-            ))}
-          </motion.div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 "use client";
 import { Twitter, Instagram, Facebook, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,12 +10,17 @@ export default function Footer() {
     <footer className="bg-neutral-700 text-white py-16 px-6 md:px-20 relative">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Brand */}
-        <div>
+        <div className="flex flex-col items-center justify-center">
           <h2 className="text-2xl font-bold mb-4">Wanderer Tribe</h2>
-          <p className="text-gray-400 text-sm">
-            Curating exclusive journeys across Asia, Africa, and Europe. Luxury
-            travel experiences, tailored for you.
-          </p>
+           <Link href="/" className="flex items-center">
+              <Image
+                src="/images/Wanderer logo 1.png"
+                alt="wanderer-tribe-logo"
+                width={100}
+                height={35}
+                className="object-contain z-50"
+              />
+            </Link>
         </div>
 
         {/* Destinations */}
@@ -31,12 +38,12 @@ export default function Footer() {
         {/* Company */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Company</h3>
-          <ul className="space-y-2 text-gray-400 text-sm">
+          <ol className="space-y-2 text-gray-400 text-sm list-disc">
             <li>About Us</li>
             <li>Careers</li>
             <li>Terms & Conditions</li>
             <li>Privacy Policy</li>
-          </ul>
+          </ol>
         </div>
 
         {/* Contact & Socials */}
@@ -55,7 +62,7 @@ export default function Footer() {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 mt-10 pt-6 text-gray-500 text-sm text-center">
+      <div className="border-t border-gray-700 mt-10 pt-6 text-gray-500 text-xs text-center">
         &copy; {currentYear} Wanderer Tribe. All rights reserved. Prices subject
         to change. Weather-dependent activities. See terms for details.
       </div>

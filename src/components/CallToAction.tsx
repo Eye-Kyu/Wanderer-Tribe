@@ -1,84 +1,231 @@
-// src/components/CallToAction.tsx
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Mail, User, MessageSquare } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Mail, User, MessageSquare, Calendar, Users, Clock } from "lucide-react";
+import { useState } from "react";
 
 export default function CallToAction() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    travellers: "",
+    date: "",
+    length: "",
+    details: "",
+  });
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!form.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!form.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = "Enter a valid email";
+    }
+    if (!form.travellers) newErrors.travellers = "Select number of travellers";
+    if (!form.date) newErrors.date = "Choose a travel date";
+    if (!form.length) newErrors.length = "Select trip length";
+    if (!form.details.trim()) newErrors.details = "Please provide trip details";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validate()) {
+      alert("Form submitted successfully! (replace with API call)");
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        travellers: "",
+        date: "",
+        length: "",
+        details: "",
+      });
+      setErrors({});
+    }
+  };
 
   return (
-    <section
-      ref={ref}
-      className="relative bg-neutral-900 py-20 px-6 text-white overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-tr from-neutral-950 via-neutral-900 to-neutral-800 opacity-90 pointer-events-none" />
-
+    <section className="py-16 px-6 md:px-10 bg-gradient-to-b from-beige to-[#e4a762]">
       <motion.div
-        className="relative z-10 max-w-3xl mx-auto text-center"
         initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-6xl mx-auto bg-white rounded-sm shadow-lg overflow-hidden grid md:grid-cols-2"
       >
-        <h2 className="font-serif text-4xl md:text-5xl font-light tracking-wide text-beige mb-6">
-          Begin Your Bespoke Journey
-        </h2>
+        {/* Left side - Image */}
+        <div className="relative">
+          <Image
+            src="/images/contact-bg.jpg"
+            alt="Curated Travel Experience"
+            width={800}
+            height={600}
+            className="object-cover w-full h-full"
+          />
+        </div>
 
-        <p className="text-white/70 text-lg mb-10 leading-relaxed">
-          Every journey we design is tailored with precision, elegance, and
-          discretion. Connect with our concierge team to curate your private
-          itinerary.
-        </p>
+        {/* Right side - Content + Form */}
+        <div className="p-10 flex flex-col justify-center">
+          <h2 className="font-heading text-3xl md:text-4xl text-[#D2691E] mb-4">
+            Plan Your Curated Experience
+          </h2>
+          <p className="text-[#333333]/80 mb-8 leading-relaxed">
+            Every trip we design is unique, personalized, and tailored to your
+            desires. Share your vision, and let us create an unforgettable
+            journey — crafted just for you.
+          </p>
 
-        <motion.form
-          className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-xl space-y-5 max-w-lg mx-auto shadow-md"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3 }}
-        >
-          {/* Name Field */}
-          <div className="relative">
-            <User className="absolute top-4 left-4 text-beige" size={20} />
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full pl-12 pr-4 py-3 rounded-md bg-transparent border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-beige"
-            />
-          </div>
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            {/* First + Last Name */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="relative">
+                <User className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  value={form.firstName}
+                  onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                  className={`w-full pl-12 pr-4 py-3 rounded-md border ${
+                    errors.firstName ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+                />
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                )}
+              </div>
+              <div className="relative">
+                <User className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  value={form.lastName}
+                  onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                  className={`w-full pl-12 pr-4 py-3 rounded-md border ${
+                    errors.lastName ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+                />
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                )}
+              </div>
+            </div>
 
-          {/* Email Field */}
-          <div className="relative">
-            <Mail className="absolute top-4 left-4 text-beige" size={20} />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full pl-12 pr-4 py-3 rounded-md bg-transparent border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-beige"
-            />
-          </div>
+            {/* Email */}
+            <div className="relative">
+              <Mail className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
+            </div>
 
-          {/* Message Field */}
-          <div className="relative">
-            <MessageSquare
-              className="absolute top-4 left-4 text-beige"
-              size={20}
-            />
-            <textarea
-              placeholder="Briefly describe your travel interests"
-              className="w-full pl-12 pr-4 py-3 h-28 resize-none rounded-md bg-transparent border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-beige"
-            />
-          </div>
+            {/* Number of Travellers */}
+            <div className="relative">
+              <Users className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+              <select
+                value={form.travellers}
+                onChange={(e) => setForm({ ...form, travellers: e.target.value })}
+                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
+                  errors.travellers ? "border-red-500" : "border-gray-300"
+                } bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+              >
+                <option value="">Number of Travellers</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3-5</option>
+                <option>6-10</option>
+                <option>10+</option>
+              </select>
+              {errors.travellers && (
+                <p className="text-red-500 text-sm mt-1">{errors.travellers}</p>
+              )}
+            </div>
 
-          {/* CTA Button */}
-          <motion.button
-            type="submit"
-            className="w-full py-3 rounded-md bg-beige text-neutral-900 font-medium tracking-wide hover:opacity-90 transition-opacity"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Request Consultation
-          </motion.button>
-        </motion.form>
+                  {/* Travel Date (Optional with Custom Label) */}
+                  <div className="relative">
+                    <Calendar className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+
+                    <input
+                      type="date"
+                      value={form.date}
+                      onChange={(e) => setForm({ ...form, date: e.target.value })}
+                      className={`peer w-full pl-12 pr-4 py-3 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] ${
+                        !form.date ? "text-transparent" : "text-[#333333]"
+                      }`}
+                    />
+
+                    {/* Custom label acting like placeholder */}
+                    {!form.date && (
+                      <span className="absolute left-12 top-3 text-gray-400 pointer-events-none text-sm">
+                        Travel date (if known)
+                      </span>
+                    )}
+                  </div>
+
+
+
+            {/* Trip Length */}
+            <div className="relative">
+              <Clock className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+              <select
+                value={form.length}
+                onChange={(e) => setForm({ ...form, length: e.target.value })}
+                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
+                  errors.length ? "border-red-500" : "border-gray-300"
+                } bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+              >
+                <option value="">Trip Length (Weeks)</option>
+                <option>1 Week</option>
+                <option>2 Weeks</option>
+                <option>3 Weeks</option>
+                <option>4 Weeks+</option>
+              </select>
+              {errors.length && (
+                <p className="text-red-500 text-sm mt-1">{errors.length}</p>
+              )}
+            </div>
+
+            {/* Message */}
+            <div className="relative">
+              <MessageSquare className="absolute top-4 left-4 text-[#2F4F2F]" size={20} />
+              <textarea
+                placeholder="Tell us more about your dream trip..."
+                value={form.details}
+                onChange={(e) => setForm({ ...form, details: e.target.value })}
+                className={`w-full pl-12 pr-4 py-3 h-28 resize-none rounded-md border ${
+                  errors.details ? "border-red-500" : "border-gray-300"
+                } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333]`}
+              />
+              {errors.details && (
+                <p className="text-red-500 text-sm mt-1">{errors.details}</p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <motion.button
+              type="submit"
+              className="w-full py-3 rounded-md bg-wanderer-green text-white font-medium tracking-wide hover:bg-wanderer-rust  transition-colors-duration-300-ease-in-out"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Start Your Journey
+            </motion.button>
+          </form>
+        </div>
       </motion.div>
     </section>
   );

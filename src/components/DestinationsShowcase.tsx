@@ -14,7 +14,7 @@ const destinations = [
     image: "/images/africa.jpg",
   },
   {
-    continent: "Europe",
+    continent: "Middle East",
     tagline: "Romantic escapes & rich history",
     image: "/images/europe.jpg",
   },
@@ -22,7 +22,8 @@ const destinations = [
 
 export default function DestinationsShowcase() {
   return (
-    <section className="py-16 bg-gradient-to-b from-neutral-50 to-neutral-100">
+    <section className="py-16 bg-beige">
+      
       <div className="max-w-7xl mx-auto text-center mb-12">
         <h2 className="font-heading text-4xl md:text-5xl text-primary mb-4">
           Explore Our Signature Destinations

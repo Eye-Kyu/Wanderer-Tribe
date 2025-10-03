@@ -10,10 +10,10 @@ const hotels = [
     highlight: "Private tented suites with panoramic savannah views",
   },
   {
-    name: "Santorini Dream Villas, Greece",
-    location: "Europe",
-    image: "/images/hotel2.jpg",
-    highlight: "Infinity pools overlooking the Aegean Sea",
+    name: "Dubai Desert Retreat, UAE",
+    location: "Middle East",
+    image: "/images/luxury/dubai-desert.jpeg",
+    highlight: "Luxury desert villas with starlit dune experiences",
   },
   {
     name: "Bali Serenity Resort, Indonesia",
@@ -25,12 +25,12 @@ const hotels = [
 
 export default function HotelShowcase() {
   return (
-    <section className="py-16 bg-neutral">
+    <section className="py-16 bg-beige">
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="font-heading text-4xl md:text-5xl text-primary mb-4">
-          Stays That Define Luxury
+        <h2 className="font-heading text-4xl md:text-5xl text-[#D2691E] mb-4">
+          Stays That Stay With You
         </h2>
-        <p className="text-textDark/80 max-w-2xl mx-auto">
+        <p className="text-[#333333]/80 max-w-2xl mx-auto">
           Indulge in handpicked hotels & resorts where elegance meets comfort.
         </p>
       </div>
@@ -50,17 +50,17 @@ export default function HotelShowcase() {
                 alt={hotel.name}
                 width={500}
                 height={350}
-                className="object-cover w-full h-64 group-hover:scale-105 transition-transform duration-500"
+                className="object-cover w-full h-72 group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs uppercase shadow-md">
+              <div className="absolute top-4 right-4 bg-wanderer-green text-white px-3 py-1 rounded-full text-xs uppercase shadow-md">
                 {hotel.location}
               </div>
             </div>
             <div className="p-6">
-              <h3 className="font-heading text-xl text-primary mb-2">
+              <h3 className="font-heading text-xl text-[#D2691E] mb-2">
                 {hotel.name}
               </h3>
-              <p className="text-textDark/80">{hotel.highlight}</p>
+              <p className="text-[#333333]/80">{hotel.highlight}</p>
             </div>
           </motion.div>
         ))}
