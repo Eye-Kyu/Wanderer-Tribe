@@ -7,7 +7,7 @@ const perks = [
   {
     icon: Globe2,
     title: "Global Reach",
-    desc: "Exclusive luxury tours across Asia, Africa, and Europe, tailored for discerning explorers.",
+    desc: "Enjoy Exclusive tours across Asia, Africa, and Europe, tailored for discerning explorers.",
     color: "bg-wanderer-teal/10 text-wanderer-teal border-wanderer-teal/30",
   },
   {
@@ -19,7 +19,7 @@ const perks = [
   {
     icon: ShieldCheck,
     title: "Trusted Excellence",
-    desc: "Decades of experience and 5-star guest satisfaction make us your trusted luxury travel partner.",
+    desc: "Decades of experience and 5-star guest satisfaction make us your trusted travel partner.",
     color: "bg-wanderer-yellow/10 text-wanderer-yellow border-wanderer-yellow/30",
   },
 ];
@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto shadow-xl md:w-11/12 bg-white/80 rounded-3xl py-16 px-20">
+      <div className="relative z-10 max-w-7xl mx-auto shadow-xl md:w-11/12 bg-white/90 rounded-3xl py-16 px-20">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
