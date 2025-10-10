@@ -151,7 +151,7 @@ export default function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: showNavbar ? 0 : -120 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 w-full z-[100] h-20 md:h-28 backdrop-blur-md bg-white border-b border-wanderer-teal/40"
+      className="fixed top-0 left-0 w-full z-[100] h-20 md:h-28  bg-transparent border-b border-black/20 shadow-xl"
       aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
@@ -190,7 +190,7 @@ export default function Navbar() {
               onMouseEnter={() => handleMouseEnter("destinations")}
               onMouseLeave={() => handleMouseLeave("destinations")}
             >
-              <Link href="/Destinations" className="hover:text-wanderer-rust">
+              <Link href="/Destinations" className="hover:text-wanderer-rust font-bold text-white">
                 Destinations
               </Link>
               <div
@@ -217,7 +217,7 @@ export default function Navbar() {
               onMouseEnter={() => handleMouseEnter("experiences")}
               onMouseLeave={() => handleMouseLeave("experiences")}
             >
-              <Link href="/Experiences" className="hover:text-wanderer-rust">
+              <Link href="/Experiences" className="hover:text-wanderer-rust font-bold text-white">
                 Experiences
               </Link>
               <div
@@ -252,13 +252,13 @@ export default function Navbar() {
 
           {/* Right side links */}
           <div className="flex items-center space-x-16">
-            <Link href="/About" className="hover:text-wanderer-rust">
+            <Link href="/About" className="hover:text-wanderer-rust font-bold text-white">
               About
             </Link>
-            <Link href="/Contact" className="hover:text-wanderer-rust">
+            <Link href="/Contact" className="hover:text-wanderer-rust font-bold text-white mix-blend-difference">
               Contact
             </Link>
-            <button className="bg-primary text-sm text-white py-2 px-4 rounded-2xl hover:bg-wanderer-rust hover:text-wanderer-green transition">
+            <button className="bg-wanderer-gold text-sm text-black py-2 px-4 rounded-2xl hover:bg-wanderer-moss hover:text-wanderer-mahogany transition">
               Travel Enquiry
             </button>
           </div>

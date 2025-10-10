@@ -52,7 +52,7 @@ export default function CallToAction() {
   };
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b from-beige to-[#e4a762]">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

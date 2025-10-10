@@ -19,71 +19,75 @@ module.exports = {
           '600': '#525252',
           '700': '#404040',
           '800': '#262626',
-          '900': '#171717'
+          '900': '#171717',
         },
 
         beige: '#f5f5dc',
         textDark: '#333333',
 
-        // 🎨 Wanderer Tribe Palette
+        // 🎨 African Heritage Wanderer Palette
         wanderer: {
-          green: "#036648",     // Dark Green
-          teal: "#3891A6",      // Teal Blue
-          yellow: "#FDE74C",    // Yellow
-          plum: "#361D2E",      // Deep Plum
-          rust: "#D56F3E",      // Rust Orange
+          forest: "#254D32",     // Deep forest green (brand foundation)
+          moss: "#3C6E47",       // Soft moss green (secondary tone)
+          bronze: "#9A6B4F",     // Earthy bronze accent
+          gold: "#CDA869",       // Warm cultural gold highlight
+          ivory: "#F5E5C0",      // Soft ivory (text/contrast)
+          rust: "#D56F3E",       // Vibrant Rust Orange (kept as main accent)
+          mahogany: "#2C1810",   // Deep brown for backgrounds/footers
         },
 
-        // Existing system colors (can map to Wanderer palette if desired)
+        // 🌍 System colors mapped to the Wanderer palette
         primary: {
-          DEFAULT: '#3891A6',          // Teal Blue as primary
-          foreground: '#ffffff'
+          DEFAULT: '#254D32',          // Forest Green — main brand tone
+          foreground: '#F5E5C0',       // Ivory for text
         },
         secondary: {
-          DEFAULT: '#D56F3E',          // Rust Orange as secondary
-          foreground: '#ffffff'
+          DEFAULT: '#D56F3E',          // Rust Orange (warm accent)
+          foreground: '#ffffff',
         },
         accent: {
-          DEFAULT: '#FDE74C',          // Yellow as accent
-          foreground: '#036648'        // Dark Green for contrast
+          DEFAULT: '#CDA869',          // Warm Gold — luxurious highlight
+          foreground: '#2C1810',       // Mahogany for text contrast
         },
-        background: '#ffffff',
-        foreground: '#091E05',
+        background: '#2C1810',         // Deep Mahogany background
+        foreground: '#F5E5C0',         // Ivory for readability
+
         card: {
-          DEFAULT: '#ffffff',
-          foreground: '#091E05'
+          DEFAULT: '#3C6E47',          // Moss green base
+          foreground: '#F5E5C0',       // Ivory text
         },
         popover: {
-          DEFAULT: '#ffffff',
-          foreground: '#091E05'
+          DEFAULT: '#3C6E47',
+          foreground: '#F5E5C0',
         },
         muted: {
-          DEFAULT: '#f5f5f5',
-          foreground: '#737373'
+          DEFAULT: '#9A6B4F',
+          foreground: '#F5E5C0',
         },
         destructive: {
           DEFAULT: '#ef4444',
-          foreground: '#ffffff'
+          foreground: '#ffffff',
         },
-        border: '#e5e5e5',
-        input: '#e5e5e5',
-        ring: '#3891A6',
+        border: '#9A6B4F',             // Subtle bronze border tone
+        input: '#9A6B4F',
+        ring: '#CDA869',               // Gold accent for focus states
 
+        // 📊 Chart Colors (optional)
         chart: {
-          '1': '#3891A6',
-          '2': '#D56F3E',
-          '3': '#FDE74C',
-          '4': '#361D2E',
-          '5': '#091E05',
+          '1': '#254D32',  // forest
+          '2': '#D56F3E',  // rust
+          '3': '#CDA869',  // gold
+          '4': '#9A6B4F',  // bronze
+          '5': '#3C6E47',  // moss
         },
       },
 
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
-      }
-    }
+        sm: 'calc(var(--radius) - 4px)',
+      },
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };

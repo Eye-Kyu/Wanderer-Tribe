@@ -5,13 +5,13 @@ const testimonials = [
   {
     name: "Peter Biko",
     location: "Luanda, Angola",
-    text: "I recently booked a trip to Thailand with this travel agency and I couldn&apos;t have been happier with my experience.",
+    text: "I recently booked a trip to Thailand with Wanderer-Tribe and I could not have been happier with my experience.",
     image: "/images/Avatar1.png",
   },
   {
     name: "Jennifer and Mark",
     location: "San Francisco",
-    text: "My husband and I have been using this travel agency for 2 years now and they have never disappointed us.",
+    text: "My husband and I have been using Wanderer Tribe for 2 years now and they have never disappointed us.",
     image: "/images/Avatar2.png",
   },
 ];
@@ -63,8 +63,8 @@ export default function Testimonials() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-wanderer-teal">{t.name}</p>
-                  <p className="text-sm text-gray-500">{t.location}</p>
+                  <p className="font-semibold text-wanderer-bronze">{t.name}</p>
+                  <p className="text-sm text-wanderer-rust">{t.location}</p>
                 </div>
               </div>
             </div>

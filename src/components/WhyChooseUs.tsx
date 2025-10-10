@@ -9,19 +9,19 @@ const perks = [
     icon: Globe2,
     title: "Global Reach",
     desc: "Enjoy exclusive tours across Asia, Africa, and Europe, tailored for discerning explorers.",
-    color: "bg-wanderer-teal/10 text-wanderer-teal border-wanderer-teal/30",
+    color: "bg-wanderer-moss/40 text-wanderer-teal border-wanderer-teal/30",
   },
   {
     icon: Crown,
     title: "Custom Experiences",
     desc: "Every journey is custom-crafted to match your passions and exceed your expectations.",
-    color: "bg-wanderer-rust/10 text-wanderer-rust border-wanderer-rust/30",
+    color: "bg-wanderer-rust/30 text-wanderer-rust border-wanderer-rust/30",
   },
   {
     icon: ShieldCheck,
     title: "Trusted Excellence",
     desc: "Decades of experience and 5-star guest satisfaction make us your trusted travel partner.",
-    color: "bg-wanderer-yellow/10 text-wanderer-yellow border-wanderer-yellow/30",
+    color: "bg-[#005c67]/50 text-wanderer-yellow border-wanderer-yellow/30",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function WhyChooseUs() {
   }, [bp]);
 
   return (
-    <section className="relative py-24 bg-beige text-white overflow-hidden">
+    <section className="relative py-24 text-white overflow-hidden">
       {/* Background image */}
       <div
         className="absolute inset-0 bg-fixed bg-cover bg-center opacity-20 mix-blend-difference"
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
       />
 
       {/* Content Box */}
-      <div className="relative z-10 max-w-7xl mx-auto shadow-xl w-11/12 bg-white/90 rounded-3xl py-16 px-6 md:px-16">
+      <div className="relative z-10 max-w-7xl mx-auto shadow-lg shadow-black w-11/12 bg-white/90 rounded-3xl py-16 px-6 md:px-16">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -149,7 +149,7 @@ export default function WhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className={`rounded-2xl p-8 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${perk.color}`}
+                className={`rounded-2xl shadow-sm shadow-black p-8 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${perk.color}`}
               >
                 <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-white/20 mb-5">
                   <perk.icon className="w-8 h-8" />

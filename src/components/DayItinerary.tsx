@@ -35,8 +35,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Arrival in Phuket</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Hotel Check-in & Leisure</span>
+            <span className="bg-wanderer-green span text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Arrival in Phuket</span>
+            <span className="bg-wanderer-green span text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Hotel Check-in & Leisure</span>
           </div>
         </div>
       ),
@@ -61,8 +61,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Phi Phi Island Tour</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Coral Reefs & Beaches</span>
+            <span className="bg-wanderer-green span text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Phi Phi Island Tour</span>
+            <span className="bg-wanderer-green span text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Coral Reefs & Beaches</span>
           </div>
         </div>
       ),
@@ -87,8 +87,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Spa & Massage Day</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Signature Therapies</span>
+            <span className=" span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Spa & Massage Day</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Signature Therapies</span>
           </div>
         </div>
       ),
@@ -114,8 +114,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Flight to Bangkok</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Pattaya Transfer</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Flight to Bangkok</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Pattaya Transfer</span>
           </div>
         </div>
       ),
@@ -141,8 +141,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Nong Nooch Garden</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Alcazar Cabaret</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Nong Nooch Garden</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Alcazar Cabaret</span>
           </div>
         </div>
       ),
@@ -168,8 +168,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Elephant Village</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Dolphinarium Show</span>
+            <span className=" span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Elephant Village</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Dolphinarium Show</span>
           </div>
         </div>
       ),
@@ -195,8 +195,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Gems Gallery</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Bangkok Hotel</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Gems Gallery</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Bangkok Hotel</span>
           </div>
         </div>
       ),
@@ -222,8 +222,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Risky Market</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Baiyoke Sky Dinner</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Risky Market</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Baiyoke Sky Dinner</span>
           </div>
         </div>
       ),
@@ -249,8 +249,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Icon Siam Mall</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Chao Phraya Cruise</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Icon Siam Mall</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Chao Phraya Cruise</span>
           </div>
         </div>
       ),
@@ -276,8 +276,8 @@ export default function ThailandItineraryTimeline() {
               className="h-32 sm:h-40 w-full rounded-lg object-cover shadow hidden sm:block" />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Check-out</span>
-            <span className="bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Airport Transfer</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Check-out</span>
+            <span className="span bg-wanderer-green text-white px-3 py-1 rounded-full shadow text-xs md:text-sm">Airport Transfer</span>
           </div>
         </div>
       ),
@@ -285,9 +285,11 @@ export default function ThailandItineraryTimeline() {
   ];
 
   return (
+    
     <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-12 md:py-16">
       <Timeline data={data} />
     </div>
+
   );
 }
 

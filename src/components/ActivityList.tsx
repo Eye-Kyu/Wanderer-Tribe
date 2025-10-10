@@ -54,7 +54,7 @@ function MobileCarousel({ isInView }: { isInView: boolean }) {
               sizes="100vw"
             />
           </div>
-          <h3 className="text-lg font-semibold mb-1 text-gray-900">
+          <h3 className="text-lg font-semibold text-wanderer-rust mb-1 ">
             {activity.title}
           </h3>
           <p className="text-gray-600 text-sm">{activity.desc}</p>
@@ -107,12 +107,12 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
         {activities.map((activity, idx) => (
           <motion.article
             key={idx}
-            className="w-[21rem] flex-shrink-0 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition"
+            className="w-[21rem] flex-shrink-0 p-2 bg-white rounded-xl shadow-xl hover:shadow-2xl transition"
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: idx * 0.04, duration: 0.6 }}
           >
-            <div className="relative w-full h-[22rem] mb-4 rounded-lg overflow-hidden">
+            <div className="relative w-full h-[22rem] mb-4 rounded-xl overflow-hidden">
               <Image
                 src={activity.image}
                 alt={activity.title}
@@ -121,7 +121,7 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
                 sizes="(max-width: 1024px) 90vw, 21rem"
               />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-900">
+            <h3 className="text-xl font-semibold mb-2 text-wanderer-rust">
               {activity.title}
             </h3>
             <p className="text-gray-600 text-sm">{activity.desc}</p>
@@ -136,7 +136,7 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
             key={i}
             onClick={() => scrollToPage(i)}
             className={`w-3 h-3 rounded-full transition ${
-              i === currentPage ? "bg-wanderer-teal" : "bg-gray-400"
+              i === currentPage ? "bg-wanderer-gold" : "bg-gray-400"
             }`}
           />
         ))}
@@ -146,13 +146,13 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
       <div className="absolute bottom-8 right-8 flex gap-4 z-30">
         <button
           onClick={() => scrollToPage(Math.max(currentPage - 1, 0))}
-          className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
+          className="p-3 rounded-full bg-wanderer-teal button shadow-md"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={() => scrollToPage(Math.min(currentPage + 1, totalPages - 1))}
-          className="p-3 rounded-full bg-wanderer-teal text-white hover:bg-neutral-800 shadow-md"
+          className="p-3 rounded-full bg-wanderer-teal button shadow-md"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -171,18 +171,22 @@ export default function ActivityList(): JSX.Element {
     <section
       id="activities"
       ref={sectionRef}
-      className="relative py-20 bg-beige w-full"
+      className="
+        relative py-20 w-full
+        bg-gradient-to-b from-[#174B2E] via-[#1a4e4a] to-[#005c67]
+        text-white
+      "
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9, ease: "easeOut" }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
         className="w-full px-6 text-center mx-auto"
       >
-        <h2 className="text-4xl md:text-5xl font-heading text-gray-900 mb-6">
+        <h2 className="text-4xl md:text-5xl font-heading mb-6 text-wanderer-gold">
           Handpicked Experiences
         </h2>
-        <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+        <p className="text-lg mb-12 max-w-3xl mx-auto text-gray-200">
           Explore a curated selection of activities — from safaris to historic
           sites, culinary delights, and romantic escapes. Each is designed to
           immerse you in unforgettable memories.

@@ -1,8 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* -------------------- TYPES -------------------- */
 interface ItineraryOption {
@@ -14,43 +19,39 @@ interface ItineraryOption {
 }
 
 /* -------------------- REUSABLE CARD -------------------- */
-const CarouselCard = ({ option, isDesktop = false }: { option: ItineraryOption; isDesktop?: boolean }) => {
-  return (
+const CarouselCard = ({
+  option,
+  isDesktop = false,
+}: {
+  option: ItineraryOption;
+  isDesktop?: boolean;
+}) => (
+  <div className="relative flex-1 rounded-xl overflow-hidden shadow-2xl bg-white group">
+    <Image
+      src={option.image}
+      alt={option.title}
+      width={400}
+      height={400}
+      className="w-full h-[22rem] md:h-[24rem] lg:h-[28rem] object-cover"
+    />
     <div
-      className={`relative flex-1 rounded-xl overflow-hidden shadow-xl bg-white border border-neutral-200 group`}
+      className={`absolute bottom-0 left-0 right-0 bg-white p-4 transition-all duration-500 ease-in-out ${
+        isDesktop ? "group-hover:h-40 h-20" : ""
+      } overflow-hidden`}
     >
-      <Image
-        src={option.image}
-        alt={option.title}
-        width={400}
-        height={400}
-        className="w-full h-[22rem] md:h-[24rem] lg:h-[28rem] object-cover"
-      />
-
-      {/* Card Info */}
+      <h3 className="text-wanderer-rust font-light text-lg">{option.title}</h3>
+      <p className="text-sm text-wanderer-bronze mb-2">{option.destination}</p>
       {isDesktop ? (
-        // 👉 Desktop: reveal more on hover
-        <div className="absolute bottom-0 left-0 right-0 bg-white p-4 transition-all duration-500 ease-in-out group-hover:h-40 h-20 overflow-hidden">
-          <h3 className="text-wanderer-green font-semibold text-lg">
-            {option.title}
-          </h3>
-          <p className="text-sm text-wanderer-teal mb-2">{option.destination}</p>
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <p className="text-sm text-neutral-700">
-              <span className="font-semibold">Includes:</span> {option.includes}
-            </p>
-            <p className="text-sm text-neutral-700">
-              <span className="font-semibold">Excludes:</span> {option.excludes}
-            </p>
-          </div>
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <p className="text-sm text-neutral-700">
+            <span className="font-semibold">Includes:</span> {option.includes}
+          </p>
+          <p className="text-sm text-neutral-700">
+            <span className="font-semibold">Excludes:</span> {option.excludes}
+          </p>
         </div>
       ) : (
-        // 👉 Mobile: always show all details (no hover needed)
-        <div className="absolute bottom-0 left-0 right-0 bg-white p-4">
-          <h3 className="text-black font-semibold text-lg">
-            {option.title}
-          </h3>
-          <p className="text-sm text-wanderer-teal mb-2">{option.destination}</p>
+        <div>
           <p className="text-sm text-neutral-700">
             <span className="font-semibold">Includes:</span> {option.includes}
           </p>
@@ -60,76 +61,55 @@ const CarouselCard = ({ option, isDesktop = false }: { option: ItineraryOption; 
         </div>
       )}
     </div>
-  );
-};
+  </div>
+);
 
 /* -------------------- MOBILE CAROUSEL -------------------- */
-import { useRef, useEffect } from "react";
-
 const MobileCarousel = ({ options }: { options: ItineraryOption[] }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Track scroll position to sync dots
   useEffect(() => {
     const handleScroll = () => {
       if (carouselRef.current) {
         const { scrollLeft, offsetWidth } = carouselRef.current;
         const newIndex = Math.round(scrollLeft / offsetWidth);
-        if (newIndex !== currentIndex) {
-          setCurrentIndex(newIndex);
-        }
+        if (newIndex !== currentIndex) setCurrentIndex(newIndex);
       }
     };
 
     const container = carouselRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll, { passive: true });
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", handleScroll);
-      }
-    };
+    container?.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container?.removeEventListener("scroll", handleScroll);
   }, [currentIndex]);
 
-  const handleDotClick = (index: number) => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: carouselRef.current.offsetWidth * index,
-        behavior: "smooth",
-      });
-      setCurrentIndex(index);
-    }
+  const handleDotClick = (i: number) => {
+    carouselRef.current?.scrollTo({
+      left: carouselRef.current.offsetWidth * i,
+      behavior: "smooth",
+    });
+    setCurrentIndex(i);
   };
 
   return (
     <div className="sm:hidden w-full">
-      {/* Carousel */}
       <div
         ref={carouselRef}
         className="flex overflow-x-scroll snap-x snap-mandatory scroll-smooth hide-scrollbar"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {options.map((opt, idx) => (
-          <div
-            key={idx}
-            className="snap-center flex-shrink-0 w-full px-4"
-          >
+          <div key={idx} className="snap-center flex-shrink-0 w-full px-4">
             <CarouselCard option={opt} />
           </div>
         ))}
       </div>
-
-      {/* Pagination dots */}
       <div className="flex justify-center mt-4 space-x-2">
         {options.map((_, i) => (
           <button
             key={i}
             onClick={() => handleDotClick(i)}
             className={`w-3 h-3 rounded-full transition ${
-              i === currentIndex ? "bg-wanderer-teal" : "bg-neutral-400"
+              i === currentIndex ? "bg-wanderer-gold" : "bg-wanderer-mahogany"
             }`}
           />
         ))}
@@ -138,22 +118,16 @@ const MobileCarousel = ({ options }: { options: ItineraryOption[] }) => {
   );
 };
 
-
 /* -------------------- DESKTOP CAROUSEL -------------------- */
 const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCards = 3;
   const totalSlides = Math.ceil(options.length / visibleCards);
 
-  const handlePrev = () => {
+  const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
+  const handleNext = () =>
     setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-  };
-
-  const handleDotClick = (i: number) => setCurrentIndex(i);
 
   return (
     <>
@@ -164,16 +138,14 @@ const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
             <CarouselCard key={idx} option={opt} isDesktop />
           ))}
       </div>
-
-      {/* Pagination + Arrows */}
       <div className="hidden sm:flex justify-between items-center mt-6 max-w-7xl mx-auto">
         <div className="flex space-x-2">
           {Array.from({ length: totalSlides }).map((_, i) => (
             <button
               key={i}
-              onClick={() => handleDotClick(i)}
+              onClick={() => setCurrentIndex(i)}
               className={`w-3 h-3 rounded-full transition ${
-                i === currentIndex ? "bg-wanderer-teal" : "bg-neutral-400"
+                i === currentIndex ? "bg-wanderer-gold" : "bg-neutral-400"
               }`}
             />
           ))}
@@ -181,13 +153,13 @@ const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
         <div className="flex gap-4">
           <button
             onClick={handlePrev}
-            className="p-3 bg-wanderer-teal text-white rounded-full hover:bg-wanderer-yellow hover:text-wanderer-green transition shadow-md"
+            className="p-3 text-white rounded-full button transition shadow-md"
           >
             <FaChevronLeft size={20} />
           </button>
           <button
             onClick={handleNext}
-            className="p-3 bg-wanderer-teal text-white rounded-full hover:bg-wanderer-yellow hover:text-wanderer-green transition shadow-md"
+            className="p-3 text-white rounded-full button transition shadow-md"
           >
             <FaChevronRight size={20} />
           </button>
@@ -199,6 +171,32 @@ const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
 
 /* -------------------- MAIN COMPONENT -------------------- */
 const ItineraryOptions: React.FC = () => {
+  const [prints, setPrints] = useState<
+    { top: string; left: string; rotation: string; scale: number }[]
+  >([]);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 25 }).map(() => ({
+      top: `${Math.random() * 90}%`,
+      left: `${Math.random() * 90}%`,
+      rotation: `${Math.random() * 360}deg`,
+      scale: 0.8 + Math.random() * 0.4,
+    }));
+    setPrints(generated);
+  }, []);
+
+  useEffect(() => {
+    gsap.utils.toArray(".tribal-print").forEach((el) => {
+      gsap.to(el as HTMLElement, {
+        y: "+=20",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        duration: 2 + Math.random() * 2,
+      });
+    });
+  }, [prints]);
+
   const options: ItineraryOption[] = [
     {
       title: "Whispers of the Wild - Loyk Mara Camp",
@@ -237,42 +235,32 @@ const ItineraryOptions: React.FC = () => {
     },
   ];
 
-  const pawPrints = Array.from({ length: 15 });
-
   return (
-    <section className="relative overflow-hidden py-20 bg-beige">
-      {/* Background paw prints */}
+    <section className="relative overflow-hidden py-20">
+      {/* ✅ Background tribal print images */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
-        {pawPrints.map((_, i) => {
-          const top = `${Math.random() * 90}%`;
-          const left = `${Math.random() * 90}%`;
-          const rotation = `${Math.random() * 360}deg`;
-          const scale = 0.8 + Math.random() * 0.4;
-          return (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{ top, left, rotate: rotation }}
-              initial={{ scale }}
-              animate={{ scale: [scale, scale * 1.1, scale] }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <Image
-                src="https://img.icons8.com/ios-filled/50/dog-footprint.png"
-                alt="paw-print"
-                width={50}
-                height={50}
-              />
-            </motion.div>
-          );
-        })}
+        {prints.map((p, i) => (
+          <div
+            key={i}
+            className="tribal-print absolute"
+            style={{
+              top: p.top,
+              left: p.left,
+              transform: `rotate(${p.rotation}) scale(${p.scale})`,
+            }}
+          >
+            <Image
+              src="/images/bgs/pawprints.svg"
+              alt="tribal pattern"
+              width={120}
+              height={110}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* Section Title */}
+<div className="space-y-7">
+        <h5 className="text-2xl text-center">Wild Africa</h5>
       <motion.h2
         className="font-heading text-wanderer-green text-center mb-6 relative z-10"
         initial={{ opacity: 0, y: -40 }}
@@ -281,15 +269,13 @@ const ItineraryOptions: React.FC = () => {
       >
         Unleash Your Safari Odyssey
       </motion.h2>
-      <p className=" text-neutral-700 text-center max-w-xl mx-auto mb-14 relative z-10">
+      <p className="text-center max-w-xl mx-auto mb-14 relative z-10">
         Dive into a 2-night, 3-day wilderness retreat curated with exclusivity,
         luxury, and adventure in mind.
       </p>
+      </div>
 
-      {/* Mobile Carousel */}
       <MobileCarousel options={options} />
-
-      {/* Desktop Carousel */}
       <DesktopCarousel options={options} />
     </section>
   );

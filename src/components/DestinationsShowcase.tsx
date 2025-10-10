@@ -22,13 +22,13 @@ const destinations = [
 
 export default function DestinationsShowcase() {
   return (
-    <section className="py-16 bg-beige">
+    <section className="py-16">
       
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="font-heading  text-primary mb-4">
+        <h2 className="font-heading mb-4">
           Explore Our Signature Destinations
         </h2>
-        <p className="text-textDark/80 max-w-2xl mx-auto ">
+        <p className=" max-w-2xl mx-auto p">
           Handpicked luxury experiences across Asia, Africa, and Europe. Immerse
           yourself in the extraordinary.
         </p>
@@ -41,7 +41,7 @@ export default function DestinationsShowcase() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: idx * 0.2 }}
-            className="relative group rounded-2xl overflow-hidden shadow-xl"
+            className="relative group overflow-hidden shadow-2xl rounded-xl"
           >
             <Image
               src={d.image}

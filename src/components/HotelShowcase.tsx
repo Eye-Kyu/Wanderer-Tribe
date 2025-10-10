@@ -25,12 +25,12 @@ const hotels = [
 
 export default function HotelShowcase() {
   return (
-    <section className="py-16 bg-beige">
+    <section className="py-16 ">
       <div className="max-w-7xl mx-auto text-center mb-12 z-40">
-        <h2 className="font-heading  text-[#D2691E] mb-4">
+        <h2 className="font-heading lg:mb-10 mb-4">
           Stays That Stay With You
         </h2>
-        <p className="text-[#333333]/80 max-w-2xl mx-auto">
+        <p className="p max-w-2xl mx-auto">
           Indulge in handpicked hotels & resorts where elegance meets comfort.
         </p>
       </div>
@@ -42,7 +42,7 @@ export default function HotelShowcase() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: idx * 0.2 }}
-            className="bg-white rounded-2xl overflow-hidden shadow-lg group"
+            className="bg-white rounded-xl overflow-hidden shadow-lg group"
           >
             <div className="relative">
               <Image
@@ -52,7 +52,7 @@ export default function HotelShowcase() {
                 height={350}
                 className="object-cover w-full h-72 group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute top-4 right-4 bg-wanderer-green text-white px-3 py-1 rounded-full text-xs uppercase shadow-md">
+              <div className="absolute top-4 right-4 bg-wanderer-moss text-white px-3 py-1 rounded-full text-xs uppercase shadow-md">
                 {hotel.location}
               </div>
             </div>

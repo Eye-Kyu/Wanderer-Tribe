@@ -85,7 +85,7 @@ const Hero: React.FC = () => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-[#D27D2D] to-[#008080] text-white px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:opacity-90 transition w-full sm:w-auto"
+                className="bg-wanderer-ivory text-wanderer-bronze px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:opacity-90 transition w-full sm:w-auto"
               >
                 <button className="md:text-base text-xs">Book Your Journey</button>
               </motion.div>
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="backdrop-blur-md bg-white/10 border border-white/30 text-white px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:bg-white/20 transition w-full sm:w-auto"
+                className="backdrop-blur-md bg-white/10 text-white px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:bg-white/70 hover:text-wanderer-mahogany transition w-full sm:w-auto"
               >
                 <button className="md:text-base text-xs">Explore Destinations</button>
               </motion.div>
