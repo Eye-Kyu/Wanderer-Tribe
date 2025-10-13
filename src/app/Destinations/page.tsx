@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, } from "react";
 import Carousel from "@/components/Carousel";
 
 type Destination = {
@@ -51,7 +51,7 @@ export default function Destinations() {
       {
         name: "Barcelona, Spain",
         description:
-          "Discover Gaudí's architecture and lively culture in Barcelona’s Gothic Quarter.",
+          "Discover Gaudí's architecture and lively culture in Barcelona's Gothic Quarter.",
         days: 5,
         cost: "$3,000",
         locations: "Barcelona",

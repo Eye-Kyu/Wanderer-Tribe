@@ -20,7 +20,7 @@ export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [, setActiveDropdown] = useState<string | null>(null);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<HTMLAnchorElement[]>([]);

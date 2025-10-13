@@ -86,7 +86,7 @@ export default function ThailandItineraryTimeline() {
         <div className="space-y-4">
           <p className="text-sm md:text-base text-[#333333]">
             Begin your journey in Phuket — unwind by the sea, explore Phi Phi
-            Island's turquoise bays, and indulge in Thai spa bliss.
+            Island&apos;s turquoise bays, and indulge in Thai spa bliss.
           </p>
           <RevealImage
             src="/images/bali.jpeg"
@@ -135,7 +135,7 @@ export default function ThailandItineraryTimeline() {
       content: (
         <div className="space-y-4">
           <p className="text-sm md:text-base text-[#333333]">
-            Experience Bangkok's bustling markets, dine sky-high at Baiyoke, and
+            Experience Bangkok&apos;s bustling markets, dine sky-high at Baiyoke, and
             cruise along the Chao Phraya River under glittering city lights.
           </p>
           <RevealImage
@@ -160,7 +160,7 @@ export default function ThailandItineraryTimeline() {
         <div className="space-y-4">
           <p className="text-sm md:text-base text-[#333333]">
             Enjoy a relaxed morning before your transfer to Suvarnabhumi
-            Airport. Bid farewell to Thailand's warmth and wonder.
+            Airport. Bid farewell to Thailand&apos;s warmth and wonder.
           </p>
           <RevealImage
             src="/images/japan-onsen.jpeg"
