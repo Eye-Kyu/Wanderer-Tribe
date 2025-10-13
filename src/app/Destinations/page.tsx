@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/Header";
 import Image from "next/image";
 import {
   motion,
@@ -8,7 +7,8 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import Carousel from "@/components/Carousel";
 
 type Destination = {
   name: string;
@@ -21,26 +21,10 @@ type Destination = {
 };
 
 export default function Destinations() {
-  // Animations
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 400], [0, -80]);
   const heroScale = useTransform(scrollY, [0, 400], [1, 1.07]);
 
-  const carouselItems = [
-    {
-      image: "/images/africa.jpg",
-      caption: "Discover the World's Wonders",
-    },
-    {
-      image: "/images/discover-europe.jpeg",
-      caption: "Timeless Europe Awaits",
-    },
-    {
-      image: "/images/discover-africa.jpg",
-      caption: "Wild African Adventures",
-    },
-    { image: "/images/explore-asia.jpeg", caption: "Exotic Asian Escapes" },
-  ];
 
   const destinations: { [key: string]: Destination[] } = {
     Europe: [
@@ -204,6 +188,9 @@ export default function Destinations() {
   const [selectedDestination, setSelectedDestination] =
     useState<Destination | null>(null);
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
+
   const regions = useMemo(
     () => [
       {
@@ -232,10 +219,11 @@ export default function Destinations() {
   );
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
-      <Navbar />
+    <div className="relative min-h-screen bg-[#152523] text-foreground overflow-hidden">
 
-      {/* Subtle animated background blobs */}
+      <Carousel />
+
+      {/* Animated background accents */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl"
@@ -265,51 +253,6 @@ export default function Destinations() {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Carousel with parallax */}
-      <section className="relative w-full overflow-hidden">
-        <motion.div
-          className="flex will-change-transform"
-          animate={{
-            x: [0, "-100%", "-200%", "-300%"],
-            transition: {
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 40,
-                ease: "linear",
-              },
-            },
-          }}
-        >
-          {carouselItems.concat(carouselItems).map((item, idx) => (
-            <div key={idx} className="relative w-full h-[60vh] flex-shrink-0">
-              <motion.div
-                style={{ y: heroY, scale: heroScale }}
-                className="h-full"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.caption}
-                  fill
-                  className="object-cover"
-                  priority={idx === 0}
-                />
-              </motion.div>
-              <div className="absolute inset-0 bg-black/40 grid place-items-center">
-                <motion.h2
-                  className="font-heading text-4xl md:text-5xl font-bold text-white text-center px-6"
-                  initial={{ opacity: 0, y: 20, letterSpacing: "0.08em" }}
-                  animate={{ opacity: 1, y: 0, letterSpacing: "0.02em" }}
-                  transition={{ duration: 0.9, ease: "easeOut" }}
-                >
-                  {item.caption}
-                </motion.h2>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </section>
-
       {/* Regions Overview */}
       <section className="relative py-24 px-6">
         <div className="max-w-7xl mx-auto space-y-24">
@@ -320,11 +263,10 @@ export default function Destinations() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className={`flex flex-col md:flex-row items-stretch overflow-hidden rounded-3xl border 
+              className={`flex flex-col md:flex-row items-stretch overflow-hidden rounded-3xl
                 ${idx % 2 !== 0 ? "md:flex-row-reverse" : ""} 
-                bg-white/5 border-white/10 backdrop-blur-xl shadow-[0_8px_50px_rgba(0,0,0,0.45)]`}
+                bg-white/5 backdrop-blur-xl shadow-[0_8px_50px_rgba(0,0,0,0.45)]`}
             >
-              {/* Image */}
               <motion.div
                 className="relative w-full md:w-2/5 h-[60vh] group"
                 initial={{ opacity: 0.8, scale: 0.98 }}
@@ -342,7 +284,6 @@ export default function Destinations() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20 group-hover:opacity-60 transition-opacity" />
               </motion.div>
 
-              {/* Content */}
               <motion.div
                 className="relative flex flex-col justify-center w-full md:w-3/5 p-10"
                 initial={{ opacity: 0, y: 40 }}
@@ -350,10 +291,9 @@ export default function Destinations() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.25 }}
               >
-                {/* Heading with underline accent */}
                 <div className="mb-6">
                   <motion.h3
-                    className="font-heading text-4xl md:text-5xl text-primary tracking-tight"
+                    className="font-heading text-4xl md:text-5xl text-wanderer-ivory tracking-tight"
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -362,7 +302,7 @@ export default function Destinations() {
                     {region.name}
                   </motion.h3>
                   <motion.div
-                    className="h-[3px] w-20 bg-gradient-to-r from-[#D27D2D] to-teal-400 rounded-full"
+                    className="h-[1px] w-24 bg-gradient-to-r from-[#212e25] to-teal-400 rounded-full"
                     initial={{ scaleX: 0, originX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     viewport={{ once: true }}
@@ -370,11 +310,10 @@ export default function Destinations() {
                   />
                 </div>
 
-                <p className="text-neutral-800 dark:text-neutral-200/90 text-lg md:text-xl leading-relaxed mb-8">
+                <p className="text-white dark:text-neutral-200/90 text-lg md:text-lg leading-relaxed mb-8">
                   {region.description}
                 </p>
 
-                {/* Destination chips with icons */}
                 <div className="flex flex-wrap gap-3 mb-8">
                   {destinations[region.name].map((dest) => (
                     <motion.button
@@ -382,23 +321,22 @@ export default function Destinations() {
                       onClick={() => setSelectedDestination(dest)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="group inline-flex items-center gap-2 border border-black  bg-transparent font-medium px-4 py-2 rounded-full shadow transition-all duration-300 text-sm"
+                      className="group inline-flex items-center gap-2 bg-wanderer-forest font-medium px-4 py-2 rounded-2xl shadow-sm shadow-black/50 transition-all duration-300 text-sm"
                     >
                       <span className="text-base">📍</span>
                       <span className="whitespace-nowrap">{dest.name}</span>
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-neutral-500">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-black/70">
                         Tap for details
                       </span>
                     </motion.button>
                   ))}
                 </div>
 
-                {/* CTA Button */}
                 <Link href={region.link}>
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold overflow-hidden bg-transparent border border-black  transition-all duration-300"
+                    className="relative inline-flex button items-center justify-center px-8 py-3 rounded-full font-semibold overflow-hidden transition-all duration-300"
                   >
                     Explore {region.name}
                   </motion.button>
@@ -430,60 +368,40 @@ export default function Destinations() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute top-4 right-4 text-2xl hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-full"
                 onClick={() => setSelectedDestination(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"
                 aria-label="Close"
-                tabIndex={0}
               >
-                &times;
+                ✕
               </button>
-              <div className="mb-4"></div>
               <Image
                 src={selectedDestination.image}
                 alt={selectedDestination.name}
-                width={800}
-                height={500}
-                className="w-full h-64 object-cover rounded-lg"
-                priority
+                width={600}
+                height={300}
+                className="rounded-xl mb-4 object-cover w-full h-64"
               />
-              <h3 className="font-heading text-2xl text-primary mb-2">
+              <h3 className="text-2xl font-bold text-wanderer-ivory mb-2">
                 {selectedDestination.name}
               </h3>
-              <p className="text-neutral-200 mb-2">
+              <p className="text-neutral-300 mb-4">
                 {selectedDestination.description}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
-                <p className="text-neutral-300">
-                  <strong>Days:</strong> {selectedDestination.days}
-                </p>
-                <p className="text-neutral-300">
-                  <strong>Cost:</strong> {selectedDestination.cost}
-                </p>
-                <p className="text-neutral-300 col-span-2">
+              <ul className="text-sm space-y-2 text-neutral-400">
+                <li>
                   <strong>Locations:</strong> {selectedDestination.locations}
-                </p>
-                <p className="text-neutral-300 col-span-2">
+                </li>
+                <li>
                   <strong>Activities:</strong> {selectedDestination.activities}
-                </p>
-              </div>
+                </li>
+                <li>
+                  <strong>Cost:</strong> {selectedDestination.cost}
+                </li>
+              </ul>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Call to Action */}
-      <section className="py-20 px-6 text-center bg-background rounded-t-3xl border-t border-white/10">
-        <h2 className="font-heading text-3xl md:text-4xl mb-6">
-          Ready to Wander?
-        </h2>
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          className="relative inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold overflow-hidden bg-transparent border border-black transition-all duration-300"
-        >
-          Book Your Adventure
-        </motion.button>
-      </section>
     </div>
   );
 }

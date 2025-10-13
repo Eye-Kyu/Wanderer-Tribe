@@ -270,14 +270,8 @@ const ItineraryOptions: React.FC = () => {
         Unleash Your Wandering Pilgrimage
       </motion.h2>
       <p className="text-center max-w-xl mx-auto mb-14 relative z-10">
-        Dive into a 2-night, 3-day wilderness retreat curated with exclusivity,
-        luxury, and adventure in mind.
-
-
-
-
-        
-        Dive into an itinerary curated with
+      Dive into an itinerary curated with the charm nature offers, tranquil escapes, 
+      and boundless exploration.
       </p>
       </div>
 

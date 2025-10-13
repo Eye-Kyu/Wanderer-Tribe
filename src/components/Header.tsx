@@ -258,9 +258,11 @@ export default function Navbar() {
             <Link href="/Contact" className="hover:text-wanderer-rust font-bold text-white mix-blend-difference">
               Contact
             </Link>
+            <Link href="#cta" >
             <button className="bg-wanderer-gold text-sm text-black py-2 px-4 rounded-2xl hover:bg-wanderer-moss hover:text-wanderer-mahogany transition">
               Travel Enquiry
             </button>
+            </Link>
           </div>
         </div>
       </div>

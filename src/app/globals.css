@@ -16,6 +16,9 @@
   display: none;
 } 
 
+html {
+  scroll-behavior: smooth;
+}
 
 .hide-x-scrollbar {
   overflow-x: scroll;
@@ -77,6 +80,9 @@ h1,h2,h3 {
 }
 h5 {
   font-family: Africana;
+}
+.group {
+  border: #333333;
 }
 .button {
   color: #D56F3E;

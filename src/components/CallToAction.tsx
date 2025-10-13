@@ -52,12 +52,12 @@ export default function CallToAction() {
   };
 
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]">
+    <section id="cta" className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:grid md:grid-cols-2"
+        className="max-w-6xl mx-auto bg-white rounded-lg shadow-black shadow-md overflow-hidden flex flex-col md:grid md:grid-cols-2"
       >
         {/* Left side - Image */}
         <div className="relative h-52 sm:h-72 md:h-auto md:block">
