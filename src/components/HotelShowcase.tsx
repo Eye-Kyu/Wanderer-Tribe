@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const hotels = [
   {
-    name: "Mara Luxury Camp, Kenya",
+    name: "More than a destination, it is a feeling - AFRICA",
     location: "Africa",
     image: "/images/hotel1.jpg",
     highlight: "Private tented suites with panoramic savannah views",
@@ -25,8 +25,8 @@ const hotels = [
 
 export default function HotelShowcase() {
   return (
-    <section className="py-16 ">
-      <div className="max-w-7xl mx-auto text-center mb-12 z-40">
+    <section className="py-16  ">
+      <div className="max-w-7xl mx-auto text-center  mb-12 z-40">
         <h2 className="font-heading lg:mb-10 mb-4">
           Stays That Stay With You
         </h2>
@@ -35,7 +35,7 @@ export default function HotelShowcase() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8 px-6 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 px-6 max-w-7xl mx-auto ">
         {hotels.map((hotel, idx) => (
           <motion.div
             key={idx}
@@ -44,7 +44,7 @@ export default function HotelShowcase() {
             transition={{ duration: 0.6, delay: idx * 0.2 }}
             className="bg-white rounded-xl overflow-hidden shadow-lg group"
           >
-            <div className="relative">
+            <div className="relative ">
               <Image
                 src={hotel.image}
                 alt={hotel.name}

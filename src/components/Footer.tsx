@@ -41,10 +41,16 @@ export default function Footer() {
         {/* Destinations */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Destinations</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
+          <ul className="space-y-3 text-gray-300 text-sm">
+            <Link href="/Destinations/asia">
             <li>Asia</li>
+            </Link>
+              <Link href="/Destinations/africa">
             <li>Africa</li>
+            </Link>
+              <Link href="/Destinations/europe">
             <li>Europe</li>
+            </Link>
             <li>Middle East</li>
             <li>South America</li>
           </ul>

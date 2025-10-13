@@ -259,19 +259,25 @@ const ItineraryOptions: React.FC = () => {
         ))}
       </div>
 
-<div className="space-y-7">
-        <h5 className="text-2xl text-center">Wild Africa</h5>
+<div className="space-y-4 md:pb-10">
+        <h5 className="text-2xl text-center">Wild Wanderer</h5>
       <motion.h2
         className="font-heading text-wanderer-green text-center mb-6 relative z-10"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        Unleash Your Safari Odyssey
+        Unleash Your Wandering Pilgrimage
       </motion.h2>
       <p className="text-center max-w-xl mx-auto mb-14 relative z-10">
         Dive into a 2-night, 3-day wilderness retreat curated with exclusivity,
         luxury, and adventure in mind.
+
+
+
+
+        
+        Dive into an itinerary curated with
       </p>
       </div>
 

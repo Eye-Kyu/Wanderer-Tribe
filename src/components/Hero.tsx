@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-white mb-6 leading-tight">
             Discover{" "}
             <span className="bg-gradient-to-r from-[#D27D2D] to-[#008080] bg-clip-text text-transparent">
               Wonders
@@ -73,11 +73,6 @@ const Hero: React.FC = () => {
             <br className="hidden sm:block" />
             with Wanderer Tribe
           </h1>
-
-          <p className="text-xs sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 font-body">
-            Curated journeys across Asia, Africa & Europe for the modern luxury
-            adventurer.
-          </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
