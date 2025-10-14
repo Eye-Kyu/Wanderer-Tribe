@@ -32,21 +32,21 @@ export default function ExperiencePageLayout({
     : experiences;
 
   return (
-    <div>
+    <div className="bg-[#152523] space-y-9">
       <ExperienceHero title={title} subtitle={subtitle} image={heroImage} />
 
       {/* Tag Filter Dropdown */}
-      <div className="flex justify-center mb-8 space-x-4">
+      <div className="flex justify-center mb-8 space-x-4 ">
         <select
           value={activeTag || ""}
           onChange={(e) =>
             setActiveTag(e.target.value === "" ? null : e.target.value)
           }
-          className="px-4 py-2 border rounded-lg text-gray-700"
+          className="px-4 md:px-5 py-2 rounded-lg text-bronze bg-wanderer-ivory"
         >
           <option value="">All Experiences</option>
           {allTags.map((tag) => (
-            <option key={tag} value={tag}>
+            <option key={tag} value={tag} className="bg-wanderer-gold">
               {tag.charAt(0).toUpperCase() + tag.slice(1)}
             </option>
           ))}

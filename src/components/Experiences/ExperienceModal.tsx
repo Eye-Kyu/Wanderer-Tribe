@@ -2,6 +2,7 @@
 
 import { Experience } from "@/types/experience";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface Props {
   experience: Experience;
@@ -18,7 +19,7 @@ export default function ExperienceModal({ experience, onClose }: Props) {
       onClick={onClose}
     >
       <motion.div
-        className="bg-white rounded-xl p-6 max-w-3xl w-full relative"
+        className="bg-black/90 rounded-xl p-6 max-w-3xl w-full relative"
         initial={{ scale: 0.8 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
@@ -26,28 +27,34 @@ export default function ExperienceModal({ experience, onClose }: Props) {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black"
+          className="absolute top-4 right-4 text-gray-500 hover:text-black z-[999]"
         >
           ✕
         </button>
         <h2 className="text-2xl font-bold mb-2">{experience.name}</h2>
-        <p className="text-sm text-gray-600 mb-4">{experience.location}</p>
-        <img
+        <p className="text-sm text-wanderer-rust mb-4">{experience.location}</p>
+        <Image
           src={experience.image}
           alt={experience.name}
           className="w-full h-64 object-cover rounded-lg mb-4"
+          width={400}
+          height={224}
         />
-        <p className="mb-2">{experience.description}</p>
+        <p className="mb-2 text-white">{experience.description}</p>
         <ul className="mb-4">
           {experience.highlights.map((h, idx) => (
-            <li key={idx}>• {h}</li>
+            <li key={idx} className="text-wanderer-gold">
+              • {h}
+            </li>
           ))}
         </ul>
         <div>
-          <strong>Tips:</strong>
+          <strong className="text-white">Tips:</strong>
           <ul>
             {experience.tips.map((t, idx) => (
-              <li key={idx}>• {t}</li>
+              <li key={idx} className="text-wanderer-gold">
+                • {t}
+              </li>
             ))}
           </ul>
         </div>

@@ -9,7 +9,7 @@ export default function AdventurePage() {
     <ExperiencePageLayout
       title="Adventure Travel"
       subtitle="Thrill-seeking adventures across mountains, forests, and oceans."
-      heroImage="/images/experiences/adventure-hero.jpg"
+      heroImage="/images/adventure/interlaken-paragliding.jpeg"
       experiences={AdventureExperiences}
     />
   );

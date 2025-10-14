@@ -8,7 +8,7 @@ export default function WellnessPage() {
     <ExperiencePageLayout
       title="Wellness Retreats"
       subtitle="Reconnect, rejuvenate, and find inner balance in breathtaking destinations."
-      heroImage="/images/experiences/wellness-hero.jpg"
+      heroImage="/images/bali-yoga.jpeg"
       experiences={WellnessExperiences}
     />
   );

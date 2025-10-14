@@ -9,7 +9,7 @@ export default function LuxuryPage() {
     <ExperiencePageLayout
       title="Luxury Escapes"
       subtitle="Indulge in unparalleled comfort, elegance, and exclusive experiences."
-      heroImage="/images/experiences/luxury-hero.jpg"
+      heroImage="/images/luxury/french-riviera-yacht.jpeg"
       experiences={LuxuryExperiences}
     />
   );
