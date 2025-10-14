@@ -195,17 +195,17 @@ export default function Navbar() {
               </Link>
               <div
                 ref={(el) => { dropdownRefs.current["destinations"] = el; }}
-                className="absolute top-full left-0 mt-2 w-56 bg-white text-wanderer-green rounded-xl shadow-xl py-4 px-6 hidden"
+                className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-xl py-4 px-6 hidden"
               >
                 <ul className="space-y-3 text-sm">
-                  <li className="flex items-center space-x-2">
-                    <FaGlobeEurope /> <Link href="/Destinations/europe">Europe</Link>
+                  <li className="flex items-center hover:text-wanderer-moss  space-x-2">
+                    <FaGlobeEurope /> <Link href="/Destinations/europe">Middle East</Link>
                   </li>
-                  <li className="flex items-center space-x-2">
+                  <li className="flex items-center space-x-2 hover:text-wanderer-moss ">
                     <FaGlobeAfrica /> <Link href="/Destinations/africa">Africa</Link>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <FaGlobeAsia /> <Link href="/Destinations/asia">Middle East</Link>
+                  <li className="flex items-center space-x-2 hover:text-wanderer-moss ">
+                    <FaGlobeAsia /> <Link href="/Destinations/asia">Asia</Link>
                   </li>
                 </ul>
               </div>
@@ -225,13 +225,13 @@ export default function Navbar() {
                 className="absolute top-full left-0 mt-2 w-64 bg-white text-wanderer-green rounded-xl shadow-xl py-4 px-6 hidden"
               >
                 <ul className="space-y-3 text-sm">
-                  <li className="flex items-center space-x-2">
+                  <li className="flex items-center space-x-2 hover:text-wanderer-moss">
                     <FaSpa /> <Link href="/Experiences/wellness">Wellness Retreats</Link>
                   </li>
-                  <li className="flex items-center space-x-2">
+                  <li className="flex items-center space-x-2 hover:text-wanderer-moss">
                     <FaHiking /> <Link href="/Experiences/adventure">Adventure Travel</Link>
                   </li>
-                  <li className="flex items-center space-x-2">
+                  <li className="flex items-center space-x-2 hover:text-wanderer-moss">
                     <FaGem /> <Link href="/Experiences/luxury">Luxury Escapes</Link>
                   </li>
                 </ul>

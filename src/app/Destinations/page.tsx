@@ -218,10 +218,20 @@ export default function Destinations() {
     []
   );
 
+  const slides = [
+    { image: "/images/africa.jpg", caption: "Discover the World's Wonders" },
+    { image: "/images/discover-europe.jpg", caption: "Timeless Europe Awaits" },
+    { image: "/images/discover-africa.jpg", caption: "Wild African Adventures" },
+    { image: "/images/explore-asia.jpeg", caption: "Exotic Asian Escapes" },
+  ];
+
+
+
+
   return (
     <div className="relative min-h-screen bg-[#152523] text-foreground overflow-hidden">
 
-      <Carousel />
+      <Carousel items={slides} autoSlideInterval={7000} />
 
       {/* Animated background accents */}
       <motion.div

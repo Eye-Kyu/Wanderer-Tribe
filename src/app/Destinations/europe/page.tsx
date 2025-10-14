@@ -14,15 +14,16 @@ export default function EuropePage() {
   const [selected, setSelected] = useState<Destination | null>(null);
 
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto">
+    <div className="bg-[#152523]">
+    <section className="py-20 px-6 max-w-7xl mx-auto ">
       {/* Animated heading */}
       <motion.h2
-        className="text-5xl md:text-6xl font-heading text-center text-[#2D5BD2] mb-16"
+        className="text-5xl md:text-6xl font-heading text-center text-white mb-16"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Discover Europe
+        Discover The Middle East
       </motion.h2>
 
       {/* Filter Dropdown */}
@@ -52,5 +53,6 @@ export default function EuropePage() {
         />
       )}
     </section>
+    </div>
   );
 }

@@ -17,10 +17,11 @@ export default function AfricaPage() {
     useState<Destination[]>(Destinations);
 
   return (
+     <div className="bg-[#152523]">
     <section className="py-20 px-6 max-w-7xl mx-auto">
       {/* Heading */}
       <motion.h2
-        className="text-5xl md:text-6xl font-heading text-center text-[#2D5BD2] mb-10"
+        className="text-5xl md:text-6xl font-heading text-center text-white mb-10"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -53,5 +54,6 @@ export default function AfricaPage() {
         />
       )}
     </section>
+    </div>
   );
 }

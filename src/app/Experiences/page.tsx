@@ -19,7 +19,7 @@ const experiencesOverview = [
     id: "wellness",
     title: "Wellness Retreats",
     description:
-      "Rejuvenate with sunrise yoga on Bali’s cliffside retreats or unwind in Morocco’s ancient hammams. These sanctuaries blend mindfulness, nature, and holistic healing for a soulful escape.",
+      "Rejuvenate with sunrise yoga on Bali's cliffside retreats or unwind in Morocco's ancient hammams. These sanctuaries blend mindfulness, nature, and holistic healing for a soulful escape.",
     image: "/images/bali-yoga.jpeg",
     link: "/Experiences/wellness",
     features: [
@@ -33,7 +33,7 @@ const experiencesOverview = [
     id: "adventure",
     title: "Adventure Travel",
     description:
-      "Conquer the Inca Trail’s rugged peaks, dive into the Great Barrier Reef’s depths, or soar with a skydive over the Swiss Alps. Each journey ignites your spirit with challenge and awe.",
+      "Conquer the Inca Trail's rugged peaks, dive into the Great Barrier Reef's depths, or soar with a skydive over the Swiss Alps. Each journey ignites your spirit with challenge and awe.",
     image: "/images/adventure/inca-trail.jpeg",
     link: "/Experiences/adventure",
     features: [
@@ -61,8 +61,9 @@ const experiencesOverview = [
 
 export default function ExperiencesPage() {
   return (
+    <div className="bg-[#152523]">
     <section
-      className="relative min-h-screen bg-[#FAF9F6] py-24 px-6 max-w-7xl mx-auto space-y-20"
+      className="relative min-h-screen  py-24 px-6 max-w-7xl mx-auto space-y-20"
       style={{
         backgroundImage: "url('/images/faint-map-pattern.png')",
         backgroundSize: "cover",
@@ -72,7 +73,7 @@ export default function ExperiencesPage() {
       }}
     >
       <motion.h1
-        className="font-heading text-4xl md:text-5xl text-center text-gray-800 mb-12"
+        className="font-heading text-4xl md:text-5xl text-center text-white mb-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -89,25 +90,21 @@ export default function ExperiencesPage() {
         return (
           <motion.div
             key={exp.id}
-            className={`relative overflow-hidden rounded-2xl bg-white/90 border border-gray-200/30 backdrop-blur-sm ${
+            className={`relative overflow-hidden rounded-2xl bg-wanderer-moss shadow-black shadow-md ${
               flexReverse ? "pr-8 md:pl-16" : "pl-8 md:pr-16"
             } flex flex-col md:flex-row items-center gap-10 py-10`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            style={{
-              clipPath: "polygon(0 0, 100% 5%, 100% 95%, 0 100%)",
-              background: "linear-gradient(135deg, #ffffff80, #faf9f680)",
-            }}
           >
             {/* Text */}
             <div className="w-full md:w-1/2 flex flex-col justify-center space-y-6 text-center md:text-left">
-              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-[#D27D2D]">
+              <h2 className="font-heading text-3xl md:text-4xl font-semibold text-wanderer-ivory">
                 {exp.title}
               </h2>
-              <p className="text-gray-700 leading-relaxed">{exp.description}</p>
-              <div className="text-sm text-gray-500 italic">
+              <p className="text-black leading-relaxed">{exp.description}</p>
+              <div className="text-sm text-wanderer-ivory italic">
                 Featured: {exp.featured}
               </div>
 
@@ -116,7 +113,7 @@ export default function ExperiencesPage() {
                 {exp.features.map((feature, i) => (
                   <div
                     key={i}
-                    className="flex items-center space-x-3 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300"
+                    className="flex items-center space-x-3 p-4 rounded-xl bg-gray-300 hover:bg-gray-100 shadow-white/20 shadow-md transition-all duration-300"
                   >
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -133,7 +130,7 @@ export default function ExperiencesPage() {
 
               <Link
                 href={exp.link}
-                className="inline-block bg-[#D27D2D] text-white px-6 py-3 rounded-full hover:bg-[#B5661F] transition-colors duration-200 mt-6 relative group"
+                className="inline-block md:w-80 bg-wanderer-rust hover:bg-white text-white hover:text-wanderer-rust px-6 py-3 rounded-full transition-colors duration-200 mt-6 ease-in-out relative group"
               >
                 <span className="relative z-10">
                   Chart Your {exp.title} Path
@@ -150,11 +147,12 @@ export default function ExperiencesPage() {
                 fill
                 className="object-cover brightness-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF9F6]/70 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF9F6]/60 to-transparent"></div>
             </div>
           </motion.div>
         );
       })}
     </section>
+    </div>
   );
 }

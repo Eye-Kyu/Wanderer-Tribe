@@ -5,41 +5,33 @@ import Image from "next/image";
 import gsap from "gsap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function Carousel() {
-  const carouselItems = [
-    {
-      image: "/images/africa.jpg",
-      caption: "Discover the World's Wonders",
-    },
-    {
-      image: "/images/discover-europe.jpg",
-      caption: "Timeless Europe Awaits",
-    },
-    {
-      image: "/images/discover-africa.jpg",
-      caption: "Wild African Adventures",
-    },
-    { image: "/images/explore-asia.jpeg", caption: "Exotic Asian Escapes" },
-  ];
+interface CarouselItem {
+  image: string;
+  caption: string;
+}
 
+interface CarouselProps {
+  items: CarouselItem[];
+  autoSlideInterval?: number;
+}
+
+export default function Carousel({
+  items,
+  autoSlideInterval = 6000,
+}: CarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const slidesRef = useRef<HTMLDivElement[]>([]);
   const directionRef = useRef<"left" | "right">("right");
 
-  // --- GSAP clip-path transition logic ---
+  // 🎥 GSAP Cinematic Transition Logic
   useEffect(() => {
     const slides = slidesRef.current;
-    if (!slides || slides.length === 0) return;
+    if (!slides.length) return;
 
     slides.forEach((slide, i) => {
       gsap.set(slide, {
-        clipPath:
-          i === activeIndex
-            ? "inset(0% 0% 0% 0%)"
-            : directionRef.current === "right"
-            ? "inset(0% 0% 0% 100%)"
-            : "inset(0% 100% 0% 0%)",
         opacity: i === activeIndex ? 1 : 0,
+        scale: i === activeIndex ? 1 : 1.08,
         zIndex: i === activeIndex ? 2 : 1,
       });
     });
@@ -49,67 +41,85 @@ export default function Carousel() {
         ? (activeIndex - 1 + slides.length) % slides.length
         : (activeIndex + 1) % slides.length;
 
-    const tl = gsap.timeline();
+    const current = slides[activeIndex];
+    const previous = slides[prevIndex];
 
-    // Animate current slide in
-    tl.to(slides[activeIndex], {
-      clipPath: "inset(0% 0% 0% 0%)",
-      duration: 1.2,
-      ease: "power3.inOut",
-      opacity: 1,
-    });
+    const tl = gsap.timeline({ defaults: { duration: 1.3, ease: "power3.inOut" } });
 
-    // Animate previous slide out
-    tl.to(
-      slides[prevIndex],
+    // Current slide fade-in & smooth zoom
+    tl.fromTo(
+      current,
       {
-        clipPath:
-          directionRef.current === "right"
-            ? "inset(0% 100% 0% 0%)"
-            : "inset(0% 0% 0% 100%)",
-        duration: 1.2,
-        ease: "power3.inOut",
         opacity: 0,
+        scale: 1.08,
+        x: directionRef.current === "right" ? "8%" : "-8%",
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        x: "0%",
+        zIndex: 2,
+      }
+    );
+
+    // Previous slide fade out
+    tl.to(
+      previous,
+      {
+        opacity: 0,
+        scale: 1.02,
+        x: directionRef.current === "right" ? "-4%" : "4%",
+        zIndex: 1,
       },
       "<"
     );
+
+    // Caption fade-in delay for elegance
+    const caption = current.querySelector("h2");
+    if (caption) {
+      gsap.fromTo(
+        caption,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.1,
+          delay: 0.4,
+          ease: "power3.out",
+        }
+      );
+    }
   }, [activeIndex]);
 
-  // --- Auto-slide every 6 seconds ---
+  // 🔁 Auto-slide
   useEffect(() => {
     const timer = setInterval(() => {
       directionRef.current = "right";
-      setActiveIndex((prev) =>
-        prev === carouselItems.length - 1 ? 0 : prev + 1
-      );
-    }, 6000);
+      setActiveIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+    }, autoSlideInterval);
     return () => clearInterval(timer);
-  }, [carouselItems.length]);
+  }, [items.length, autoSlideInterval]);
 
   const handlePrev = () => {
     directionRef.current = "left";
-    setActiveIndex((prev) =>
-      prev === 0 ? carouselItems.length - 1 : prev - 1
-    );
+    setActiveIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
     directionRef.current = "right";
-    setActiveIndex((prev) =>
-      prev === carouselItems.length - 1 ? 0 : prev + 1
-    );
+    setActiveIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <section className="relative w-screen h-screen overflow-hidden">
+    <section className="relative w-screen h-screen overflow-hidden bg-neutral-950">
       <div className="relative w-full h-full">
-        {carouselItems.map((item, i) => (
+        {items.map((item, i) => (
           <div
             key={i}
             ref={(el) => {
               if (el) slidesRef.current[i] = el;
             }}
-            className="absolute inset-0"
+            className="absolute inset-0 overflow-hidden will-change-transform"
           >
             <Image
               src={item.image}
@@ -118,7 +128,8 @@ export default function Carousel() {
               className="object-cover"
               priority={i === 0}
             />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            {/* Removed dark fade — replaced with subtle vignette for clarity */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-center justify-center">
               <h2 className="font-heading text-4xl md:text-7xl font-bold text-white text-center px-6 drop-shadow-lg">
                 {item.caption}
               </h2>
@@ -126,29 +137,29 @@ export default function Carousel() {
           </div>
         ))}
 
-        {/* Arrows */}
+        {/* Navigation Arrows */}
         <button
           onClick={handlePrev}
-          className="absolute left-6 button top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-4 rounded-full z-50"
+          className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-4 rounded-full z-50 transition"
           aria-label="Previous Slide"
         >
-          <FaChevronLeft size={20} />
+          <FaChevronLeft size={22} />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-6 button top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-4 rounded-full z-50"
+          className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-4 rounded-full z-50 transition"
           aria-label="Next Slide"
         >
-         <FaChevronRight size={20} />
+          <FaChevronRight size={22} />
         </button>
 
         {/* Pagination Dots */}
         <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-50">
-          {carouselItems.map((_, i) => (
+          {items.map((_, i) => (
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
-              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 i === activeIndex ? "bg-white scale-125" : "bg-white/40"
               }`}
               aria-label={`Go to slide ${i + 1}`}

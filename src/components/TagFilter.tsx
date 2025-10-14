@@ -30,20 +30,20 @@ export default function TagFilter({ destinations, onFilter }: TagFilterProps) {
       {/* Icon Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="p-2 rounded-full bg-neutral-800 text-neutral-200 border border-neutral-700 hover:bg-neutral-700 transition"
+        className="p-2 rounded-full bg-neutral-800 text-neutral-200 border border-wanderer-gold hover:bg-neutral-700 transition"
       >
         <Filter size={18} />
       </button>
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute left-1/2 transform -translate-x-1/2 mt-3 bg-neutral-900 border border-neutral-700 rounded-xl shadow-lg p-3 z-50 w-48 text-left">
+        <div className="absolute left-1/2 transform -translate-x-1/2 mt-3 bg-neutral-900 border border-wanderer-gold rounded-xl shadow-lg p-3 z-50 w-48 text-left">
           {/* All Option */}
           <button
             onClick={() => handleSelect(null)}
             className={`block w-full px-3 py-2 rounded-md text-sm transition ${
               selectedTag === null
-                ? "bg-[#2D5BD2] text-white"
+                ? "bg-wanderer-moss text-white"
                 : "text-neutral-300 hover:bg-neutral-800"
             }`}
           >

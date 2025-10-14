@@ -14,10 +14,11 @@ export default function AsiaPage() {
   const [selected, setSelected] = useState<Destination | null>(null);
 
   return (
+    <div className="bg-[#152523]">
     <section className="py-20 px-6 max-w-7xl mx-auto">
       {/* Animated heading */}
       <motion.h2
-        className="text-4xl md:text-5xl font-heading text-center mb-12 text-[#D27D2D]"
+        className="text-4xl md:text-5xl font-heading text-center mb-12 text-white"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -51,5 +52,6 @@ export default function AsiaPage() {
         />
       )}
     </section>
+    </div>
   );
 }
