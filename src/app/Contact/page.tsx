@@ -182,7 +182,7 @@ export default function ContactPage() {
                 </button>
                 {isSubmitted && (
                   <p className="text-green-600 text-sm">
-                    Thank you! We'll get back to you soon.
+                    Thank you! We&apos;ll get back to you soon.
                   </p>
                 )}
               </div>

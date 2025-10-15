@@ -22,8 +22,7 @@ type Destination = {
 
 export default function Destinations() {
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 400], [0, -80]);
-  const heroScale = useTransform(scrollY, [0, 400], [1, 1.07]);
+
 
 
   const destinations: { [key: string]: Destination[] } = {
@@ -188,7 +187,6 @@ export default function Destinations() {
   const [selectedDestination, setSelectedDestination] =
     useState<Destination | null>(null);
 
-  const [activeIndex, setActiveIndex] = useState(0);
 
 
   const regions = useMemo(
