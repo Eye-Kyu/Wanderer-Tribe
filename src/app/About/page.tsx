@@ -106,7 +106,7 @@ export default function AboutPage() {
         subtitle: "Whispers of What's Next",
         content:
           "Peek into the future: a lost temple in Cambodia's jungles, a volcanic island off Iceland, a Himalayan pass blooming with rare orchids. These are the next chapters Wanderer Tribe is unveiling—join us to be among the first to explore.",
-        image: null,
+        image: "/images/Adventure/inca-trail.jpeg",
         accentColor: "#008080",
          imagePosition: "left",
       }
@@ -148,52 +148,54 @@ export default function AboutPage() {
           <span className="block -mt-[2vw]">Tribe</span>
         </div>
       </section>
-
+      
+      
       {/* 📖 About Sections */}
-      <section className="relative">
-        {chapters.map((chapter, idx) => (
-          <div
-            key={chapter.id}
-            className={`flex flex-col relative md:flex-row shadow-black shadow-sm ${
-              chapter.imagePosition === "right" ? "md:flex-row-reverse" : ""
-            } h-[90vh] md:h-[80vh]`}
-          >
-            {/* Image Side */}
-            <motion.div
-              className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-            >
-              <Image
-                src={chapter.image || "/images/default-image.jpg"}
-                alt={chapter.title}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+<section className="relative w-full">
+  {chapters.map((chapter) => (
+    <div
+      key={chapter.id}
+      className={`flex flex-col md:flex-row  ${
+        chapter.imagePosition === "right" ? "md:flex-row-reverse" : ""
+      } relative shadow-black shadow-sm bg-[#0E2A2A]`}
+    >
+      {/* Image Side */}
+      <motion.div
+        className="relative w-full md:w-1/2 h-[40vh] sm:h-[50vh] md:h-auto overflow-hidden"
+        whileHover={{ scale: 1.02 }}
+      >
+        <Image
+          src={chapter.image || "/images/default-image.jpg"}
+          alt={chapter.title}
+          fill
+          className="object-cover"
+        />
+      </motion.div>
 
-            {/* Text Side */}
-            <div className="w-full relative md:w-1/2 h-1/2 md:h-full flex flex-col justify-center items-start px-8 md:px-20 text-left bg-[#0E2A2A]">
-              <motion.h3
-                className="font-heading text-3xl md:text-5xl mb-6 font-semibold"
-                style={{ color: chapter.accentColor }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                {chapter.title}
-              </motion.h3>
+      {/* Text Side */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-20 py-10 md:py-0">
+        <motion.h3
+          className="font-heading text-2xl sm:text-3xl lg:text-5xl mb-4 sm:mb-6 font-semibold"
+          style={{ color: chapter.accentColor }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {chapter.title}
+        </motion.h3>
 
-              <p className="text-gray-300 text-lg max-w-lg mb-4 leading-relaxed">
-                {chapter.subtitle}
-              </p>
-              <p className="text-gray-400 text-base max-w-lg leading-relaxed mb-8">
-                {chapter.content}
-              </p>
-            </div>
-          </div>
-        ))}
-      </section>
+        <p className="text-gray-300 text-base sm:text-lg max-w-lg mb-3 sm:mb-4 leading-relaxed">
+          {chapter.subtitle}
+        </p>
+        <p className="text-gray-400 text-sm sm:text-base max-w-lg leading-relaxed">
+          {chapter.content}
+        </p>
+      </div>
+    </div>
+  ))}
+</section>
+
 
       {/* ✨ CTA */}
       <section className="relative py-20 px-6 text-center bg-[#122F2F] border-t border-gray-700">
