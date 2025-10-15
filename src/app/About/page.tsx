@@ -47,8 +47,8 @@ export default function AboutPage() {
         {
           scale: 0.7,
           borderRadius: "50%",
-          width: "500px",
-          height: "500px",
+          width: "400px",
+          height: "350px",
         },
         {
           scale: 1.2,
@@ -85,8 +85,8 @@ export default function AboutPage() {
         title: "The Founders' Vision",
         subtitle: "A Dream Born of Wanderlust",
         content:
-          "In the shadow of a forgotten Himalayan peak, founders Elena and Rajiv sketched their dream on a weathered map. Inspired by a chance encounter with a nomadic tribe, they vowed to craft journeys that peel back the earth's secrets—pristine lagoons, ancient caves lit by torchlight, and festivals unseen by outsiders.",
-        image: "/images/About/vision.svg",
+         "Amidst the rustle of acacia trees and the whispers of distant dunes, Wanderer Tribe was born. Our founders envisioned more than travel — they dreamed of connection. From Africa's sacred lands to forgotten island trails, Wanderer Tribe seeks not to escape life, but to discover it — through stories, encounters, and journeys that awaken the soul.",
+           image: "/images/About/vision.svg",
         accentColor: "#F5E1C0",
         imagePosition: "left",
       },
@@ -100,6 +100,16 @@ export default function AboutPage() {
         accentColor: "#F5E1C0",
         imagePosition: "right",
       },
+      {
+        id: "previews",
+        title: "Exclusive Previews",
+        subtitle: "Whispers of What's Next",
+        content:
+          "Peek into the future: a lost temple in Cambodia's jungles, a volcanic island off Iceland, a Himalayan pass blooming with rare orchids. These are the next chapters Wanderer Tribe is unveiling—join us to be among the first to explore.",
+        image: null,
+        accentColor: "#008080",
+         imagePosition: "left",
+      }
     ],
     []
   );
@@ -144,7 +154,7 @@ export default function AboutPage() {
         {chapters.map((chapter, idx) => (
           <div
             key={chapter.id}
-            className={`flex flex-col md:flex-row ${
+            className={`flex flex-col relative md:flex-row shadow-black shadow-sm ${
               chapter.imagePosition === "right" ? "md:flex-row-reverse" : ""
             } h-[90vh] md:h-[80vh]`}
           >
@@ -162,7 +172,7 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Text Side */}
-            <div className="w-full md:w-1/2 h-1/2 md:h-full flex flex-col justify-center items-start px-8 md:px-20 text-left bg-[#0E2A2A]">
+            <div className="w-full relative md:w-1/2 h-1/2 md:h-full flex flex-col justify-center items-start px-8 md:px-20 text-left bg-[#0E2A2A]">
               <motion.h3
                 className="font-heading text-3xl md:text-5xl mb-6 font-semibold"
                 style={{ color: chapter.accentColor }}
@@ -206,7 +216,7 @@ export default function AboutPage() {
           Let Wanderer Tribe weave your story with threads of rarity and wonder—
           contact us to begin.
         </motion.p>
-        <Link href="/contact">
+        <Link href="/Contact">
           <motion.button
             whileHover={{ scale: 1.05, backgroundColor: "#D27D2D" }}
             whileTap={{ scale: 0.95 }}

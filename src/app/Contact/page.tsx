@@ -1,14 +1,13 @@
 "use client";
-import Navbar from "@/components/Header";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+
+import { useCtaModal } from "@/context/CTAModalContext";
+import CallToAction from "@/components/CallToAction"; 
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 export default function ContactPage() {
   // Parallax and scroll effects
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, -100]);
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.9]);
+    const { showCta, openCta, closeCta } = useCtaModal();
 
   // Form state
   const [formData, setFormData] = useState({
@@ -38,185 +37,171 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FAF9F6] text-gray-800">
-      <Navbar />
+    <div className="relative min-h-screen bg-[#0E2A2A] text-white overflow-hidden">
 
-      {/* Hero Section */}
-      <section className="relative w-full h-[60vh] overflow-hidden">
-        <motion.div style={{ y: heroY, opacity: heroOpacity }}>
-          <Image
-            src="/images/contact-wilderness.jpg"
-            alt="Contact Background"
-            fill
-            className="object-cover brightness-90"
-          />
-          <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 px-6 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h1 className="text-4xl md:text-6xl font-heading text-white font-semibold">
-              Contact Wanderer Tribe
-            </motion.h1>
-            <motion.p className="mt-4 text-lg md:text-xl text-white/80 max-w-xl">
-              We’re here to help you craft unforgettable, unique travel
-              experiences. Reach out and let us make your next adventure
-              exceptional.
-            </motion.p>
-          </motion.div>
-        </motion.div>
-      </section>
 
-      {/* Contact Form Section */}
-      <section className="relative py-20 px-6 max-w-3xl mx-auto">
-        <motion.div
-          className="bg-white border border-gray-200 rounded-xl p-10 shadow-md"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-8">
-            Get in Touch
-          </h2>
+      <div className="w-screen h-1/3 border-b border-wanderer-forest">
+      <div className="md:left-12 flex flex-col justify-center items-start px-8 md:px-20 md:pt-28 text-left space-y-6">
+      <h1 className="md:text-8xl">CONTACT US</h1>
+      <p className="md:text-lg max-w-3xl">
+        For travel inquiries, collaborations, or support, feel free to reach out
+        using the form or through the details below — our team will respond
+        promptly.
+      </p>  
+      </div>    
+      </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="peer w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D27D2D] focus:border-transparent placeholder-transparent"
-                placeholder="Your Name"
-              />
-              <label className="absolute left-4 top-4 text-gray-400 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-[#D27D2D] peer-focus:text-sm">
-                Your Name
-              </label>
-            </div>
+{/* Contact Form Section */}
+<section className="relative py-24 px-6 max-w-6xl mx-auto">
+  <motion.div
+    className="grid md:grid-cols-2 gap-12 items-start bg-[#FAF6EF] rounded-2xl p-10 border border-[#DAD3C8] shadow-sm"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >{/* Left — Contact Info */}
+<div className="flex flex-col items-center justify-center h-full">
 
-            <div className="relative">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="peer w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D27D2D] focus:border-transparent placeholder-transparent"
-                placeholder="Your Email"
-              />
-              <label className="absolute left-4 top-4 text-gray-400 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-[#D27D2D] peer-focus:text-sm">
-                Your Email
-              </label>
-            </div>
 
-            <div className="relative">
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="peer w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D27D2D] focus:border-transparent bg-white"
-                required
-              >
-                <option value="" disabled>
-                  Select Inquiry Type
-                </option>
-                <option value="booking">Booking</option>
-                <option value="collaboration">Collaboration</option>
-                <option value="general">General</option>
-              </select>
-              <label className="absolute left-4 top-1 text-gray-400 text-sm pointer-events-none">
-                Inquiry Type
-              </label>
-            </div>
+  <div className="space-y-5 w-full max-w-sm">
+    <div className="flex items-center justify-center gap-4 bg-white rounded-xl px-5 py-4 shadow-[inset_0_3px_10px_rgba(0,0,0,0.15)] hover:shadow-md transition">
+      <div className="w-10 h-10 flex items-center justify-center bg-[#F5E1C0] rounded-full">
+        ✉️
+      </div>
+      <div className="text-left">
+        <p className="text-sm text-gray-500">Email</p>
+        <p className="font-medium text-gray-800">explore@wanderertribe.com</p>
+      </div>
+    </div>
 
-            <div className="relative">
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                className="peer w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#D27D2D] focus:border-transparent placeholder-transparent h-32 resize-none"
-                placeholder="Your Message"
-              />
-              <label className="absolute left-4 top-4 text-gray-400 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-[#D27D2D] peer-focus:text-sm">
-                Your Message
-              </label>
-            </div>
+    <div className="flex items-center justify-center gap-4 bg-white rounded-xl px-5 py-4 shadow-[inset_0_3px_10px_rgba(0,0,0,0.15)] hover:shadow-md transition">
+      <div className="w-10 h-10 flex items-center justify-center bg-[#F5E1C0] rounded-full">
+        📞
+      </div>
+      <div>
+        <p className="text-sm text-gray-500">Phone</p>
+        <p className="font-medium text-gray-800">+254 110036929</p>
+      </div>
+    </div>
 
-            <div className="text-center">
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center px-8 py-3 rounded-full font-medium bg-[#D27D2D] text-white hover:bg-[#B5661F] shadow-md transition"
-              >
-                Submit
-              </button>
-              {isSubmitted && (
-                <p className="mt-4 text-green-600 text-sm transition-opacity duration-500">
-                  Thank you! We’ll respond shortly.
-                </p>
-              )}
-            </div>
-          </form>
-        </motion.div>
-      </section>
+    <div className="flex items-center justify-center gap-4 bg-white rounded-xl px-5 py-4 shadow-[inset_0_3px_10px_rgba(0,0,0,0.15)] hover:shadow-md transition">
+      <div className="w-10 h-10 flex items-center justify-center bg-[#F5E1C0] rounded-full">
+        📍
+      </div>
+      <div className="text-left">
+        <p className="text-sm text-gray-500">Address</p>
+        <p className="font-medium text-gray-800">
+          La Casa De Papel — Rio De Janeiro, Brazil
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-      {/* Contact Details Section */}
-      <section className="relative py-20 px-6 max-w-5xl mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-12">
-          Contact Information
-        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="text-lg font-semibold text-[#D27D2D] mb-2">Email</h3>
-            <p className="text-gray-700">explore@wanderertribe.com</p>
+    {/* Right — Form */}
+    <div className="bg-white  rounded-2xl p-8 shadow-lg shadow-black/20">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Name*
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full border-b border-black/20  p-3 focus:border-black outline-none text-black"
+              placeholder="Your full name"
+            />
           </div>
-          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="text-lg font-semibold text-[#D27D2D] mb-2">Phone</h3>
-            <p className="text-gray-700">+31 6 13227086</p>
-          </div>
-          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition">
-            <h3 className="text-lg font-semibold text-[#D27D2D] mb-2">
-              Social
-            </h3>
-            <div className="flex justify-center space-x-4 mt-2">
-              {/* Example icons */}
-              <a
-                href="https://instagram.com/wanderertribe"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#D27D2D] transition"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://twitter.com/wanderertribe"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#D27D2D] transition"
-              >
-                Twitter
-              </a>
-              <a
-                href="https://facebook.com/wanderertribe"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#D27D2D] transition"
-              >
-                Facebook
-              </a>
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+               Email*
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full  border-b border-black/20 p-3 focus:border-black outline-none text-black"
+              placeholder="example@email.com"
+            />
           </div>
         </div>
-      </section>
 
-      {/* Final Call-to-Action */}
-      <section className="relative py-16 px-6 text-center bg-white border-t border-gray-200">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Inquiry Type*
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              className="w-full bg-white  border-b border-black/20 p-3 focus:border-black outline-none text-black"
+            >
+              <option value="">Select</option>
+              <option value="booking" className="text-wanderer-rust">Booking</option>
+              <option value="collaboration" className="text-wanderer-rust">Collaboration</option>
+              <option value="general" className="text-wanderer-rust">General</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Country / Region
+            </label>
+            <input
+              type="text"
+              name="country"
+              onChange={handleChange}
+              className="w-full  border-b border-black/20 p-3 focus:border-black outline-none text-black"
+              placeholder="e.g. Kenya"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Message
+          </label>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            className="w-full  border-b border-black/20 p-3 focus:border-black outline-none text-black h-32 resize-none"
+            placeholder="Enter your message"
+          />
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            className="px-6 py-3 rounded-full bg-wanderer-moss text-white font-medium hover:bg-[#B5661F] transition"
+          >
+            Submit
+          </button>
+          {isSubmitted && (
+            <p className="mt-3 text-green-600 text-sm">
+              Thank you! We'll get back to you soon.
+            </p>
+          )}
+        </div>
+      </form>
+    </div>
+  </motion.div>
+</section> 
+
+
+ {/* Final Call-to-Action */}
+      <section className="relative py-16 px-6 text-center bg-gradient-to-b from-[#0E2A2A] to-[#181818]">
         <motion.h2
-          className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4"
+          className="text-2xl md:text-4xl font-semibold mb-4"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -224,8 +209,9 @@ export default function ContactPage() {
         >
           Begin Your Journey
         </motion.h2>
+
         <motion.p
-          className="text-gray-700 mb-6 max-w-md mx-auto"
+          className="text-white mb-6 max-w-md mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -234,15 +220,45 @@ export default function ContactPage() {
           Reach out today and let us help you plan a unique experience that you
           will never forget.
         </motion.p>
-        <a href="/about" className="inline-block">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="px-8 py-3 rounded-full font-medium bg-[#D27D2D] text-white hover:bg-[#B5661F] shadow-md transition"
-          >
-            Learn More
-          </motion.button>
-        </a>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          onClick={openCta}
+          className="px-8 py-3 rounded-full font-medium bg-wanderer-gold text-wanderer-moss hover:bg-wanderer-moss hover:text-wanderer-gold shadow-md transition"
+        >
+          Learn More
+        </motion.button>
       </section>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {showCta && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm"
+            onClick={closeCta}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative bg-white rounded-xl shadow-2xl w-[95%] md:w-[80%] lg:w-[65%] max-h-[90vh] overflow-y-auto"
+            >
+              <button
+                onClick={closeCta}
+                className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-xl font-bold"
+              >
+                ×
+              </button>
+              <CallToAction />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

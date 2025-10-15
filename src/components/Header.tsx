@@ -15,12 +15,33 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { useCtaModal } from "@/context/CTAModalContext";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, setActiveDropdown] = useState<string | null>(null);
+
+
+  const { openCta } = useCtaModal();
+  const pathname = usePathname();
+
+  const handleTravelEnquiry = () => {
+    if (pathname === "/") {
+      const ctaSection = document.getElementById("cta");
+      if (ctaSection) {
+        ctaSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        openCta();
+      }
+    } else {
+      openCta();
+    }
+  };
+
+
 
   const menuRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<HTMLAnchorElement[]>([]);
@@ -180,6 +201,8 @@ export default function Navbar() {
           </button>
         </div>
 
+
+
         {/* --- Desktop Nav (Logo centered) --- */}
         <div className="hidden md:flex w-full items-center justify-between text-lg font-light text-black relative">
           {/* Left side links */}
@@ -258,11 +281,11 @@ export default function Navbar() {
             <Link href="/Contact" className="hover:text-wanderer-rust font-bold text-white mix-blend-difference">
               Contact
             </Link>
-            <Link href="#cta" >
-            <button className="bg-wanderer-gold text-sm text-black py-2 px-4 rounded-2xl hover:bg-wanderer-moss hover:text-wanderer-mahogany transition">
+           
+            <button onClick={handleTravelEnquiry} className="bg-wanderer-gold text-sm text-black py-2 px-4 rounded-2xl hover:bg-wanderer-moss hover:text-wanderer-mahogany transition">
               Travel Enquiry
             </button>
-            </Link>
+          
           </div>
         </div>
       </div>
@@ -270,7 +293,7 @@ export default function Navbar() {
       {/* --- Mobile Fullscreen Overlay Menu (GSAP controlled) --- */}
       <div
         ref={menuRef}
-        className="fixed inset-0 bg-wanderer-green text-white font-extralight flex flex-col justify-center items-center gap-8 text-md md:hidden z-[300] h-screen"
+        className="fixed inset-0 bg-wanderer-forest text-white font-extralight flex flex-col justify-center items-center gap-8 text-md md:hidden z-[300] h-screen"
         style={{
           clipPath: "circle(0% at 100% 0)",
           pointerEvents: "none",
