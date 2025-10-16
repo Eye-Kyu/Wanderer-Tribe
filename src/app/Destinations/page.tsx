@@ -26,7 +26,7 @@ export default function Destinations() {
 
 
   const destinations: { [key: string]: Destination[] } = {
-    Europe: [
+    The_Middle_East: [
       {
         name: "Paris, France",
         description:
@@ -192,7 +192,7 @@ export default function Destinations() {
   const regions = useMemo(
     () => [
       {
-        name: "Europe",
+        name: "The_Middle_East",
         description:
           "Europe, a tapestry of history and culture, invites you to explore its iconic landmarks like the Eiffel Tower and Colosseum. From the romantic streets of Paris to the ancient ruins of Rome, this continent offers a blend of art, architecture, and cuisine.\nTravel tip: Spring and fall provide pleasant weather and fewer crowds. Ideal for cultural enthusiasts and history buffs.",
         image: "/images/discover-europe.jpeg",
@@ -217,10 +217,10 @@ export default function Destinations() {
   );
 
   const slides = [
-    { image: "/images/africa.jpg", caption: "Discover the World's Wonders" },
-    { image: "/images/discover-europe.jpg", caption: "Timeless Europe Awaits" },
-    { image: "/images/discover-africa.jpg", caption: "Wild African Adventures" },
-    { image: "/images/explore-asia.jpeg", caption: "Exotic Asian Escapes" },
+    { image: "/images/africa.jpg", title: "Discover the World's Wonders", subtitle: "Adventure Awaits" },
+    { image: "/images/discover-europe.jpg", title: "Timeless Europe Awaits", subtitle: "History, Culture, Romance" },
+    { image: "/images/discover-africa.jpg", title: "Wild African Adventures", subtitle: "Safari and Beyond" },
+    { image: "/images/explore-asia.jpeg", title: "Exotic Asian Escapes", subtitle: "Tradition Meets Tranquility" },
   ];
 
 
@@ -229,7 +229,7 @@ export default function Destinations() {
   return (
     <div className="relative min-h-screen bg-[#152523] text-foreground overflow-hidden">
 
-      <Carousel items={slides} autoSlideInterval={7000} />
+      <Carousel slides={slides} autoplay delay={6000}/>
 
       {/* Animated background accents */}
       <motion.div
@@ -263,7 +263,7 @@ export default function Destinations() {
 
       {/* Regions Overview */}
       <section className="relative py-24 px-6">
-        <div className="max-w-7xl mx-auto space-y-24">
+        <div className="max-w-7xl mx-auto space-y-24 md:space-y-20">
           {regions.map((region, idx) => (
             <motion.div
               key={region.name}
@@ -318,7 +318,7 @@ export default function Destinations() {
                   />
                 </div>
 
-                <p className="text-white dark:text-neutral-200/90 text-lg md:text-lg leading-relaxed mb-8">
+                <p className="text-white dark:text-neutral-200/90 text-lg md:text-base  leading-relaxed mb-8">
                   {region.description}
                 </p>
 
@@ -329,7 +329,7 @@ export default function Destinations() {
                       onClick={() => setSelectedDestination(dest)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="group inline-flex items-center gap-2 bg-wanderer-forest font-medium px-4 py-2 rounded-2xl shadow-sm shadow-black/50 transition-all duration-300 text-sm"
+                      className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all text-wanderer-moss duration-300 text-sm"
                     >
                       <span className="text-base">📍</span>
                       <span className="whitespace-nowrap">{dest.name}</span>
@@ -344,7 +344,7 @@ export default function Destinations() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative inline-flex button items-center justify-center px-8 py-3 rounded-full font-semibold overflow-hidden transition-all duration-300"
+                    className="relative inline-flex bg-wanderer-ivory text-wanderer-mahogany items-center justify-center px-5 py-2 rounded-full font-semibold overflow-hidden transition-all duration-300"
                   >
                     Explore {region.name}
                   </motion.button>

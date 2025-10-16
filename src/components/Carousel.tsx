@@ -1,172 +1,149 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import gsap from "gsap";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-interface CarouselItem {
+interface Slide {
   image: string;
-  caption: string;
+  title: string;
+  subtitle?: string;
 }
 
 interface CarouselProps {
-  items: CarouselItem[];
-  autoSlideInterval?: number;
+  slides: Slide[];
+  autoplay?: boolean;
+  delay?: number;
 }
 
-export default function Carousel({
-  items,
-  autoSlideInterval = 6000,
-}: CarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const slidesRef = useRef<HTMLDivElement[]>([]);
-  const directionRef = useRef<"left" | "right">("right");
+const Carousel: React.FC<CarouselProps> = ({
+  slides,
+  autoplay = true,
+  delay = 6000,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 🎥 GSAP Cinematic Transition Logic
-  useEffect(() => {
-    const slides = slidesRef.current;
-    if (!slides.length) return;
+  // --- GSAP curtain reveal using scale ---
+  const animateReveal = (
+    newIndex: number,
+    dir: "next" | "prev",
+    oldIndex?: number
+  ) => {
+    const newSlide = slideRefs.current[newIndex];
+    const oldSlide = oldIndex !== undefined ? slideRefs.current[oldIndex] : null;
+    if (!newSlide) return;
 
-    slides.forEach((slide, i) => {
-      gsap.set(slide, {
-        opacity: i === activeIndex ? 1 : 0,
-        scale: i === activeIndex ? 1 : 1.08,
-        zIndex: i === activeIndex ? 2 : 1,
-      });
+    slideRefs.current.forEach((slide) => {
+      if (slide) gsap.set(slide, { zIndex: 0, opacity: 0 });
     });
 
-    const prevIndex =
-      directionRef.current === "right"
-        ? (activeIndex - 1 + slides.length) % slides.length
-        : (activeIndex + 1) % slides.length;
+    // Prepare new slide mask
+    gsap.set(newSlide, {
+      zIndex: 2,
+      opacity: 1,
+      transformOrigin: dir === "next" ? "100% 50%" : "0% 50%",
+      scaleX: 0,
+    });
 
-    const current = slides[activeIndex];
-    const previous = slides[prevIndex];
-
-    const tl = gsap.timeline({ defaults: { duration: 1.3, ease: "power3.inOut" } });
-
-    // Current slide fade-in & smooth zoom
-    tl.fromTo(
-      current,
-      {
-        opacity: 0,
-        scale: 1.08,
-        x: directionRef.current === "right" ? "8%" : "-8%",
+    gsap.to(newSlide, {
+      scaleX: 1,
+      duration: 1.2,
+      ease: "power3.inOut",
+      onComplete: () => {
+        if (oldSlide) gsap.set(oldSlide, { opacity: 0 });
       },
-      {
-        opacity: 1,
-        scale: 1,
-        x: "0%",
-        zIndex: 2,
-      }
-    );
+    });
+  };
 
-    // Previous slide fade out
-    tl.to(
-      previous,
-      {
-        opacity: 0,
-        scale: 1.02,
-        x: directionRef.current === "right" ? "-4%" : "4%",
-        zIndex: 1,
-      },
-      "<"
-    );
+  const nextSlide = () => {
+    const oldIndex = currentIndex;
+    const newIndex = (currentIndex + 1) % slides.length;
+    setCurrentIndex(newIndex);
+    animateReveal(newIndex, "next", oldIndex);
+  };
 
-    // Caption fade-in delay for elegance
-    const caption = current.querySelector("h2");
-    if (caption) {
-      gsap.fromTo(
-        caption,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.1,
-          delay: 0.4,
-          ease: "power3.out",
-        }
-      );
-    }
-  }, [activeIndex]);
+  const prevSlide = () => {
+    const oldIndex = currentIndex;
+    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
+    setCurrentIndex(newIndex);
+    animateReveal(newIndex, "prev", oldIndex);
+  };
 
-  // 🔁 Auto-slide
+  // Autoplay
   useEffect(() => {
-    const timer = setInterval(() => {
-      directionRef.current = "right";
-      setActiveIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
-    }, autoSlideInterval);
-    return () => clearInterval(timer);
-  }, [items.length, autoSlideInterval]);
+    if (!autoplay) return;
+    autoplayRef.current = setInterval(nextSlide, delay);
+    return () => clearInterval(autoplayRef.current!);
+  }, [currentIndex]);
 
-  const handlePrev = () => {
-    directionRef.current = "left";
-    setActiveIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    directionRef.current = "right";
-    setActiveIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
-  };
+  // Initial setup
+  useEffect(() => {
+    const firstSlide = slideRefs.current[0];
+    if (firstSlide) {
+      gsap.set(firstSlide, {
+        zIndex: 2,
+        opacity: 1,
+        scaleX: 1,
+      });
+    }
+  }, []);
 
   return (
-    <section className="relative w-screen h-screen overflow-hidden bg-neutral-950">
-      <div className="relative w-full h-full">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              if (el) slidesRef.current[i] = el;
-            }}
-            className="absolute inset-0 overflow-hidden will-change-transform"
-          >
-            <Image
-              src={item.image}
-              alt={item.caption}
-              fill
-              className="object-cover"
-              priority={i === 0}
-            />
-            {/* Removed dark fade — replaced with subtle vignette for clarity */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-center justify-center">
-              <h2 className="font-heading text-4xl md:text-7xl font-bold text-white text-center px-6 drop-shadow-lg">
-                {item.caption}
+    <div className="relative w-screen h-screen overflow-hidden">
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          ref={(el) => {
+            slideRefs.current[index] = el;
+          }}
+          className="absolute inset-0 w-full h-full origin-left"
+        >
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            priority={index === 0}
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute bottom-16 lg:bottom-24 left-4 md:left-10 text-white z-10">
+            <h1 className="text-3xl md:text-8xl font-bold mb-2 drop-shadow-lg">
+              {slide.title}
+            </h1>
+            {slide.subtitle && (
+              <h2 className="text-base md:text-3xl font-light drop-shadow-md">
+                {slide.subtitle}
               </h2>
-            </div>
+            )}
           </div>
-        ))}
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={handlePrev}
-          className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-4 rounded-full z-50 transition"
-          aria-label="Previous Slide"
-        >
-          <FaChevronLeft size={22} />
-        </button>
-        <button
-          onClick={handleNext}
-          className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-4 rounded-full z-50 transition"
-          aria-label="Next Slide"
-        >
-          <FaChevronRight size={22} />
-        </button>
-
-        {/* Pagination Dots */}
-        <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-50">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i === activeIndex ? "bg-white scale-125" : "bg-white/40"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
         </div>
+      ))}
+
+      {/* Navigation buttons */}
+      <button
+        onClick={prevSlide}
+        className="hidden md:flex items-center justify-center absolute left-6 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-10 h-10 z-20"
+      >
+        <ArrowLeft className="h-5 w-5" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="hidden md:flex items-center justify-center absolute right-6 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-10 h-10 z-20"
+      >
+        <ArrowRight className="h-5 w-5" />
+      </button>
+
+      {/* Pagination */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-wanderer-gold text-xs bg-black/40 px-3 py-1 rounded-full z-20">
+        {currentIndex + 1} / {slides.length}
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default Carousel;
