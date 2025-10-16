@@ -12,6 +12,13 @@
 }
 
 
+.hero-fixed-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+}
+
+
 ::-webkit-scrollbar:horizontal {
   display: none;
 } 
@@ -71,12 +78,16 @@ body {
 .span {
  background-color: #CDA869; /* wanderer-green */
 }
+p{
+  font-weight: 300;
+}
 .p {
   color:azure
 }
 h1,h2,h3 {
   font-family: Stardom;
   color: #F5E5C0;
+  font-weight: 300;
 }
 h5 {
   font-family: Africana;
@@ -88,9 +99,14 @@ h5 {
   color: #D56F3E;
   background: #F5E5C0;
 }
+
 .button:hover {
   color: #CDA869;
   background: #3C6E47;
+}
+
+.button2 {
+  border: 1px solid;
 }
 
 .border {

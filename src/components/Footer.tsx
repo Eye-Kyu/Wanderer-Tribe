@@ -37,34 +37,37 @@ export default function Footer() {
             />
           </Link>
         </div>
-
         {/* Destinations */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Destinations</h3>
-          <ul className="space-y-3 text-gray-300 text-sm">
+          <div className="space-y-3 flex flex-col">
+            <Link href="/Destinations/africa">
+              <p>Africa</p>
+            </Link>
+            <Link href="/Destinations/europe">
+              <p>Europe</p>
+            </Link>
             <Link href="/Destinations/asia">
-            <li>Asia</li>
+              <p>Middle East</p>
             </Link>
-              <Link href="/Destinations/africa">
-            <li>Africa</li>
-            </Link>
-              <Link href="/Destinations/europe">
-            <li>Europe</li>
-            </Link>
-            <li>Middle East</li>
-            <li>South America</li>
-          </ul>
+          </div>
         </div>
 
         {/* Company */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Company</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li>About Us</li>
-            <li>Careers</li>
-            <li>Terms & Conditions</li>
-            <li>Privacy Policy</li>
-          </ul>
+
+          <div className="space-y-3 flex flex-col">
+            <Link href="/About">
+              <p>About Us</p>
+            </Link>
+            <Link href="/Term">
+              <p>Terms & Conditions</p>
+            </Link>
+            <Link href="/Privacy">
+              <p>Privacy Policy</p>
+            </Link>
+          </div>
         </div>
 
         {/* Contact & Socials */}
@@ -83,7 +86,7 @@ export default function Footer() {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 mt-10 pt-6 text-gray-400 text-xs text-center relative z-10">
+      <div className="border-t border-gray-800 mt-10 pt-6 text-gray-400 text-xs text-center relative z-10">
         &copy; {currentYear} Wanderer Tribe. All rights reserved. Prices subject
         to change. Weather-dependent activities. See terms for details.
       </div>

@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import { useMemo, useState, } from "react";
+import { useMemo, useState } from "react";
 import Carousel from "@/components/Carousel";
 
 type Destination = {
@@ -22,8 +22,6 @@ type Destination = {
 
 export default function Destinations() {
   const { scrollY } = useScroll();
-
-
 
   const destinations: { [key: string]: Destination[] } = {
     The_Middle_East: [
@@ -187,15 +185,13 @@ export default function Destinations() {
   const [selectedDestination, setSelectedDestination] =
     useState<Destination | null>(null);
 
-
-
   const regions = useMemo(
     () => [
       {
         name: "The_Middle_East",
         description:
-          "Europe, a tapestry of history and culture, invites you to explore its iconic landmarks like the Eiffel Tower and Colosseum. From the romantic streets of Paris to the ancient ruins of Rome, this continent offers a blend of art, architecture, and cuisine.\nTravel tip: Spring and fall provide pleasant weather and fewer crowds. Ideal for cultural enthusiasts and history buffs.",
-        image: "/images/discover-europe.jpeg",
+          "The Middle East, a crossroads of cultures, invites you to explore its ancient wonders and modern marvels. From the bustling souks of Marrakech to the futuristic skyline of Dubai, this region offers a rich tapestry of history, architecture, and cuisine.\nTravel tip: Visit during the cooler months for pleasant weather, and embrace local customs and traditions.",
+        image: "/images/middleeast/dubai.jpg",
         link: "/Destinations/europe",
       },
       {
@@ -217,19 +213,31 @@ export default function Destinations() {
   );
 
   const slides = [
-    { image: "/images/africa.jpg", title: "Discover the World's Wonders", subtitle: "Adventure Awaits" },
-    { image: "/images/discover-europe.jpg", title: "Timeless Europe Awaits", subtitle: "History, Culture, Romance" },
-    { image: "/images/discover-africa.jpg", title: "Wild African Adventures", subtitle: "Safari and Beyond" },
-    { image: "/images/explore-asia.jpeg", title: "Exotic Asian Escapes", subtitle: "Tradition Meets Tranquility" },
+    {
+      image: "/images/africa.jpg",
+      title: "Discover the World's Wonders",
+      subtitle: "Adventure Awaits",
+    },
+    {
+      image: "/images/discover-europe.jpg",
+      title: "Timeless Europe Awaits",
+      subtitle: "History, Culture, Romance",
+    },
+    {
+      image: "/images/discover-africa.jpg",
+      title: "Wild African Adventures",
+      subtitle: "Safari and Beyond",
+    },
+    {
+      image: "/images/explore-asia.jpeg",
+      title: "Exotic Asian Escapes",
+      subtitle: "Tradition Meets Tranquility",
+    },
   ];
-
-
-
 
   return (
     <div className="relative min-h-screen bg-[#152523] text-foreground overflow-hidden">
-
-      <Carousel slides={slides} autoplay delay={6000}/>
+      <Carousel slides={slides} autoplay delay={6000} />
 
       {/* Animated background accents */}
       <motion.div
@@ -272,11 +280,17 @@ export default function Destinations() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className={`flex flex-col md:flex-row items-stretch overflow-hidden rounded-3xl
-                ${idx % 2 !== 0 ? "md:flex-row-reverse" : ""} 
-                bg-white/5 backdrop-blur-xl shadow-[0_8px_50px_rgba(0,0,0,0.45)]`}
+          ${idx % 2 !== 0 ? "md:flex-row-reverse" : ""} 
+          bg-white/5 backdrop-blur-xl shadow-[0_8px_50px_rgba(0,0,0,0.45)]`}
             >
+              {/* Image Section */}
               <motion.div
-                className="relative w-full md:w-2/5 h-[60vh] group"
+                className="
+            relative w-full 
+            h-[40vh]                /* Mobile: 40% of viewport height */
+            md:h-auto md:flex-1     /* Desktop: takes full available height */
+            group
+          "
                 initial={{ opacity: 0.8, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -287,13 +301,14 @@ export default function Destinations() {
                   alt={`${region.name} Background`}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 768px) 40vw, 100vw"
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20 group-hover:opacity-60 transition-opacity" />
               </motion.div>
 
+              {/* Text Section */}
               <motion.div
-                className="relative flex flex-col justify-center w-full md:w-3/5 p-10"
+                className="relative flex flex-col justify-center w-full md:w-3/5 p-4 md:p-10"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -301,7 +316,7 @@ export default function Destinations() {
               >
                 <div className="mb-6">
                   <motion.h3
-                    className="font-heading text-4xl md:text-5xl text-wanderer-ivory tracking-tight"
+                    className="font-heading text-2xl md:text-5xl text-wanderer-ivory tracking-tight"
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -318,7 +333,7 @@ export default function Destinations() {
                   />
                 </div>
 
-                <p className="text-white dark:text-neutral-200/90 text-lg md:text-base  leading-relaxed mb-8">
+                <p className="text-white dark:text-neutral-200/90 text-sm md:text-base leading-relaxed mb-8">
                   {region.description}
                 </p>
 
@@ -329,13 +344,10 @@ export default function Destinations() {
                       onClick={() => setSelectedDestination(dest)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all text-wanderer-moss duration-300 text-sm"
+                      className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all text-wanderer-moss duration-300 text-xs md:text-sm"
                     >
-                      <span className="text-base">📍</span>
-                      <span className="whitespace-nowrap">{dest.name}</span>
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-black/70">
-                        Tap for details
-                      </span>
+                      <span className="text-xs md:text-base">📍</span>
+                      <span className="whitespace-nowrap ">{dest.name}</span>
                     </motion.button>
                   ))}
                 </div>
@@ -344,7 +356,7 @@ export default function Destinations() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative inline-flex bg-wanderer-ivory text-wanderer-mahogany items-center justify-center px-5 py-2 rounded-full font-semibold overflow-hidden transition-all duration-300"
+                    className="relative inline-flex bg-wanderer-ivory text-wanderer-mahogany items-center justify-center px-2 md:px-5 py-1 md:py-2 rounded-full font-semibold overflow-hidden transition-all duration-300"
                   >
                     Explore {region.name}
                   </motion.button>

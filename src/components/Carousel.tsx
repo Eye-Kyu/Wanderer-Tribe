@@ -141,9 +141,9 @@ const Carousel: React.FC<CarouselProps> = ({
               {slide.title}
             </h1>
             {slide.subtitle && (
-              <h2 className="text-base md:text-3xl font-light drop-shadow-md">
+              <p className="text-sm md:text-2xl font-light drop-shadow-md">
                 {slide.subtitle}
-              </h2>
+              </p>
             )}
           </div>
         </div>
