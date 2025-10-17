@@ -19,6 +19,7 @@
 }
 
 
+
 ::-webkit-scrollbar:horizontal {
   display: none;
 } 
@@ -27,13 +28,14 @@ html {
   scroll-behavior: smooth;
 }
 
-.hide-x-scrollbar {
-  overflow-x: scroll;
-  overflow-y: auto;
-}
 
-.hide-x-scrollbar::-webkit-scrollbar:horizontal {
-  display: none;
+/* ✅ Hide scrollbar on all browsers */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
 
 @keyframes fadeIn {

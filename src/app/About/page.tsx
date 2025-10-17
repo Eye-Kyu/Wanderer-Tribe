@@ -14,6 +14,7 @@ export default function AboutPage() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const backupRef = useRef<HTMLDivElement>(null);
 
   // 🎞️ Cinematic Intro
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function AboutPage() {
           width: "100vw",
           height: "100vh",
           ease: "power3.inOut",
-          duration: 1.2,
+          duration: 1,
         }
       );
 
@@ -64,10 +65,27 @@ export default function AboutPage() {
         {
           opacity: 0,
           y: -30,
-          duration: 1,
+          duration: 0.9,
           ease: "power2.inOut",
         },
-        "-=1"
+        "-=0.8"
+      );
+
+      tl.fromTo(
+        backupRef.current,
+        {
+          scale: 0.6,
+          opacity: 0,
+          y: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: -30,
+          ease: "power3.inOut",
+          duration: 0.8,
+        },
+        "-=0.3"
       );
     }, overlayRef);
 
@@ -84,8 +102,8 @@ export default function AboutPage() {
         title: "The Founders' Vision",
         subtitle: "A Dream Born of Wanderlust",
         content:
-         "Amidst the rustle of acacia trees and the whispers of distant dunes, Wanderer Tribe was born. Our founders envisioned more than travel — they dreamed of connection. From Africa's sacred lands to forgotten island trails, Wanderer Tribe seeks not to escape life, but to discover it — through stories, encounters, and journeys that awaken the soul.",
-           image: "/images/About/vision.svg",
+          "Amidst the rustle of acacia trees and the whispers of distant dunes, Wanderer Tribe was born. Our founders envisioned more than travel — they dreamed of connection. From Africa's sacred lands to forgotten island trails, Wanderer Tribe seeks not to escape life, but to discover it — through stories, encounters, and journeys that awaken the soul.",
+        image: "/images/About/vision.svg",
         accentColor: "#F5E1C0",
         imagePosition: "left",
       },
@@ -107,8 +125,8 @@ export default function AboutPage() {
           "Peek into the future: a lost temple in Cambodia's jungles, a volcanic island off Iceland, a Himalayan pass blooming with rare orchids. These are the next chapters Wanderer Tribe is unveiling—join us to be among the first to explore.",
         image: "/images/Adventure/inca-trail.jpeg",
         accentColor: "#008080",
-         imagePosition: "left",
-      }
+        imagePosition: "left",
+      },
     ],
     []
   );
@@ -124,8 +142,8 @@ export default function AboutPage() {
           ref={imageRef}
           className="relative overflow-hidden z-10"
           style={{
-            width: "400px",
-            height: "400px",
+            width: "410px",
+            height: "350px",
             borderRadius: "50%",
           }}
         >
@@ -141,60 +159,69 @@ export default function AboutPage() {
 
         <div
           ref={textRef}
-          className="absolute text-white font-bold leading-none text-[18vw] tracking-tight text-center mix-blend-difference select-none z-20"
+          className="absolute text-white font-bold leading-none text-[18vw] tracking-tight text-center mix-blend-exclusion select-none z-20"
         >
           <span className="block">Wanderer</span>
           <span className="block -mt-[2vw]">Tribe</span>
         </div>
-      </section>
-      
-      
-      {/* 📖 About Sections */}
-<section className="relative w-full">
-  {chapters.map((chapter) => (
-    <div
-      key={chapter.id}
-      className={`flex flex-col md:flex-row  ${
-        chapter.imagePosition === "right" ? "md:flex-row-reverse" : ""
-      } relative shadow-black shadow-sm bg-[#0E2A2A]`}
-    >
-      {/* Image Side */}
-      <motion.div
-        className="relative w-full md:w-1/2 h-[40vh] sm:h-[50vh] md:h-auto overflow-hidden"
-        whileHover={{ scale: 1.02 }}
-      >
-        <Image
-          src={chapter.image || "/images/default-image.jpg"}
-          alt={chapter.title}
-          fill
-          className="object-cover"
-        />
-      </motion.div>
-
-      {/* Text Side */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-20 py-10 md:py-0">
-        <motion.h3
-          className="font-heading text-2xl sm:text-3xl lg:text-5xl mb-4 sm:mb-6 font-semibold"
-          style={{ color: chapter.accentColor }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
+          ref={backupRef}
+          className="absolute  font-bold leading-none text-[18vw] tracking-tight text-center mix-blend-screen select-none z-20"
         >
-          {chapter.title}
-        </motion.h3>
+          <span className="block">ABOUT US</span>
+        </div>
+      </section>
 
-        <p className="text-gray-300 text-base sm:text-lg max-w-lg mb-3 sm:mb-4 leading-relaxed">
-          {chapter.subtitle}
-        </p>
-        <p className="text-gray-400 text-sm sm:text-base max-w-lg leading-relaxed">
-          {chapter.content}
-        </p>
-      </div>
-    </div>
-  ))}
-</section>
+      {/* 📖 About Sections */}
+      <section className="relative w-full backdrop-blur-md pt-6 md:pt-11">
+        {chapters.map((chapter) => (
+          <div
+            key={chapter.id}
+            className={`flex flex-col md:flex-row ${
+              chapter.imagePosition === "right" ? "md:flex-row-reverse" : ""
+            } relative shadow-black shadow-sm bg-[#0E2A2A] md:px-6 md:space-y-9`}
+            style={{
+              // ensures smooth responsive height control
+              minHeight: "50vh",
+              height: "auto",
+            }}
+          >
+            {/* Image Side */}
+            <motion.div
+              className="relative w-full md:w-1/2 h-[40vh] sm:h-[50vh] md:h-[45vh] overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+            >
+              <Image
+                src={chapter.image || "/images/default-image.jpg"}
+                alt={chapter.title}
+                fill
+                className="object-cover object-center"
+              />
+            </motion.div>
 
+            {/* Text Side */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 lg:px-20 py-10 md:py-0 h-auto md:h-[45vh]">
+              <motion.h3
+                className="font-heading text-2xl sm:text-3xl lg:text-5xl mb-4 sm:mb-6 font-semibold"
+                style={{ color: chapter.accentColor }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                {chapter.title}
+              </motion.h3>
+
+              <p className="text-gray-300 text-base sm:text-lg max-w-lg mb-3 sm:mb-4 leading-relaxed">
+                {chapter.subtitle}
+              </p>
+              <p className="text-gray-400 text-sm sm:text-base max-w-lg leading-relaxed">
+                {chapter.content}
+              </p>
+            </div>
+          </div>
+        ))}
+      </section>
 
       {/* ✨ CTA */}
       <section className="relative py-20 px-6 text-center bg-[#122F2F] border-t border-gray-700">

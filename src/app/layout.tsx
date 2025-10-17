@@ -10,7 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Wanderer Tribe - Your Journey, Our Passion",
-  description: "Tailor-made travel packages for Asia, Africa, and The Middle East.",
+  description:
+    "Tailor-made travel packages for Asia, Africa, and The Middle East.",
 };
 
 export default function RootLayout({
@@ -22,12 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body className={inter.className}>
-           <CtaModalProvider>
-        <LenisProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </LenisProvider>
+        <CtaModalProvider>
+          <LenisProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </LenisProvider>
         </CtaModalProvider>
       </body>
     </html>
