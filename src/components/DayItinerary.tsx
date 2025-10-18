@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
 import { Timeline } from "@/components/ui/timeline";
 
-// --- Image Reveal Component ---
+// --- Static Image Component ---
 function RevealImage({
   src,
   alt,
@@ -15,35 +14,8 @@ function RevealImage({
   priority?: boolean;
   direction?: "vertical" | "horizontal";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setVisible(entry.isIntersecting);
-        });
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className={`relative w-full aspect-[5/3] rounded-lg overflow-hidden shadow bg-neutral-100 transition-all duration-700 ${
-        visible
-          ? direction === "horizontal"
-            ? "clip-reveal-horizontal opacity-100"
-            : "clip-reveal-vertical opacity-100"
-          : direction === "horizontal"
-          ? "clip-hidden-horizontal opacity-0"
-          : "clip-hidden-vertical opacity-0"
-      }`}
-    >
+    <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow bg-neutral-100">
       <Image
         src={src}
         alt={alt}
@@ -52,27 +24,6 @@ function RevealImage({
         sizes="(max-width: 768px) 100vw, 50vw"
         priority={priority}
       />
-      <style jsx>{`
-        .clip-hidden-vertical {
-          clip-path: inset(100% 0 0 0);
-          transform: scale(1.05);
-        }
-        .clip-reveal-vertical {
-          clip-path: inset(0 0 0 0);
-          transform: scale(1);
-        }
-        .clip-hidden-horizontal {
-          clip-path: inset(0 100% 0 0);
-          transform: scale(1.05);
-        }
-        .clip-reveal-horizontal {
-          clip-path: inset(0 0 0 0);
-          transform: scale(1);
-        }
-        .transition-all {
-          transition: clip-path 1s ease, transform 0.7s ease, opacity 0.7s ease;
-        }
-      `}</style>
     </div>
   );
 }
@@ -84,7 +35,7 @@ export default function ThailandItineraryTimeline() {
       title: "Phuket • Island Escape",
       content: (
         <div className="space-y-4">
-          <p className="text-sm md:text-base text-[#333333]">
+          <p className="text-sm md:text-base text-white">
             Begin your journey in Phuket — unwind by the sea, explore Phi Phi
             Island&apos;s turquoise bays, and indulge in Thai spa bliss.
           </p>
@@ -109,7 +60,7 @@ export default function ThailandItineraryTimeline() {
       title: "Pattaya • Culture & Coastal Vibes",
       content: (
         <div className="space-y-4">
-          <p className="text-sm md:text-base text-[#333333]">
+          <p className="text-sm md:text-base text-white">
             Fly to Bangkok and transfer to Pattaya — discover the tropical
             gardens of Nong Nooch, marvel at the Alcazar Cabaret, and unwind at
             Mongchang Café.
@@ -134,9 +85,10 @@ export default function ThailandItineraryTimeline() {
       title: "Bangkok • City of Temples & Taste",
       content: (
         <div className="space-y-4">
-          <p className="text-sm md:text-base text-[#333333]">
-            Experience Bangkok&apos;s bustling markets, dine sky-high at Baiyoke, and
-            cruise along the Chao Phraya River under glittering city lights.
+          <p className="text-sm md:text-base text-white">
+            Experience Bangkok&apos;s bustling markets, dine sky-high at
+            Baiyoke, and cruise along the Chao Phraya River under glittering
+            city lights.
           </p>
           <RevealImage
             src="/images/asia/bangkok.jpeg"
@@ -158,7 +110,7 @@ export default function ThailandItineraryTimeline() {
       title: "Departure • Farewell Thailand",
       content: (
         <div className="space-y-4">
-          <p className="text-sm md:text-base text-[#333333]">
+          <p className="text-sm md:text-base text-white">
             Enjoy a relaxed morning before your transfer to Suvarnabhumi
             Airport. Bid farewell to Thailand&apos;s warmth and wonder.
           </p>

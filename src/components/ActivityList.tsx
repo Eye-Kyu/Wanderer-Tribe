@@ -7,18 +7,66 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- Activities ---
 const activities = [
-  { title: "African Safaris", desc: "Witness the Big Five in their natural habitat with luxury lodges under starlit skies.", image: "/images/africa/serengeti.jpeg" },
-  { title: "Tropical Beaches", desc: "Relax on pristine white sands and turquoise waters in secluded destinations.", image: "/images/asia/maldives.jpeg" },
-  { title: "Culinary Delights", desc: "Taste world-class cuisine with private chefs and immersive food tours.", image: "/images/luxury/bordeaux-wine.jpeg" },
-  { title: "Historic Sites", desc: "Step back in time exploring ancient ruins and UNESCO heritage wonders.", image: "/images/africa/cairo.jpeg" },
-  { title: "Luxury Cruises", desc: "Sail across oceans and rivers aboard elegant yachts and premium liners.", image: "/images/luxury/french-riviera-yacht.jpeg" },
-  { title: "Mountain Adventures", desc: "Discover alpine trails, private lodges, and breathtaking summits.", image: "/images/adventure/swiss-alps.jpeg" },
-  { title: "Cultural Journeys", desc: "Engage with traditions, art, and spiritual heritage across continents.", image: "/images/asia-temple.jpg" },
-  { title: "Desert Escapes", desc: "Experience starlit skies and golden dunes in luxury desert camps.", image: "/images/luxury/dubai-desert.jpeg" },
-  { title: "Wildlife Encounters", desc: "Meet exotic wildlife through conservation-led safaris and guided treks.", image: "/images/africa/okavango.jpeg" },
-  { title: "City Luxury", desc: "Stay in iconic cities, indulging in fine dining, shopping, and nightlife.", image: "/images/shibuya.jpeg" },
-  { title: "Romantic Getaways", desc: "Private villas, candlelit dinners, and bespoke experiences for couples.", image: "/images/luxury/south-africa-lodge.jpeg" },
-  { title: "Adventure Sports", desc: "Dive, ski, paraglide, or surf in world-renowned adventure destinations.", image: "/images/adventure/costa-rica-rafting.jpeg" },
+  {
+    title: "African Safaris",
+    desc: "Witness the Big Five in their natural habitat with luxury lodges under starlit skies.",
+    image: "/images/africa/serengeti.jpeg",
+  },
+  {
+    title: "Tropical Beaches",
+    desc: "Relax on pristine white sands and turquoise waters in secluded destinations.",
+    image: "/images/asia/maldives.jpeg",
+  },
+  {
+    title: "Culinary Delights",
+    desc: "Taste world-class cuisine with private chefs and immersive food tours.",
+    image: "/images/luxury/bordeaux-wine.jpeg",
+  },
+  {
+    title: "Historic Sites",
+    desc: "Step back in time exploring ancient ruins and UNESCO heritage wonders.",
+    image: "/images/africa/cairo.jpeg",
+  },
+  {
+    title: "Luxury Cruises",
+    desc: "Sail across oceans and rivers aboard elegant yachts and premium liners.",
+    image: "/images/luxury/french-riviera-yacht.jpeg",
+  },
+  {
+    title: "Mountain Adventures",
+    desc: "Discover alpine trails, private lodges, and breathtaking summits.",
+    image: "/images/adventure/swiss-alps.jpeg",
+  },
+  {
+    title: "Cultural Journeys",
+    desc: "Engage with traditions, art, and spiritual heritage across continents.",
+    image: "/images/asia-temple.jpg",
+  },
+  {
+    title: "Desert Escapes",
+    desc: "Experience starlit skies and golden dunes in luxury desert camps.",
+    image: "/images/luxury/dubai-desert.jpeg",
+  },
+  {
+    title: "Wildlife Encounters",
+    desc: "Meet exotic wildlife through conservation-led safaris and guided treks.",
+    image: "/images/africa/okavango.jpeg",
+  },
+  {
+    title: "City Luxury",
+    desc: "Stay in iconic cities, indulging in fine dining, shopping, and nightlife.",
+    image: "/images/shibuya.jpeg",
+  },
+  {
+    title: "Romantic Getaways",
+    desc: "Private villas, candlelit dinners, and bespoke experiences for couples.",
+    image: "/images/luxury/south-africa-lodge.jpeg",
+  },
+  {
+    title: "Adventure Sports",
+    desc: "Dive, ski, paraglide, or surf in world-renowned adventure destinations.",
+    image: "/images/adventure/costa-rica-rafting.jpeg",
+  },
 ];
 
 // --- Responsive Hook ---
@@ -67,43 +115,48 @@ function MobileCarousel({ isInView }: { isInView: boolean }) {
 // --- Desktop Version (carousel w/ pagination) ---
 function DesktopCarousel({ isInView }: { isInView: boolean }) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const [pageWidth, setPageWidth] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const CARDS_PER_PAGE = 4;
+  const CARDS_VISIBLE = 3;
   const CARD_WIDTH = 336;
   const GAP_PX = 24;
 
   useEffect(() => {
-    const measure = () => setPageWidth(CARDS_PER_PAGE * (CARD_WIDTH + GAP_PX));
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    // Measure a single card + gap
+    setCardWidth(CARD_WIDTH + GAP_PX);
+    const handleResize = () => setCardWidth(CARD_WIDTH + GAP_PX);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const totalPages = Math.ceil(activities.length / CARDS_PER_PAGE);
+  const maxIndex = Math.max(0, activities.length - CARDS_VISIBLE);
 
-  const scrollToPage = (page: number) => {
-    if (!scrollRef.current || pageWidth === 0) return;
-    const target = page * pageWidth;
+  const scrollToIndex = (idx: number) => {
+    if (!scrollRef.current) return;
+    const target = idx * cardWidth;
     scrollRef.current.scrollTo({ left: target, behavior: "smooth" });
-    setCurrentPage(page);
+    setCurrentIndex(idx);
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!scrollRef.current || pageWidth === 0) return;
-      const newPage = Math.round(scrollRef.current.scrollLeft / pageWidth);
-      setCurrentPage(newPage);
+      if (!scrollRef.current || cardWidth === 0) return;
+      const idx = Math.round(scrollRef.current.scrollLeft / cardWidth);
+      setCurrentIndex(idx);
     };
     const el = scrollRef.current;
     el?.addEventListener("scroll", handleScroll);
     return () => el?.removeEventListener("scroll", handleScroll);
-  }, [pageWidth]);
+  }, [cardWidth]);
 
   return (
     <>
-      <div ref={scrollRef} className="flex gap-6 px-4 pb-6 overflow-hidden scroll-smooth">
+      <div
+        ref={scrollRef}
+        className="flex gap-6 px-4 pb-6 overflow-hidden scroll-smooth"
+        style={{ scrollSnapType: "x mandatory" }}
+      >
         {activities.map((activity, idx) => (
           <motion.article
             key={idx}
@@ -111,6 +164,7 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: idx * 0.04, duration: 0.6 }}
+            style={{ scrollSnapAlign: "start" }}
           >
             <div className="relative w-full h-[22rem] mb-4 rounded-xl overflow-hidden">
               <Image
@@ -129,29 +183,16 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
         ))}
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-6 space-x-2">
-        {Array.from({ length: totalPages }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => scrollToPage(i)}
-            className={`w-3 h-3 rounded-full transition ${
-              i === currentPage ? "bg-wanderer-gold" : "bg-gray-400"
-            }`}
-          />
-        ))}
-      </div>
-
       {/* Arrows */}
       <div className="absolute bottom-8 right-8 flex gap-4 z-30">
         <button
-          onClick={() => scrollToPage(Math.max(currentPage - 1, 0))}
+          onClick={() => scrollToIndex(Math.max(currentIndex - 1, 0))}
           className="p-3 rounded-full bg-wanderer-teal button shadow-md"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
-          onClick={() => scrollToPage(Math.min(currentPage + 1, totalPages - 1))}
+          onClick={() => scrollToIndex(Math.min(currentIndex + 1, maxIndex))}
           className="p-3 rounded-full bg-wanderer-teal button shadow-md"
         >
           <ChevronRight className="w-5 h-5" />
@@ -180,7 +221,7 @@ export default function ActivityList(): JSX.Element {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
         className="w-full px-6 text-center mx-auto"
       >
         <h2 className="text-4xl md:text-5xl font-heading mb-6 text-wanderer-gold">

@@ -151,15 +151,17 @@ export default function Navbar() {
   };
 
   const handleMouseLeave = (menu: string) => {
-    if (dropdownTimelines.current[menu]) {
-      dropdownTimelines.current[menu]!.reverse().eventCallback(
-        "onReverseComplete",
-        () => {
-          if (dropdownRefs.current[menu]) {
-            gsap.set(dropdownRefs.current[menu], { display: "none" });
-          }
+    const tl = dropdownTimelines.current[menu];
+    if (tl) {
+      tl.reverse().eventCallback("onReverseComplete", () => {
+        if (dropdownRefs.current[menu]) {
+          gsap.set(dropdownRefs.current[menu], { display: "none" });
         }
-      );
+      });
+    } else {
+      if (dropdownRefs.current[menu]) {
+        gsap.set(dropdownRefs.current[menu], { display: "none" });
+      }
     }
     setActiveDropdown(null);
   };
@@ -193,9 +195,7 @@ export default function Navbar() {
         animate={{ y: showNavbar ? 0 : -120 }}
         transition={{ duration: 0.3 }}
         className={`fixed top-0 left-0 w-full z-[100] h-20 md:h-28 border-b border-black/10 shadow-xl transition-colors duration-500 ${
-          scrolledUp
-            ? "bg-white text-black"
-            : "bg-transparent text-white mix-blend-difference"
+          scrolledUp ? "bg-white text-black" : "bg-transparent text-white"
         }`}
         aria-label="Main navigation"
       >
@@ -241,7 +241,9 @@ export default function Navbar() {
                   Destinations
                 </Link>
                 <div
-                  ref={(el) => (dropdownRefs.current["destinations"] = el)}
+                  ref={(el) => {
+                    dropdownRefs.current["destinations"] = el;
+                  }}
                   className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-xl py-4 px-6 hidden"
                 >
                   <ul className="space-y-3 text-sm">
@@ -274,7 +276,9 @@ export default function Navbar() {
                   Experiences
                 </Link>
                 <div
-                  ref={(el) => (dropdownRefs.current["experiences"] = el)}
+                  ref={(el) => {
+                    dropdownRefs.current["experiences"] = el;
+                  }}
                   className="absolute top-full left-0 mt-2 w-64 bg-white text-wanderer-green rounded-xl shadow-xl py-4 px-6 hidden"
                 >
                   <ul className="space-y-3 text-sm">
@@ -350,7 +354,9 @@ export default function Navbar() {
             <Link
               key={i}
               href={link.href}
-              ref={(el) => el && (linkRefs.current[i] = el)}
+              ref={(el) => {
+                if (el) linkRefs.current[i] = el;
+              }}
               className="opacity-0 translate-y-10"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -359,9 +365,9 @@ export default function Navbar() {
           ))}
 
           <button
-            ref={(el) =>
-              el && (linkRefs.current[4] = el as unknown as HTMLAnchorElement)
-            }
+            ref={(el) => {
+              if (el) linkRefs.current[4] = el as unknown as HTMLAnchorElement;
+            }}
             className="bg-primary button2 text-white py-1 px-2 rounded-2xl hover:bg-wanderer-rust hover:text-wanderer-green transition opacity-0 translate-y-10"
             onClick={() => setMobileMenuOpen(false)}
           >

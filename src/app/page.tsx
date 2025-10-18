@@ -1,3 +1,4 @@
+// src/app/page.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -13,6 +14,7 @@ import ActivityList from "@/components/ActivityList";
 import Testimonials from "@/components/Testimonials";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CallToAction from "@/components/CallToAction";
+import Pin2 from "@/components/Pin2";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,9 +40,9 @@ export default function Home() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top 45%",    // begin when section top is near bottom of viewport
-        end: "bottom 45%",   // end when section bottom is near top of viewport
-        scrub: 0.6,          // smooth scrubbing, works both directions
+        start: "top 45%", // begin when section top is near bottom of viewport
+        end: "bottom 45%", // end when section bottom is near top of viewport
+        scrub: 0.6, // smooth scrubbing, works both directions
         // markers: true,    // enable while debugging
       },
     });
@@ -50,7 +52,7 @@ export default function Home() {
       bg,
       {
         opacity: 1,
-       // small upward parallax (6% of element height)
+        // small upward parallax (6% of element height)
         ease: "power1.out",
         duration: 1,
       },
@@ -90,51 +92,47 @@ export default function Home() {
       <div className="space-y-9">
         {/* 1. Hero Section */}
         <Hero />
-
         {/* 2. Destinations Showcase */}
         <DestinationsShowcase />
-
         {/* 3. Itinerary Highlights */}
         <ItineraryOptions />
-
         {/* 4. Section with GSAP timeline-controlled background */}
-                  <section
-              ref={sectionRef}
-              className="relative w-screen overflow-hidden min-h-screen" // ✅ Ensures full viewport height
-            >
-              {/* Background div controlled by GSAP */}
-              <div
-                ref={bgRef}
-                className="absolute inset-0 bg-repeat bg-center min-h-full"
-                style={{
-                  backgroundColor: "#254D32",
-                  backgroundImage: "url('/images/bgs/moroccan.svg')",
-                  backgroundSize: "60px 66px", // ✅ Adjust pattern density here
-                  backgroundRepeat: "repeat",
-                  backgroundAttachment: "fixed", // ✅ optional: enhances parallax feel
-                }}
-              />
+        <section
+          ref={sectionRef}
+          className="relative w-screen overflow-hidden min-h-screen shadow-md shadow-[#0f0f0fdc]" // ✅ Ensures full viewport height
+        >
+          {/* Background div controlled by GSAP */}
+          <div
+            ref={bgRef}
+            className="absolute inset-0 bg-repeat bg-center min-h-full"
+            style={{
+              backgroundColor: "#254D32",
+              backgroundImage: "url('/images/bgs/bgafricana.jpg')",
+              backgroundSize: "400px 408px", // ✅ Adjust pattern density here
+              backgroundRepeat: "repeat",
+              backgroundAttachment: "fixed", // ✅ optional: enhances parallax feel
+            }}
+          />
 
-              {/* Gradient overlay for fade-in/out effect */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(37,77,50,0.9) 0%, rgba(37,77,50,0.6) 20%, rgba(37,77,50,0.22) 50%, rgba(37,77,50,0.6) 80%, rgba(37,77,50,0.9) 100%)",
-                  mixBlendMode: "multiply",
-                }}
-              />
+          {/* Gradient overlay for fade-in/out effect */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(37,77,50,0.9) 0%, rgba(37,77,50,0.6) 20%, rgba(37,77,50,0.2) 50%, rgba(37,77,50,0.6) 80%, rgba(37,77,50,0.9) 100%)",
+              mixBlendMode: "multiply",
+            }}
+          />
 
-              {/* Optional subtle tint overlay */}
-              <div className="absolute inset-0 bg-wanderer-moss/10" />
+          {/* Optional subtle tint overlay */}
+          <div className="absolute inset-0 bg-wanderer-moss/10" />
 
-              {/* Foreground content */}
-              <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-16 md:py-24">
-                <DayItinerary />
-              </div>
-</section>
-
-         <HotelShowcase />
+          {/* Foreground content */}
+          <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-16 md:py-24">
+            <DayItinerary />
+          </div>
+        </section>
+        <HotelShowcase />
       </div>
 
       {/* 6. Experiences & Activities */}
