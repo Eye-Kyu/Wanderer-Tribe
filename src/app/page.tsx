@@ -14,7 +14,6 @@ import ActivityList from "@/components/ActivityList";
 import Testimonials from "@/components/Testimonials";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CallToAction from "@/components/CallToAction";
-import Pin2 from "@/components/Pin2";
 
 gsap.registerPlugin(ScrollTrigger);
 
