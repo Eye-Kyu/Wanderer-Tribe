@@ -279,7 +279,7 @@ export default function Navbar() {
                   ref={(el) => {
                     dropdownRefs.current["experiences"] = el;
                   }}
-                  className="absolute top-full left-0 mt-2 w-64 bg-white text-wanderer-green rounded-xl shadow-xl py-4 px-6 hidden"
+                  className="absolute top-full left-0 mt-2 w-64 bg-white text-black rounded-xl shadow-xl py-4 px-6 hidden"
                 >
                   <ul className="space-y-3 text-sm">
                     <li className="flex items-center space-x-2 hover:text-wanderer-moss">

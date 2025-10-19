@@ -16,8 +16,13 @@ export default function DestinationModal({ destination, onClose }: Props) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      onClick={onClose} // ✅ click anywhere to close
     >
-      <div className="bg-wanderer-moss rounded-2xl w-11/12 max-w-6xl h-[80vh] grid grid-cols-2 overflow-hidden shadow-2xl">
+      {/* Modal content */}
+      <div
+        className="bg-wanderer-moss rounded-2xl w-11/12 max-w-6xl h-[80vh] grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()} // ✅ prevent closing when clicking inside
+      >
         {/* Image Side */}
         <div className="relative">
           <Image
@@ -44,7 +49,7 @@ export default function DestinationModal({ destination, onClose }: Props) {
           <h4 className="text-xl font-semibold mb-2 text-wanderer-gold">
             Itinerary ({destination.duration} days)
           </h4>
-          <ul className="list-decimal list-inside mb-4 text-neutral-200">
+          <ul className="list-decimal list-inside mb-4 text-neutral-200 space-y-1">
             {destination.itinerary.map((item, i) => (
               <li key={i}>
                 <strong>{item.day}:</strong> {item.details}
@@ -52,10 +57,14 @@ export default function DestinationModal({ destination, onClose }: Props) {
             ))}
           </ul>
 
-          <h4 className="text-xl font-semibold mb-2 text-wanderer-gold">Culture & Food</h4>
+          <h4 className="text-xl font-semibold mb-2 text-wanderer-gold">
+            Culture & Food
+          </h4>
           <p className="text-neutral-200 mb-4">{destination.culture}</p>
 
-          <h4 className="text-xl font-semibold text-wanderer-gold mb-2">Insider Tips</h4>
+          <h4 className="text-xl font-semibold text-wanderer-gold mb-2">
+            Insider Tips
+          </h4>
           <p className="text-neutral-200">{destination.tips}</p>
         </div>
       </div>
