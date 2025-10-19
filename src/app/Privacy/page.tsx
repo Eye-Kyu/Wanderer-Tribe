@@ -12,7 +12,7 @@ export default function PrivacyPage() {
         className="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl p-10"
       >
         <h1 className="text-4xl font-heading text-wanderer-gold mb-8 text-center">
-          Wanderer Tribe – Privacy Policy
+          Wanderer Tribe - Privacy Policy
         </h1>
 
         <p className="text-sm text-neutral-500 mb-10 text-center">
