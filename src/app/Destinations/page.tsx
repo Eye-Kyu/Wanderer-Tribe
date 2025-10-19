@@ -219,11 +219,6 @@ export default function Destinations() {
       subtitle: "Adventure Awaits",
     },
     {
-      image: "/images/discover-europe.jpg",
-      title: "Timeless Europe Awaits",
-      subtitle: "History, Culture, Romance",
-    },
-    {
       image: "/images/discover-africa.jpg",
       title: "Wild African Adventures",
       subtitle: "Safari and Beyond",

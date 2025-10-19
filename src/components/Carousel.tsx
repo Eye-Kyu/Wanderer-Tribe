@@ -40,10 +40,11 @@ const oldSlide =
 oldIndex !== undefined ? slideRefs.current[oldIndex] : null;
 if (!curtain || !newSlide) return;
 
+
 animRef.current?.kill();
 
 // Stack order reset
-slideRefs.current.forEach((s, i) => {
+slideRefs.current.forEach((s) => {
   if (s) gsap.set(s, { zIndex: 0, opacity: 0 });
 });
 if (oldSlide) gsap.set(oldSlide, { zIndex: 1, opacity: 1 });
@@ -97,7 +98,15 @@ animateReveal(newIndex, "prev", oldIndex);
 useEffect(() => {
 if (!autoplay) return;
 autoplayRef.current = setInterval(nextSlide, delay);
-return () => autoplayRef.current && clearInterval(autoplayRef.current);
+
+
+return () => {
+  if (autoplayRef.current) {
+    clearInterval(autoplayRef.current);
+  }
+};
+
+
 }, [currentIndex, autoplay, delay]);
 
 // set first slide visible
@@ -106,12 +115,13 @@ const first = slideRefs.current[0];
 if (first) gsap.set(first, { zIndex: 1, opacity: 1 });
 }, []);
 
-return ( 
-<div className="relative w-screen h-screen overflow-hidden">
+return ( <div className="relative w-screen h-screen overflow-hidden">
 {slides.map((slide, index) => (
 <div
 key={index}
-ref={(el) => (slideRefs.current[index] = el)}
+ref={(el) => {
+slideRefs.current[index] = el;
+}}
 className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-out ${
             index === currentIndex
               ? "opacity-100 pointer-events-auto"
@@ -131,7 +141,7 @@ className="object-cover"
 )} </div> </div>
 ))}
 
-```
+
   {/* Curtain overlay */}
   <div
     ref={curtainRef}
