@@ -24,58 +24,59 @@ export default function Destinations() {
   const { scrollY } = useScroll();
 
   const destinations: { [key: string]: Destination[] } = {
-    The_Middle_East: [
-      {
-        name: "Paris, France",
-        description:
-          "Experience the romance of Paris with its iconic Eiffel Tower and charming cafés along the Seine.",
-        days: 3,
-        cost: "$2,500",
-        locations: "Paris",
-        activities: "Eiffel Tower Visit, Louvre Museum, Seine River Cruise",
-        image: "/images/paris.jpeg",
-      },
-      {
-        name: "Rome, Italy",
-        description:
-          "Explore ancient ruins and vibrant streets in Rome, home to the Colosseum and Vatican.",
-        days: 4,
-        cost: "$2,800",
-        locations: "Rome",
-        activities: "Colosseum Tour, Vatican Museums, Trastevere Dining",
-        image: "/images/rome.jpeg",
-      },
-      {
-        name: "Barcelona, Spain",
-        description:
-          "Discover Gaudí's architecture and lively culture in Barcelona's Gothic Quarter.",
-        days: 5,
-        cost: "$3,000",
-        locations: "Barcelona",
-        activities: "Sagrada Familia, Park Güell, La Rambla",
-        image: "/images/barcelona.jpeg",
-      },
-      {
-        name: "Amsterdam, Netherlands",
-        description:
-          "Cruise the canals and visit world-class museums in picturesque Amsterdam.",
-        days: 4,
-        cost: "$2,700",
-        locations: "Amsterdam",
-        activities: "Canal Cruise, Van Gogh Museum, Anne Frank House",
-        image: "/images/amsterdam.jpeg",
-      },
-      {
-        name: "Venice, Italy",
-        description:
-          "Float through Venice's canals and marvel at St. Mark's Basilica.",
-        days: 3,
-        cost: "$2,900",
-        locations: "Venice",
-        activities: "Gondola Ride, St. Mark's Square, Doge's Palace",
-        image: "/images/venice.jpeg",
-      },
-    ],
+   The_Middle_East: [
+  {
+    name: "Dubai, United Arab Emirates",
+    description:
+      "Experience futuristic architecture, luxurious shopping, and desert adventures in dazzling Dubai.",
+    days: 4,
+    cost: "$3,200",
+    locations: "Dubai",
+    activities: "Burj Khalifa Visit, Desert Safari, Dubai Marina Cruise",
+    image: "/images/middle-east/Dubai.webp",
+  },
+  {
+    name: "Petra, Jordan",
+    description:
+      "Discover the ancient rose-red city carved into rock, one of the New Seven Wonders of the World.",
+    days: 3,
+    cost: "$2,400",
+    locations: "Petra",
+    activities: "Treasury Visit, Siq Canyon Walk, Wadi Rum Excursion",
+    image: "/images/middle-east/Jordan.webp",
+  },
+  {
+    name: "Cairo, Egypt",
+    description:
+      "Uncover the mysteries of ancient Egypt, from the Great Pyramids of Giza to the treasures of the Nile.",
+    days: 5,
+    cost: "$2,800",
+    locations: "Cairo",
+    activities: "Pyramids Tour, Egyptian Museum, Nile Dinner Cruise",
+    image: "/images/middle-east/Egypt.webp",
+  },
+  {
+    name: "Doha, Qatar",
+    description:
+      "Blend tradition and innovation in Doha with its modern skyline and rich Qatari culture.",
+    days: 4,
+    cost: "$2,900",
+    locations: "Doha",
+    activities: "Souq Waqif, Museum of Islamic Art, Corniche Walk",
+    image: "/images/middle-east/Doha.webp",
+  },
+  {
+    name: "Muscat, Oman",
+    description:
+      "Enjoy the serene beauty of Oman's coast, its forts, and traditional souqs in Muscat.",
+    days: 3,
+    cost: "$2,700",
+    locations: "Muscat",
+    activities: "Grand Mosque Visit, Muttrah Souq, Dolphin Watching Cruise",
+    image: "/images/middle-east/Oman.webp",
+  },
+],
+
     Africa: [
       {
         name: "Maasai Mara, Kenya",
