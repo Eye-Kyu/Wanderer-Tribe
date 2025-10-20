@@ -1,20 +1,20 @@
 "use client";
+
 import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 
 const Hero: React.FC = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
   const scrollToNext = () => {
     const nextSection = document.getElementById("activities");
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
     <section
@@ -25,78 +25,48 @@ const Hero: React.FC = () => {
       {/* Mobile: Static Fallback Image */}
       <div className="absolute inset-0 w-full h-full md:hidden z-0">
         <Image
-          src="/images/costa-rica-resort.jpeg" // <-- Replace with your actual hero image
+          src="/images/costa-rica-resort.jpeg"
           alt="Background"
           fill
           priority
-          className="object-cover "
+          className="object-cover"
         />
       </div>
 
-      {/* Desktop/Tablet: YouTube Background Video */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden hidden md:block">
-        <div
-          className="
-            absolute top-1/2 left-1/2
-            w-[177.78vh] h-[100vh]   /* 16:9 ratio trick */
-            min-w-full min-h-full
-            -translate-x-1/2 -translate-y-1/2
-          "
-        >
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/embed/nl8p6tIV_k0?autoplay=1&mute=1&loop=1&playlist=nl8p6tIV_k0&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
-            title="Background Video"
-            loading="lazy"
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
+      {/* Desktop/Tablet: Local Background Video */}
+      <div className="absolute inset-0 w-full h-full hidden md:block overflow-hidden">
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          src="/videos/Landing-page.mp4"
+        />
       </div>
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10" />
 
-      {/* Hero Content */}
+      {/* Hero Text - Bottom Left */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center text-center px-4 z-20"
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        className="absolute bottom-10 left-6 sm:left-12 md:left-20 z-20 text-left max-w-3xl"
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-white mb-6 leading-tight">
-            Discover{" "}
-            <span className="bg-gradient-to-r from-[#D27D2D] to-[#008080] bg-clip-text text-transparent">
-              Wonders
-            </span>{" "}
-            <br className="hidden sm:block" />
-            with Wanderer Tribe
-          </h1>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/Contact">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-wanderer-ivory text-wanderer-bronze px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:opacity-90 transition w-full sm:w-auto"
-              >
-                <button className="md:text-base text-xs">Book Your Journey</button>
-              </motion.div>
-            </Link>
-
-            <Link href="/Destinations">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="backdrop-blur-md bg-white/10 text-white px-2 sm:px-8 py-1 md:py-3 rounded-xl shadow-lg hover:bg-white/70 hover:text-wanderer-mahogany transition w-full sm:w-auto"
-              >
-                <button className="md:text-base text-xs">Explore Destinations</button>
-              </motion.div>
-            </Link>
-          </div>
-        </div>
+        <h1 className="text-3xl sm:text-2xl lg:text-4xl font-heading text-white leading-tight mb-4">
+          Discover{" "}
+          <span className="bg-gradient-to-r from-[#e98e3a] to-[#176d25] bg-clip-text text-transparent">
+            Wonders
+          </span>{" "}
+          with Wanderer Tribe
+        </h1>
+        <p className="text-white/80 text-sm sm:text-base max-w-lg">
+          Explore breathtaking destinations and unique experiences around the
+          world.
+        </p>
       </motion.div>
 
       {/* Scroll Down Animation */}
