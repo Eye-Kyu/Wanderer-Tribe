@@ -45,10 +45,10 @@ export default function Footer() {
               <p>Africa</p>
             </Link>
             <Link href="/Destinations/europe">
-              <p>Europe</p>
+              <p>Middle East</p>
             </Link>
             <Link href="/Destinations/asia">
-              <p>Middle East</p>
+              <p>Asia</p>
             </Link>
           </div>
         </div>
@@ -61,7 +61,7 @@ export default function Footer() {
             <Link href="/About">
               <p>About Us</p>
             </Link>
-            <Link href="/Term">
+            <Link href="/Terms">
               <p>Terms & Conditions</p>
             </Link>
             <Link href="/Privacy">
@@ -77,10 +77,10 @@ export default function Footer() {
             <Mail className="w-4 h-4" /> contact@wanderertribe.com
           </p>
           <div className="flex items-center gap-4 mt-2">
-            <Twitter className="w-5 h-5 hover:text-blue-400 transition" />
+           
             <Instagram className="w-5 h-5 hover:text-pink-500 transition" />
             <Facebook className="w-5 h-5 hover:text-blue-600 transition" />
-            <Linkedin className="w-5 h-5 hover:text-blue-500 transition" />
+          
           </div>
         </div>
       </div>
