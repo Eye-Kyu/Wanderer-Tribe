@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,7 +23,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-X1F9CWD7MR"
+        />
+        <Script
+          id="gtag-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-X1F9CWD7MR');
+        `,
+          }}
+        />
+      </head>
       <body className={inter.className}>
         <CtaModalProvider>
           <LenisProvider>
