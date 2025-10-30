@@ -5,6 +5,7 @@ import Navbar from "@/components/Header";
 import Footer from "@/components/Footer";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { CtaModalProvider } from "@/context/CTAModalContext";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             <Footer />
           </LenisProvider>
         </CtaModalProvider>
+        <Analytics />
       </body>
     </html>
   );
