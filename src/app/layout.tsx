@@ -9,11 +9,93 @@ import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Wanderer Tribe - Your Journey, Our Passion",
+  metadataBase: new URL("https://wanderertribe.ke"),
+  title: {
+    default:
+      "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
+    template: "%s | Wanderer Tribe",
+  },
   description:
-    "Tailor-made travel packages for Asia, Africa, and The Middle East.",
+    "Wanderer Tribe curates life-changing journeys across Africa, Asia, and the Middle East. Explore luxury escapes, cultural adventures, and offbeat destinations crafted for the modern explorer.",
+  keywords: [
+    "Wanderer Tribe",
+    "luxury travel",
+    "adventure tourism",
+    "Africa travel",
+    "Asia travel",
+    "Middle East travel",
+    "cultural tours",
+    "safari experiences",
+    "eco travel",
+    "wanderlust destinations",
+    "guided tours",
+    "travel experiences",
+  ],
+  authors: [{ name: "Wanderer Tribe", url: "https://wanderertribe.ke" }],
+  creator: "Wanderer Tribe",
+  publisher: "Wanderer Tribe",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxSnippet: -1,
+      maxImagePreview: "large",
+      maxVideoPreview: -1,
+    },
+  },
+  alternates: {
+    canonical: "https://wanderertribe.ke",
+  },
+  openGraph: {
+    title:
+      "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
+    description:
+      "Discover extraordinary destinations and authentic adventures across Africa, Asia, and the Middle East with Wanderer Tribe — where culture meets luxury.",
+    url: "https://wanderertribe.ke",
+    siteName: "Wanderer Tribe",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Wanderer Tribe — Explore Africa, Asia & The Middle East",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
+    description:
+      "Travel deeper. Explore farther. Experience unforgettable adventures with Wanderer Tribe.",
+    site: "@wanderertribe",
+    creator: "@wanderertribe",
+    images: ["/images/og-image.jpg"],
+  },
+  category: "Travel & Tourism",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: { url: "/favicon/apple-touch-icon.png", sizes: "180x180" },
+    shortcut: "/favicon/favicon.ico",
+  },
+  manifest: "/favicon/site.webmanifest",
+  themeColor: "#008080",
+  colorScheme: "light dark",
+  referrer: "origin-when-cross-origin",
+  viewport:
+    "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes",
+  verification: {
+    google: "YOUR-GOOGLE-SITE-VERIFICATION-CODE", // optional
+  },
 };
 
 export default function RootLayout({
