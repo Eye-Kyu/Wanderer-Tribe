@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Wanderer Tribe",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/Wanderer logo 1.png",
         width: 1200,
         height: 630,
         alt: "Wanderer Tribe — Explore Africa, Asia & The Middle East",
@@ -75,7 +76,7 @@ export const metadata: Metadata = {
       "Travel deeper. Explore farther. Experience unforgettable adventures with Wanderer Tribe.",
     site: "@wanderertribe",
     creator: "@wanderertribe",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/Wanderer logo 1.png"],
   },
   category: "Travel & Tourism",
   icons: {
