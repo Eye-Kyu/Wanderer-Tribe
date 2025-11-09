@@ -21,15 +21,32 @@ export default function ContactPage() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", category: "", message: "" });
-    }, 3000);
+    setIsSubmitted(false);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          category: "",
+          message: "",
+        });
+        console.log("Email sent successfully!");
+      } else {
+        console.error("Error sending email:", await res.json());
+      }
+    } catch (err) {
+      console.error("Network error:", err);
+    }
   };
 
   return (
@@ -235,7 +252,7 @@ export default function ContactPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
               className="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
             >
