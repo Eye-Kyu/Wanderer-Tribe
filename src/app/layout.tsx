@@ -132,6 +132,7 @@ export default function RootLayout({
           </LenisProvider>
         </CtaModalProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

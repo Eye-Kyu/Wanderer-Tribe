@@ -1,7 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Mail, User, MessageSquare, Calendar, Users, Clock } from "lucide-react";
+import {
+  Mail,
+  User,
+  MessageSquare,
+  Calendar,
+  Users,
+  Clock,
+} from "lucide-react";
 import { useState } from "react";
 
 export default function CallToAction() {
@@ -34,25 +41,46 @@ export default function CallToAction() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      alert("Form submitted successfully! (replace with API call)");
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        travellers: "",
-        date: "",
-        length: "",
-        details: "",
+    if (!validate()) return;
+
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
-      setErrors({});
+
+      const data = await res.json();
+      if (data.success) {
+        alert(
+          "Your booking request has been sent! Check your email for confirmation."
+        );
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          travellers: "",
+          date: "",
+          length: "",
+          details: "",
+        });
+        setErrors({});
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send your booking request.");
     }
   };
 
   return (
-    <section id="cta" className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]">
+    <section
+      id="cta"
+      className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]"
+    >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -84,40 +112,57 @@ export default function CallToAction() {
             {/* First + Last Name */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="relative">
-                <User className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+                <User
+                  className="absolute top-4 left-4 text-[#2F4F2F]"
+                  size={18}
+                />
                 <input
                   type="text"
                   placeholder="First Name"
                   value={form.firstName}
-                  onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, firstName: e.target.value })
+                  }
                   className={`w-full pl-12 pr-4 py-3 rounded-md border ${
                     errors.firstName ? "border-red-500" : "border-gray-300"
                   } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
                 />
                 {errors.firstName && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.firstName}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">
+                    {errors.firstName}
+                  </p>
                 )}
               </div>
               <div className="relative">
-                <User className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+                <User
+                  className="absolute top-4 left-4 text-[#2F4F2F]"
+                  size={18}
+                />
                 <input
                   type="text"
                   placeholder="Last Name"
                   value={form.lastName}
-                  onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, lastName: e.target.value })
+                  }
                   className={`w-full pl-12 pr-4 py-3 rounded-md border ${
                     errors.lastName ? "border-red-500" : "border-gray-300"
                   } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
                 />
                 {errors.lastName && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.lastName}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">
+                    {errors.lastName}
+                  </p>
                 )}
               </div>
             </div>
 
             {/* Email */}
             <div className="relative">
-              <Mail className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+              <Mail
+                className="absolute top-4 left-4 text-[#2F4F2F]"
+                size={18}
+              />
               <input
                 type="email"
                 placeholder="Your Email"
@@ -128,16 +173,23 @@ export default function CallToAction() {
                 } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
               />
               {errors.email && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.email}</p>
+                <p className="text-red-500 text-xs sm:text-sm mt-1">
+                  {errors.email}
+                </p>
               )}
             </div>
 
             {/* Number of Travellers */}
             <div className="relative">
-              <Users className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+              <Users
+                className="absolute top-4 left-4 text-[#2F4F2F]"
+                size={18}
+              />
               <select
                 value={form.travellers}
-                onChange={(e) => setForm({ ...form, travellers: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, travellers: e.target.value })
+                }
                 className={`w-full pl-12 pr-4 py-3 rounded-md border ${
                   errors.travellers ? "border-red-500" : "border-gray-300"
                 } bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
@@ -150,13 +202,18 @@ export default function CallToAction() {
                 <option>10+</option>
               </select>
               {errors.travellers && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.travellers}</p>
+                <p className="text-red-500 text-xs sm:text-sm mt-1">
+                  {errors.travellers}
+                </p>
               )}
             </div>
 
             {/* Travel Date */}
             <div className="relative">
-              <Calendar className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+              <Calendar
+                className="absolute top-4 left-4 text-[#2F4F2F]"
+                size={18}
+              />
               <input
                 type="date"
                 value={form.date}
@@ -174,7 +231,10 @@ export default function CallToAction() {
 
             {/* Trip Length */}
             <div className="relative">
-              <Clock className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+              <Clock
+                className="absolute top-4 left-4 text-[#2F4F2F]"
+                size={18}
+              />
               <select
                 value={form.length}
                 onChange={(e) => setForm({ ...form, length: e.target.value })}
@@ -189,13 +249,18 @@ export default function CallToAction() {
                 <option>4 Weeks+</option>
               </select>
               {errors.length && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.length}</p>
+                <p className="text-red-500 text-xs sm:text-sm mt-1">
+                  {errors.length}
+                </p>
               )}
             </div>
 
             {/* Message */}
             <div className="relative">
-              <MessageSquare className="absolute top-4 left-4 text-[#2F4F2F]" size={18} />
+              <MessageSquare
+                className="absolute top-4 left-4 text-[#2F4F2F]"
+                size={18}
+              />
               <textarea
                 placeholder="Tell us more about your dream trip..."
                 value={form.details}
@@ -205,7 +270,9 @@ export default function CallToAction() {
                 } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
               />
               {errors.details && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.details}</p>
+                <p className="text-red-500 text-xs sm:text-sm mt-1">
+                  {errors.details}
+                </p>
               )}
             </div>
 
