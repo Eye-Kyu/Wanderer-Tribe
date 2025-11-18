@@ -11,9 +11,7 @@ const Hero: React.FC = () => {
 
   const scrollToNext = () => {
     const nextSection = document.getElementById("activities");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
+    if (nextSection) nextSection.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -22,48 +20,44 @@ const Hero: React.FC = () => {
       className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
     >
-      {/* Mobile: Video with Image Fallback */}
-      <div className="absolute inset-0 w-full h-full md:hidden z-0 overflow-hidden">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          src="/videos/mobile-landing.mp4"
-          poster="/images/costa-rica-resort.jpeg"   // fallback thumbnail
-        />
+      {/* Fallback image */}
+      <Image
+        src="/images/costa-rica-resort.jpeg"
+        alt="Background"
+        fill
+        priority
+        className="object-cover z-0"
+      />
 
-        {/* Fallback image (only seen if video fails completely) */}
-        <Image
-          src="/images/costa-rica-resort.jpeg"
-          alt="Background"
-          fill
-          priority
-          className="object-cover"
-        />
-      </div>
+      {/* MOBILE VIDEO (hidden on md+) */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-10 md:hidden"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        src="/videos/mobile-landing.mp4"
+        poster="/images/costa-rica-resort.jpeg"
+      />
 
-      {/* Desktop/Tablet: Local Background Video */}
-      <div className="absolute inset-0 w-full h-full hidden md:block overflow-hidden">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          src="/videos/Landing-page.mp4"
-        />
-      </div>
+      {/* DESKTOP/TABLET VIDEO (hidden on mobile) */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover z-10 hidden md:block"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        src="/videos/Landing-page.mp4"
+      />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-20" />
 
       {/* Hero Text */}
       <motion.div
-        className="absolute bottom-10 left-6 sm:left-12 md:left-20 z-20 text-left max-w-3xl"
+        className="absolute bottom-10 left-6 sm:left-12 md:left-20 z-30 text-left max-w-3xl"
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 1, ease: "easeOut" }}
@@ -81,7 +75,7 @@ const Hero: React.FC = () => {
         </p>
       </motion.div>
 
-      {/* Scroll Down Animation */}
+      {/* Scroll Indicator */}
       <motion.div
         onClick={scrollToNext}
         initial={{ opacity: 0, y: -10 }}
@@ -92,7 +86,7 @@ const Hero: React.FC = () => {
           repeat: Infinity,
           repeatType: "reverse",
         }}
-        className="absolute bottom-6 sm:bottom-10 md:left-1/2 transform -translate-x-1/2 cursor-pointer text-center z-20 lg:visible hidden"
+        className="absolute bottom-6 sm:bottom-10 md:left-1/2 transform -translate-x-1/2 cursor-pointer text-center z-30 hidden lg:block"
       >
         <ChevronDown className="w-4 md:w-6 h-6 sm:w-8 sm:h-8 text-white/80 mx-auto" />
         <p className="text-xs sm:text-sm text-white/70 mt-2 tracking-wide font-body">

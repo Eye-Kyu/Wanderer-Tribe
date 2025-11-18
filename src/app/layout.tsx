@@ -9,7 +9,11 @@ import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap", // 🚀 prevents render-blocking font load
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://wanderertribe.ke"),
   title: {
@@ -47,9 +51,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: {
-    canonical: "https://wanderertribe.ke",
-  },
+  alternates: { canonical: "https://wanderertribe.ke" },
   openGraph: {
     title:
       "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
@@ -94,35 +96,43 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   viewport:
     "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes",
-  verification: {
-    google: "YOUR-GOOGLE-SITE-VERIFICATION-CODE", // optional
-  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
+        {/* Preload critical media for faster LCP */}
+        <link rel="preload" href="/images/costa-rica-resort.jpeg" as="image" />
+        <link rel="preload" href="/videos/mobile-landing.mp4" as="video" />
+        <link rel="preload" href="/videos/Landing-page.mp4" as="video" />
+
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
         <Script
-          async
           src="https://www.googletagmanager.com/gtag/js?id=G-X1F9CWD7MR"
+          strategy="afterInteractive"
         />
+
         <Script
           id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-X1F9CWD7MR');
-        `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-X1F9CWD7MR', { send_page_view: true });
+            `,
           }}
         />
       </head>
+
       <body className={inter.className}>
         <CtaModalProvider>
           <LenisProvider>
@@ -131,6 +141,7 @@ export default function RootLayout({
             <Footer />
           </LenisProvider>
         </CtaModalProvider>
+
         <Analytics />
         <SpeedInsights />
       </body>
