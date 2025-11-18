@@ -22,8 +22,20 @@ const Hero: React.FC = () => {
       className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
     >
-      {/* Mobile: Static Fallback Image */}
-      <div className="absolute inset-0 w-full h-full md:hidden z-0">
+      {/* Mobile: Video with Image Fallback */}
+      <div className="absolute inset-0 w-full h-full md:hidden z-0 overflow-hidden">
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          src="/videos/mobile-landing.mp4"
+          poster="/images/costa-rica-resort.jpeg"   // fallback thumbnail
+        />
+
+        {/* Fallback image (only seen if video fails completely) */}
         <Image
           src="/images/costa-rica-resort.jpeg"
           alt="Background"
@@ -49,7 +61,7 @@ const Hero: React.FC = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10" />
 
-      {/* Hero Text - Bottom Left */}
+      {/* Hero Text */}
       <motion.div
         className="absolute bottom-10 left-6 sm:left-12 md:left-20 z-20 text-left max-w-3xl"
         initial={{ opacity: 0, y: 30 }}
