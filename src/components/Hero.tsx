@@ -20,38 +20,42 @@ const Hero: React.FC = () => {
       className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
     >
-      {/* Fallback image */}
+      {/* Fallback LCP Image */}
       <Image
         src="/images/costa-rica-resort.jpeg"
         alt="Background"
         fill
         priority
+        fetchPriority="high"
+        sizes="100vw"
         className="object-cover z-0"
       />
 
-      {/* MOBILE VIDEO (hidden on md+) */}
+      {/* MOBILE VIDEO */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-10 md:hidden"
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
-        src="/videos/mobile-landing.mp4"
+        preload="none"
         poster="/images/costa-rica-resort.jpeg"
-      />
+      >
+        <source src="/videos/mobile-landing.mp4" type="video/mp4" />
+      </video>
 
-      {/* DESKTOP/TABLET VIDEO (hidden on mobile) */}
+      {/* DESKTOP VIDEO */}
+      {/* DESKTOP VIDEO */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-10 hidden md:block"
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
-        src="/videos/Landing-page.mp4"
-      />
-
+        preload="none"
+      >
+        <source src="/videos/Landing-page.mp4" type="video/mp4" />
+      </video>
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-20" />
 

@@ -113,6 +113,27 @@ export default function RootLayout({
 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link
+          rel="preload"
+          as="font"
+          href="/_next/static/media/inter-latin-400-normal.woff2"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Stardom_Complete/Fonts/OTF/Stardom-Regular.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Adrian.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
 
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-X1F9CWD7MR"
