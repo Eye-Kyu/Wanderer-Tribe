@@ -221,7 +221,7 @@ const ItineraryOptions: React.FC = () => {
       destination: "Maasai Mara, Kenya",
       includes: "Tented suites, Park entry",
       excludes: "Beverages, Additional drives",
-      image: "/images/tents.jpg",
+      image: "/images/tents.webp",
     },
     {
       title: "Serenity Escape - Olare Mara Camp",

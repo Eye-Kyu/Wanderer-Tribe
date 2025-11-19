@@ -60,7 +60,7 @@ const activities = [
   {
     title: "Romantic Getaways",
     desc: "Private villas, candlelit dinners, and bespoke experiences for couples.",
-    image: "/images/luxury/south-africa-lodge.jpeg",
+    image: "/images/luxury/south-africa-lodge.webp",
   },
   {
     title: "Adventure Sports",
