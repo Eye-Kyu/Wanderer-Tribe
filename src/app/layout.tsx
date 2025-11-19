@@ -8,6 +8,7 @@ import LenisProvider from "@/components/providers/LenisProvider";
 import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import PageLoader from "@/components/PageLoader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -155,13 +156,15 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <CtaModalProvider>
-          <LenisProvider>
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </LenisProvider>
-        </CtaModalProvider>
+        <PageLoader>
+          <CtaModalProvider>
+            <LenisProvider>
+              <Navbar />
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </LenisProvider>
+          </CtaModalProvider>
+        </PageLoader>
 
         <Analytics />
         <SpeedInsights />
