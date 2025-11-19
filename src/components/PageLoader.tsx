@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Loader from "./Loader";
 
 export default function PageLoader({
@@ -9,25 +8,34 @@ export default function PageLoader({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
 
-  // initial load
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1200);
-  }, []);
+    // If everything is already loaded (e.g., browser cache)
+    if (document.readyState === "complete") {
+      setLoading(false);
+      return;
+    }
 
-  // route change loader
-  useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timeout);
-  }, [pathname]);
+    // Wait until EVERYTHING is fully loaded
+    const handlePageLoad = () => {
+      setLoading(false);
+    };
+
+    window.addEventListener("load", handlePageLoad);
+
+    return () => window.removeEventListener("load", handlePageLoad);
+  }, []);
 
   return (
     <>
       {loading && <Loader />}
-      <div style={{ opacity: loading ? 0 : 1, transition: "opacity .6s ease" }}>
+      <div
+        style={{
+          opacity: loading ? 0 : 1,
+          transition: "opacity 0.6s ease",
+        }}
+      >
         {children}
       </div>
     </>
