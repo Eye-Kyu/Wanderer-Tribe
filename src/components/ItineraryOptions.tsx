@@ -203,14 +203,14 @@ const ItineraryOptions: React.FC = () => {
       destination: "Maasai Mara, Kenya",
       includes: "Airfare, Full-board stay, Expert-led safaris",
       excludes: "Bush dining ($40/person), Personal items",
-      image: "/images/bush-dine.jpg",
+      image: "/images/bush-dine.webp",
     },
     {
       title: "Safari Symphony - Mito Safari Camp",
       destination: "Serengeti, Tanzania",
       includes: "Flights, Luxury tents, Wildlife tours",
       excludes: "Garden walks, Extra excursions",
-      image: "/images/mito-camp.jpg",
+      image: "/images/mito-camp.webp",
     },
     {
       title: "Untamed Horizons - Mara Major Camp",
@@ -224,14 +224,14 @@ const ItineraryOptions: React.FC = () => {
       destination: "Olare, Kenya",
       includes: "Airfare, Full-board stay, Guided tours",
       excludes: "Spa services, Premium drinks",
-      image: "/images/camp4.jpg",
+      image: "/images/luxury/south-africa-lodge.webp",
     },
     {
       title: "Wild Dreams - Talek River Camp",
       destination: "Talek, Kenya",
       includes: "Tents, Safaris, Park entry",
       excludes: "Private guides, Beverages",
-      image: "/images/camp5.jpg",
+      image: "/images/africa.webp",
     },
   ];
 

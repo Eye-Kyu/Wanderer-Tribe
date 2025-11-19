@@ -106,7 +106,7 @@ export default function Home() {
             className="absolute inset-0 bg-repeat bg-center min-h-full"
             style={{
               backgroundColor: "#254D32",
-              backgroundImage: "url('/images/bgs/bgafricana.jpg')",
+              backgroundImage: "url('/images/bgs/bgafricana.webp')",
               backgroundSize: "400px 408px", // ✅ Adjust pattern density here
               backgroundRepeat: "repeat",
               backgroundAttachment: "fixed", // ✅ optional: enhances parallax feel

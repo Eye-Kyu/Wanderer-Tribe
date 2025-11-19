@@ -40,7 +40,7 @@ export default function ThailandItineraryTimeline() {
             Island&apos;s turquoise bays, and indulge in Thai spa bliss.
           </p>
           <RevealImage
-            src="/images/bali.jpeg"
+            src="/images/bali.webp"
             alt="Phuket Islands"
             priority
             direction="vertical"
@@ -66,7 +66,7 @@ export default function ThailandItineraryTimeline() {
             Mongchang Café.
           </p>
           <RevealImage
-            src="/images/asia/nongnooch.jpg"
+            src="/images/asia/nongnooch.webp"
             alt="Pattaya Highlights"
             direction="horizontal"
           />
@@ -91,7 +91,7 @@ export default function ThailandItineraryTimeline() {
             city lights.
           </p>
           <RevealImage
-            src="/images/asia/bangkok.jpeg"
+            src="/images/asia/bangkok.webp"
             alt="Bangkok City"
             direction="vertical"
           />
@@ -115,7 +115,7 @@ export default function ThailandItineraryTimeline() {
             Airport. Bid farewell to Thailand&apos;s warmth and wonder.
           </p>
           <RevealImage
-            src="/images/japan-onsen.jpeg"
+            src="/images/japan-onsen.webp"
             alt="Thailand Departure"
             direction="horizontal"
           />
