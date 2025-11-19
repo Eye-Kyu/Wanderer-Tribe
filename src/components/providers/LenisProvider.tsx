@@ -7,19 +7,20 @@ import gsap from "gsap";
 export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2, // smoother scrolling
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      duration: 1.5,
+      easing: (t) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+      wheelMultiplier: 1,
+      smoothWheel: true,
+      infinite: false,
     });
 
-    // Store the callback so we can remove it later
     const tickerCallback = (time: number) => {
-      lenis.raf(time * 1000); // GSAP time is in seconds, Lenis expects ms
+      lenis.raf(time * 1000);
     };
 
-    // GSAP ticker instead of requestAnimationFrame
     gsap.ticker.add(tickerCallback);
-
-    gsap.ticker.lagSmoothing(0); // prevents GSAP from skipping frames on lags
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(tickerCallback);

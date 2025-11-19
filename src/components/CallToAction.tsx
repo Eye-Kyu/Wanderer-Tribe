@@ -282,6 +282,7 @@ export default function CallToAction() {
               className="w-full py-3 rounded-md bg-wanderer-green text-white font-medium tracking-wide hover:bg-wanderer-teal transition-colors ease-in-out duration-300 text-sm sm:text-base"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              aria-label="Start your journey"
             >
               Start Your Journey
             </motion.button>

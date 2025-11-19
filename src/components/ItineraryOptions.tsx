@@ -108,6 +108,7 @@ const MobileCarousel = ({ options }: { options: ItineraryOption[] }) => {
           <button
             key={i}
             onClick={() => handleDotClick(i)}
+            aria-label="current slide"
             className={`w-3 h-3 rounded-full transition ${
               i === currentIndex ? "bg-wanderer-gold" : "bg-wanderer-mahogany"
             }`}
@@ -144,6 +145,7 @@ const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
+              aria-label="current slide"
               className={`w-3 h-3 rounded-full transition ${
                 i === currentIndex ? "bg-wanderer-gold" : "bg-neutral-400"
               }`}
@@ -154,12 +156,14 @@ const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
           <button
             onClick={handlePrev}
             className="p-3 text-white rounded-full button transition shadow-md"
+            aria-label="Scroll left"
           >
             <FaChevronLeft size={20} />
           </button>
           <button
             onClick={handleNext}
             className="p-3 text-white rounded-full button transition shadow-md"
+            aria-label="Scroll right"
           >
             <FaChevronRight size={20} />
           </button>

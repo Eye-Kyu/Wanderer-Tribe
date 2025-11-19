@@ -188,12 +188,14 @@ function DesktopCarousel({ isInView }: { isInView: boolean }) {
         <button
           onClick={() => scrollToIndex(Math.max(currentIndex - 1, 0))}
           className="p-3 rounded-full bg-wanderer-teal button shadow-md"
+          aria-label="Scroll left"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button
           onClick={() => scrollToIndex(Math.min(currentIndex + 1, maxIndex))}
           className="p-3 rounded-full bg-wanderer-teal button shadow-md"
+          aria-label="Scroll right"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
