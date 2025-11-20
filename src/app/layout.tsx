@@ -153,6 +153,29 @@ export default function RootLayout({
             `,
           }}
         />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://wanderertribe.ke",
+              name: "WANDERER TRIBE",
+              alternateName: "Wanderer Tribe",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://wanderertribe.ke/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" />
+        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       </head>
 
       <body className={inter.className}>
