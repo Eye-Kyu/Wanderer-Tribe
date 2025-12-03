@@ -247,14 +247,15 @@ export default function Navbar() {
                   className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-xl shadow-xl py-4 px-6 hidden"
                 >
                   <ul className="space-y-3 text-sm">
-                    <li className="flex items-center hover:text-wanderer-moss space-x-2">
-                      <FaGlobeEurope />{" "}
-                      <Link href="/Destinations/europe">Middle East</Link>
-                    </li>
                     <li className="flex items-center space-x-2 hover:text-wanderer-moss">
                       <FaGlobeAfrica />{" "}
                       <Link href="/Destinations/africa">Africa</Link>
                     </li>
+                    <li className="flex items-center hover:text-wanderer-moss space-x-2">
+                      <FaGlobeEurope />{" "}
+                      <Link href="/Destinations/europe">Middle East</Link>
+                    </li>
+
                     <li className="flex items-center space-x-2 hover:text-wanderer-moss">
                       <FaGlobeAsia />{" "}
                       <Link href="/Destinations/asia">Asia</Link>

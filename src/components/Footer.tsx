@@ -73,14 +73,26 @@ export default function Footer() {
         {/* Contact & Socials */}
         <div>
           <h3 className="text-lg font-semibold mb-3">Connect</h3>
-          <p className="text-gray-300 text-sm flex items-center gap-2 mb-3">
-            <Mail className="w-4 h-4" /> contact@wanderertribe.com
-          </p>
+          <Link href="/Contact">
+            <p className="text-gray-300 text-sm flex items-center gap-2 mb-3">
+              <Mail className="w-4 h-4" /> contact@wanderertribe.com
+            </p>
+          </Link>
           <div className="flex items-center gap-4 mt-2">
-           
-            <Instagram className="w-5 h-5 hover:text-pink-500 transition" />
-            <Facebook className="w-5 h-5 hover:text-blue-600 transition" />
-          
+            <Link
+              href="https://www.instagram.com/wanderer_tribe_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="w-5 h-5 hover:text-pink-500 transition" />
+            </Link>
+            <Link
+              href="https://l.instagram.com/?u=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1H7rxXcKD2%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio&e=AT3TDyq78eMIS9YHH9YihTm3FGkVekPmA7VxLOIE1VeKgFoH100EpLjaFE3zLpHlGX0uxeyX8ZSdE-APtUrm-3kbJw8pL8TQa9Emk_89gA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook className="w-5 h-5 hover:text-blue-600 transition" />
+            </Link>
           </div>
         </div>
       </div>

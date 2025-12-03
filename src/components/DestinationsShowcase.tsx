@@ -5,16 +5,16 @@ import Link from "next/link";
 
 const destinations = [
   {
-    continent: "Asia",
-    tagline: "Mystical journeys across vibrant cultures",
-    image: "/images/asia.jpg",
-    link: "/Destinations/asia",
-  },
-  {
     continent: "Africa",
     tagline: "Wild safaris & timeless landscapes",
     image: "/images/africa.jpg",
     link: "/Destinations/africa",
+  },
+  {
+    continent: "Asia",
+    tagline: "Mystical journeys across vibrant cultures",
+    image: "/images/asia.jpg",
+    link: "/Destinations/asia",
   },
   {
     continent: "Middle East",
@@ -32,8 +32,8 @@ export default function DestinationsShowcase() {
           Explore Our Signature Destinations
         </h2>
         <p className="max-w-2xl mx-auto p">
-          Handpicked luxury experiences across Asia, Africa, and the Middle East.
-          Immerse yourself in the extraordinary.
+          Handpicked luxury experiences across Asia, Africa, and the Middle
+          East. Immerse yourself in the extraordinary.
         </p>
       </div>
 
