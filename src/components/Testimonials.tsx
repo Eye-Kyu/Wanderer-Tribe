@@ -6,13 +6,13 @@ const testimonials = [
     name: "Peter Biko",
     location: "Luanda, Angola",
     text: "I recently booked a trip to Thailand with Wanderer-Tribe and I could not have been happier with my experience.",
-    image: "/images/Avatar1.png",
+    image: "/images/Avatar1.webp",
   },
   {
     name: "Jennifer and Mark",
     location: "San Francisco",
     text: "My husband and I have been using Wanderer Tribe for 2 years now and they have never disappointed us.",
-    image: "/images/Avatar2.png",
+    image: "/images/Avatar2.webp",
   },
 ];
 
@@ -36,13 +36,13 @@ export default function Testimonials() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
         <h2 className="md: pb-4 font-bold mb-4">
-         Do not Just Take our Word For It
+          Do not Just Take our Word For It
         </h2>
         <p className="max-w-3xl mx-auto text-base md:text-lg mb-12">
-          Our customer&apos;s feedback is essential in building a great reputation
-          and maintaining excellent service. By listening to our customer&apos;s
-          needs, we can improve our offerings and provide an exceptional travel
-          experience.
+          Our customer&apos;s feedback is essential in building a great
+          reputation and maintaining excellent service. By listening to our
+          customer&apos;s needs, we can improve our offerings and provide an
+          exceptional travel experience.
         </p>
 
         {/* Testimonials Grid */}

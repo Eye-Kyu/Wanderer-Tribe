@@ -90,7 +90,7 @@ export default function CallToAction() {
         {/* Left side - Image */}
         <div className="relative h-52 sm:h-72 md:h-auto md:block">
           <Image
-            src="/images/contact-bg.jpg"
+            src="/images/contact-bg.webp"
             alt="Curated Travel Experience"
             fill
             className="object-cover w-full h-full"
