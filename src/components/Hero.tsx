@@ -1,13 +1,22 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { useInView, motion } from "framer-motion";
-import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 const Hero: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  // Detect screen size on client
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   const scrollToNext = () => {
     const nextSection = document.getElementById("activities");
@@ -17,8 +26,8 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full h-screen overflow-hidden z-0"
       id="hero"
+      className="relative w-full h-screen overflow-hidden z-0"
     >
       {/* Fallback LCP Image */}
       <Image
@@ -31,32 +40,32 @@ const Hero: React.FC = () => {
         className="object-cover z-0"
       />
 
-      {/* MOBILE VIDEO */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-10 md:hidden"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        poster="/images/costa-rica-resort.webp"
-      >
-        <source src="/videos/mobile-landing.webm" type="video/webm" />
-      </video>
+      {/* Conditionally render one video based on screen size */}
+      {isMobile ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster="/images/costa-rica-resort.webp"
+          src="/videos/mobile-landing.webm"
+        />
+      ) : (
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          src="/videos/landing-page.webm"
+        />
+      )}
 
-      {/* DESKTOP VIDEO */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover z-10 hidden md:block"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-      >
-        <source src="/videos/Landing-page.webm" type="video/webm" />
-      </video>
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-20" />
+      {/* Simplified overlay */}
+      <div className="absolute inset-0 bg-black/30 z-20" />
 
       {/* Hero Text */}
       <motion.div
