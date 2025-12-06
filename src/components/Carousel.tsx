@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import gsap from "gsap";
@@ -76,20 +76,22 @@ const Carousel: React.FC<CarouselProps> = ({
     animRef.current = tl;
   };
 
-  // navigation
-  const nextSlide = () => {
-    const oldIndex = currentIndex;
-    const newIndex = (currentIndex + 1) % slides.length;
-    setCurrentIndex(newIndex);
-    animateReveal(newIndex, "next", oldIndex);
-  };
+  // navigation wrapped in useCallback to avoid changing references
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % slides.length;
+      animateReveal(newIndex, "next", prevIndex);
+      return newIndex;
+    });
+  }, [slides.length]);
 
-  const prevSlide = () => {
-    const oldIndex = currentIndex;
-    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-    setCurrentIndex(newIndex);
-    animateReveal(newIndex, "prev", oldIndex);
-  };
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + slides.length) % slides.length;
+      animateReveal(newIndex, "prev", prevIndex);
+      return newIndex;
+    });
+  }, [slides.length]);
 
   // autoplay
   useEffect(() => {
@@ -101,7 +103,7 @@ const Carousel: React.FC<CarouselProps> = ({
         clearInterval(autoplayRef.current);
       }
     };
-  }, [currentIndex, nextSlide, autoplay, delay]);
+  }, [nextSlide, autoplay, delay]);
 
   // set first slide visible
   useEffect(() => {
