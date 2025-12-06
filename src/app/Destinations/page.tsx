@@ -1,11 +1,6 @@
 "use client";
 import Image from "next/image";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import Carousel from "@/components/Carousel";
@@ -21,61 +16,59 @@ type Destination = {
 };
 
 export default function Destinations() {
-  const { scrollY } = useScroll();
-
   const destinations: { [key: string]: Destination[] } = {
-   The_Middle_East: [
-  {
-    name: "Dubai, United Arab Emirates",
-    description:
-      "Experience futuristic architecture, luxurious shopping, and desert adventures in dazzling Dubai.",
-    days: 4,
-    cost: "$3,200",
-    locations: "Dubai",
-    activities: "Burj Khalifa Visit, Desert Safari, Dubai Marina Cruise",
-    image: "/images/middle-east/Dubai.webp",
-  },
-  {
-    name: "Petra, Jordan",
-    description:
-      "Discover the ancient rose-red city carved into rock, one of the New Seven Wonders of the World.",
-    days: 3,
-    cost: "$2,400",
-    locations: "Petra",
-    activities: "Treasury Visit, Siq Canyon Walk, Wadi Rum Excursion",
-    image: "/images/middle-east/Jordan.webp",
-  },
-  {
-    name: "Cairo, Egypt",
-    description:
-      "Uncover the mysteries of ancient Egypt, from the Great Pyramids of Giza to the treasures of the Nile.",
-    days: 5,
-    cost: "$2,800",
-    locations: "Cairo",
-    activities: "Pyramids Tour, Egyptian Museum, Nile Dinner Cruise",
-    image: "/images/middle-east/Egypt.webp",
-  },
-  {
-    name: "Doha, Qatar",
-    description:
-      "Blend tradition and innovation in Doha with its modern skyline and rich Qatari culture.",
-    days: 4,
-    cost: "$2,900",
-    locations: "Doha",
-    activities: "Souq Waqif, Museum of Islamic Art, Corniche Walk",
-    image: "/images/middle-east/Doha.webp",
-  },
-  {
-    name: "Muscat, Oman",
-    description:
-      "Enjoy the serene beauty of Oman's coast, its forts, and traditional souqs in Muscat.",
-    days: 3,
-    cost: "$2,700",
-    locations: "Muscat",
-    activities: "Grand Mosque Visit, Muttrah Souq, Dolphin Watching Cruise",
-    image: "/images/middle-east/Oman.webp",
-  },
-],
+    The_Middle_East: [
+      {
+        name: "Dubai, United Arab Emirates",
+        description:
+          "Experience futuristic architecture, luxurious shopping, and desert adventures in dazzling Dubai.",
+        days: 4,
+        cost: "$3,200",
+        locations: "Dubai",
+        activities: "Burj Khalifa Visit, Desert Safari, Dubai Marina Cruise",
+        image: "/images/middle-east/Dubai.webp",
+      },
+      {
+        name: "Petra, Jordan",
+        description:
+          "Discover the ancient rose-red city carved into rock, one of the New Seven Wonders of the World.",
+        days: 3,
+        cost: "$2,400",
+        locations: "Petra",
+        activities: "Treasury Visit, Siq Canyon Walk, Wadi Rum Excursion",
+        image: "/images/middle-east/Jordan.webp",
+      },
+      {
+        name: "Cairo, Egypt",
+        description:
+          "Uncover the mysteries of ancient Egypt, from the Great Pyramids of Giza to the treasures of the Nile.",
+        days: 5,
+        cost: "$2,800",
+        locations: "Cairo",
+        activities: "Pyramids Tour, Egyptian Museum, Nile Dinner Cruise",
+        image: "/images/middle-east/Egypt.webp",
+      },
+      {
+        name: "Doha, Qatar",
+        description:
+          "Blend tradition and innovation in Doha with its modern skyline and rich Qatari culture.",
+        days: 4,
+        cost: "$2,900",
+        locations: "Doha",
+        activities: "Souq Waqif, Museum of Islamic Art, Corniche Walk",
+        image: "/images/middle-east/Doha.webp",
+      },
+      {
+        name: "Muscat, Oman",
+        description:
+          "Enjoy the serene beauty of Oman's coast, its forts, and traditional souqs in Muscat.",
+        days: 3,
+        cost: "$2,700",
+        locations: "Muscat",
+        activities: "Grand Mosque Visit, Muttrah Souq, Dolphin Watching Cruise",
+        image: "/images/middle-east/Oman.webp",
+      },
+    ],
 
     Africa: [
       {

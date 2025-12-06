@@ -7,7 +7,6 @@ function RevealImage({
   src,
   alt,
   priority = false,
-  direction = "vertical",
 }: {
   src: string;
   alt: string;

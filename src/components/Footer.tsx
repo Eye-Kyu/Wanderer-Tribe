@@ -1,5 +1,5 @@
 "use client";
-import { Twitter, Instagram, Facebook, Linkedin, Mail } from "lucide-react";
+import { Instagram, Facebook, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
