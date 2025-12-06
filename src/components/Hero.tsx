@@ -39,12 +39,11 @@ const Hero: React.FC = () => {
         loop
         playsInline
         preload="none"
-        poster="/images/costa-rica-resort.jpeg"
+        poster="/images/costa-rica-resort.webp"
       >
-        <source src="/videos/mobile-landing.mp4" type="video/mp4" />
+        <source src="/videos/mobile-landing.webm" type="video/webm" />
       </video>
 
-      {/* DESKTOP VIDEO */}
       {/* DESKTOP VIDEO */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-10 hidden md:block"
@@ -54,7 +53,7 @@ const Hero: React.FC = () => {
         playsInline
         preload="none"
       >
-        <source src="/videos/Landing-page.mp4" type="video/mp4" />
+        <source src="/videos/Landing-page.webm" type="video/webm" />
       </video>
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-20" />

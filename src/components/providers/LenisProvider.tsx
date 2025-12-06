@@ -2,30 +2,24 @@
 
 import { ReactNode, useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
 
 export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5,
-      easing: (t) =>
-        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
-      wheelMultiplier: 1,
+      duration: 1.1, // smoother & lighter than 1.5
       smoothWheel: true,
-      infinite: false,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.2,
     });
 
-    const tickerCallback = (time: number) => {
-      lenis.raf(time * 1000);
-    };
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-    gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    requestAnimationFrame(raf);
 
-    return () => {
-      gsap.ticker.remove(tickerCallback);
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   return <>{children}</>;

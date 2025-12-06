@@ -6,19 +6,19 @@ const hotels = [
   {
     name: "Dream beneath Africa's endless skies",
     location: "Africa",
-    image: "/images/hotel1.jpg",
+    image: "/images/hotel1.webp",
     highlight: "Private tented suites with panoramic savannah views",
   },
   {
     name: "Your stay, inspired by centuries of Arabian warmth.",
     location: "Middle East",
-    image: "/images/luxury/dubai-desert.jpeg",
+    image: "/images/luxury/dubai-desert.webp",
     highlight: "Luxury desert villas with starlit dune experiences",
   },
   {
     name: "Rest where tradition breathes and nature listens.",
     location: "Asia",
-    image: "/images/hotel3.jpg",
+    image: "/images/hotel3.webp",
     highlight: "Secluded villas surrounded by tropical jungles",
   },
 ];
@@ -27,9 +27,7 @@ export default function HotelShowcase() {
   return (
     <section className="py-16  ">
       <div className="max-w-7xl mx-auto text-center  mb-12 z-40">
-        <h3 className="font-heading lg:mb-10 mb-4">
-          Stays That Stay With You
-        </h3>
+        <h3 className="font-heading lg:mb-10 mb-4">Stays That Stay With You</h3>
         <p className="p max-w-2xl mx-auto">
           Indulge in handpicked hotels & resorts where elegance meets comfort.
         </p>

@@ -13,14 +13,14 @@ const destinations = [
   {
     continent: "Asia",
     tagline: "Mystical journeys across vibrant cultures",
-    image: "/images/asia.jpg",
+    image: "/images/asia.webp",
     link: "/Destinations/asia",
   },
   {
     continent: "Middle East",
     tagline: "Romantic escapes & rich history",
-    image: "/images/europe.jpg",
-    link: "/Destinations/asia",
+    image: "/images/middle-east/Doha.webp",
+    link: "/Destinations/europe",
   },
 ];
 

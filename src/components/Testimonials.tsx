@@ -22,7 +22,7 @@ export default function Testimonials() {
       {/* ✅ Background image with Next.js <Image /> */}
       <div className="absolute inset-0">
         <Image
-          src="/images/testimonial-back.jpg"
+          src="/images/testimonial-back.webp"
           alt="Cape Town background"
           fill
           priority
