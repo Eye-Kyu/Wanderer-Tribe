@@ -76,11 +76,14 @@ export default function Home() {
       // cleanup
       try {
         if (tlRef.current) {
-          tlRef.current.scrollTrigger && tlRef.current.scrollTrigger.kill();
+          if (tlRef.current.scrollTrigger) {
+            tlRef.current.scrollTrigger.kill();
+          }
+
           tlRef.current.kill();
         }
         ScrollTrigger.getAll().forEach((st) => st.kill());
-      } catch (e) {
+      } catch (_e) {
         /* ignore cleanup errors */
       }
     };

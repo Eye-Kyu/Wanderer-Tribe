@@ -92,12 +92,18 @@ export const metadata: Metadata = {
     shortcut: "/favicon/favicon.ico",
   },
   manifest: "/favicon/site.webmanifest",
-  themeColor: "#008080",
-  colorScheme: "light dark",
   referrer: "origin-when-cross-origin",
-  viewport:
-    "width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes",
 };
+
+// New viewport export function (required for viewport metadata)
+export function generateViewport() {
+  return {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  };
+}
 
 export default function RootLayout({
   children,
@@ -161,7 +167,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               url: "https://wanderertribe.ke",
-              name: "WANDERER TRIBE",
+              name: "WANDERER TRIBE", // Uppercase here for search results
               alternateName: "Wanderer Tribe",
               potentialAction: {
                 "@type": "SearchAction",
@@ -176,6 +182,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" />
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+
+        {/* Manually add theme-color and color-scheme meta tags */}
+        <meta name="theme-color" content="#008080" />
+        <meta name="color-scheme" content="light dark" />
       </head>
 
       <body className={inter.className}>

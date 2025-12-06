@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import Carousel from "@/components/Carousel";
