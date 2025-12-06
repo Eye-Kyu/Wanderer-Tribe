@@ -83,7 +83,7 @@ export default function Home() {
           tlRef.current.kill();
         }
         ScrollTrigger.getAll().forEach((st) => st.kill());
-      } catch (_e) {
+      } catch {
         /* ignore cleanup errors */
       }
     };
