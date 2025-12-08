@@ -11,21 +11,26 @@ interface Props {
 export default function ExperienceCard({ experience, onSelect }: Props) {
   return (
     <div
-      className="cursor-pointer rounded-xl bg-gradient-to-t from-[#33573b] to-transparent overflow-hidden shadow-lg shadow-black hover:shadow-xl transition"
+      className="w-full h-[350px] sm:h-[400px] lg:h-[500px] cursor-pointer rounded-lg overflow-hidden shadow-lg shadow-black hover:shadow-xl transition relative"
       onClick={onSelect}
     >
-      <Image
-        src={experience.image}
-        alt={experience.name}
-        className="w-full h-full object-cover"
-        width={400}
-        height={224}
-      />
-      <div className="p-4">
-        <h3 className="text-xl text-white font-semibold">{experience.name}</h3>
-        <p className="text-sm text-black">{experience.location}</p>
+      {/* Image fills container */}
+      <div className="relative w-full h-full">
+        <Image
+          src={experience.image}
+          alt={experience.name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 400px"
+          priority
+        />
+      </div>
 
-        {/* Tags */}
+      {/* Text overlay */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-sm p-4 rounded-b-lg">
+        <h3 className="text-xl text-white font-semibold">{experience.name}</h3>
+        <p className="text-sm text-gray-300">{experience.location}</p>
+
         <div className="mt-2 flex flex-wrap gap-2">
           {experience.tags.map((tag) => (
             <span

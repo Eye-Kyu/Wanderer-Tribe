@@ -52,7 +52,7 @@ export const WellnessExperiences: Experience[] = [
     {
         id: 5,
         name: "Hot Spring Healing in Japan",
-        image: "/images/japan-onsen.jpeg",
+        image: "/images/japan-onsen.webp",
         location: "Kyoto & Hakone, Japan",
         duration: "5 Days",
         highlights: ["Onsen baths", "Zen gardens", "Traditional ryokan stay"],

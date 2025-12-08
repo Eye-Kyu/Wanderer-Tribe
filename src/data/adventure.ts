@@ -4,7 +4,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 1,
         name: "Safari in Kenya",
-        image: "/images/adventure/kenya-safari.jpeg",
+        image: "/images/adventure/kenya-safari.webp",
         location: "Maasai Mara, Kenya",
         duration: "5 Days",
         highlights: ["Game drives", "Hot air balloon", "Cultural visit"],
@@ -16,7 +16,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 2,
         name: "Hiking the Inca Trail",
-        image: "/images/adventure/inca-trail.jpeg",
+        image: "/images/adventure/inca-trail.webp",
         location: "Cusco, Peru",
         duration: "4 Days",
         highlights: ["Machu Picchu sunrise", "Cloud Forest", "Ancient ruins"],
@@ -28,7 +28,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 3,
         name: "Rock Climbing in Thailand",
-        image: "/images/adventure/thailand-climbing.jpeg",
+        image: "/images/adventure/thailand-climbing.webp",
         location: "Krabi, Thailand",
         duration: "3 Days",
         highlights: ["Railay Beach cliffs", "Limestone climbing", "Sunset views"],
@@ -40,7 +40,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 4,
         name: "White-Water Rafting in Costa Rica",
-        image: "/images/adventure/costa-rica-rafting.jpeg",
+        image: "/images/adventure/costa-rica-rafting.webp",
         location: "Pacuare River, Costa Rica",
         duration: "2 Days",
         highlights: ["Class III-IV rapids", "Rainforest views", "Camping"],
@@ -52,7 +52,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 5,
         name: "Skiing in the Swiss Alps",
-        image: "/images/adventure/swiss-alps.jpeg",
+        image: "/images/adventure/swiss-alps.webp",
         location: "Zermatt, Switzerland",
         duration: "5 Days",
         highlights: ["Matterhorn views", "Alpine slopes", "Après-ski activities"],
@@ -64,7 +64,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 6,
         name: "Scuba Diving in the Great Barrier Reef",
-        image: "/images/adventure/great-barrier-reef.jpeg",
+        image: "/images/adventure/great-barrier-reef.webp",
         location: "Queensland, Australia",
         duration: "4 Days",
         highlights: ["Coral reefs", "Marine life", "Snorkeling tours"],
@@ -76,7 +76,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 7,
         name: "Canyoning in Slovenia",
-        image: "/images/adventure/slovenia-canyoning.jpeg",
+        image: "/images/adventure/slovenia-canyoning.webp",
         location: "Soča Valley, Slovenia",
         duration: "2 Days",
         highlights: ["Waterfalls", "Rappelling", "Natural pools"],
@@ -88,7 +88,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 8,
         name: "Northern Lights Trek",
-        image: "/images/adventure/northern-lights.jpeg",
+        image: "/images/norway.jpeg",
         location: "Tromsø, Norway",
         duration: "5 Days",
         highlights: ["Aurora Borealis", "Dog sledding", "Snow activities"],
@@ -100,7 +100,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 9,
         name: "Mount Kilimanjaro Climb",
-        image: "/images/adventure/kilimanjaro.jpeg",
+        image: "/images/africa/serengeti.webp",
         location: "Tanzania",
         duration: "7 Days",
         highlights: ["Summit Uhuru Peak", "Shira Plateau", "Mweka Route"],
@@ -112,7 +112,7 @@ export const AdventureExperiences: Experience[] = [
     {
         id: 10,
         name: "Paragliding in Interlaken",
-        image: "/images/adventure/interlaken-paragliding.jpeg",
+        image: "/images/adventure/interlaken-paragliding.webp",
         location: "Interlaken, Switzerland",
         duration: "1 Day",
         highlights: ["Aerial views", "Lake Thun", "Alpine scenery"],

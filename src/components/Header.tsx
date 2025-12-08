@@ -236,7 +236,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/Destinations"
-                  className="hover:text-wanderer-rust font-light"
+                  className="hover:text-wanderer-rust font-medium"
                 >
                   Destinations
                 </Link>
@@ -272,7 +272,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/Experiences"
-                  className="hover:text-wanderer-rust font-light"
+                  className="hover:text-wanderer-rust font-medium"
                 >
                   Experiences
                 </Link>
@@ -319,13 +319,13 @@ export default function Navbar() {
             <div className="flex items-center space-x-16">
               <Link
                 href="/About"
-                className="hover:text-wanderer-rust font-light"
+                className="hover:text-wanderer-rust font-medium"
               >
                 About
               </Link>
               <Link
                 href="/Contact"
-                className="hover:text-wanderer-rust font-light"
+                className="hover:text-wanderer-rust font-medium"
               >
                 Contact
               </Link>

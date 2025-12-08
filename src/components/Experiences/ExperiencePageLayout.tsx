@@ -58,7 +58,7 @@ export default function ExperiencePageLayout({
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTag || "all"}
-            className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+            className="columns-1 sm:columns-2 lg:columns-2 gap-6 space-y-11"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
