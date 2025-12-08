@@ -48,7 +48,6 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="none"
           poster="/images/costa-rica-resort.webp"
           src="/videos/mobile-landing.webm"
         />
@@ -59,7 +58,6 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="none"
           src="/videos/landing-page.webm"
         />
       )}

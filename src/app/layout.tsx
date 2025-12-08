@@ -4,7 +4,6 @@ import Script from "next/script";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Header";
 import Footer from "@/components/Footer";
-import LenisProvider from "@/components/providers/LenisProvider";
 import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
     "guided tours",
     "travel experiences",
   ],
-  authors: [{ name: "Wanderer Tribe", url: "https://wanderertribe.ke" }],
+  authors: [{ name: "Wanderer Tribe" /* url: "https://wanderertribe.ke"*/ }],
   creator: "Wanderer Tribe",
   publisher: "Wanderer Tribe",
   robots: {
