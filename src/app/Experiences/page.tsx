@@ -34,7 +34,7 @@ const experiencesOverview = [
     title: "Adventure Travel",
     description:
       "Conquer the Inca Trail's rugged peaks, dive into the Great Barrier Reef's depths, or soar with a skydive over the Swiss Alps. Each journey ignites your spirit with challenge and awe.",
-    image: "/images/adventure/inca-trail.jpeg",
+    image: "/images/adventure/inca-trail.webp",
     link: "/Experiences/adventure",
     features: [
       { icon: FaMountain, text: "Mountain & Hiking Adventures" },
@@ -48,7 +48,7 @@ const experiencesOverview = [
     title: "Luxury Escapes",
     description:
       "Savor a private villa sunset in the Maldives or a Bordeaux wine tasting in a chateau. These escapes offer bespoke elegance, from 5-star suites to curated cultural immersions.",
-    image: "/images/luxury/bordeaux-wine.jpeg",
+    image: "/images/luxury/bordeaux-wine.webp",
     link: "/Experiences/luxury",
     features: [
       { icon: FaGem, text: "Exclusive Experiences" },

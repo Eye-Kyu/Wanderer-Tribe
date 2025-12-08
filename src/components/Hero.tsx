@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          src="/videos/landing-page.webm"
+          src="/videos/Landing-page.webm"
         />
       )}
 
