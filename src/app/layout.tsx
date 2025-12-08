@@ -191,11 +191,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <PageLoader>
           <CtaModalProvider>
-            <LenisProvider>
-              <Navbar />
-              <main className="min-h-screen">{children}</main>
-              <Footer />
-            </LenisProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
           </CtaModalProvider>
         </PageLoader>
 

@@ -7,7 +7,7 @@ const destinations = [
   {
     continent: "Africa",
     tagline: "Wild safaris & timeless landscapes",
-    image: "/images/africa.jpg",
+    image: "/images/africa.webp",
     link: "/Destinations/africa",
   },
   {

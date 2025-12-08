@@ -18,7 +18,7 @@ export const Destinations: Destination[] = [
     {
         id: 1,
         name: "Cape Town, South Africa",
-        image: "/images/africa/cape-town.jpeg",
+        image: "/images/africa/cape-town.webp",
         region: "Southern Africa",
         duration: "5 Days",
         description: "A vibrant coastal city with iconic Table Mountain, beaches, and vineyards.",
@@ -38,7 +38,7 @@ export const Destinations: Destination[] = [
     {
         id: 2,
         name: "Marrakech, Morocco",
-        image: "/images/africa/marrakech.jpeg",
+        image: "/images/africa/marrakech.webp",
         region: "North Africa",
         duration: "4 Days",
         description: "A bustling city of souks, palaces, gardens, and traditions.",
@@ -57,7 +57,7 @@ export const Destinations: Destination[] = [
     {
         id: 3,
         name: "Victoria Falls, Zambia/Zimbabwe",
-        image: "/images/africa/victoria-falls.jpeg",
+        image: "/images/africa/victoria-falls.webp",
         region: "Southern Africa",
         duration: "3 Days",
         description: "One of the largest and most powerful waterfalls on Earth.",
@@ -75,7 +75,7 @@ export const Destinations: Destination[] = [
     {
         id: 4,
         name: "Maasai Mara, Kenya",
-        image: "/images/africa/maasai-mara.jpeg",
+        image: "/images/africa/maasai-mara.webp",
         region: "East Africa",
         duration: "4 Days",
         description: "A world-class safari destination with the Great Migration.",
@@ -94,7 +94,7 @@ export const Destinations: Destination[] = [
     {
         id: 5,
         name: "Zanzibar, Tanzania",
-        image: "/images/africa/zanzibar.jpeg",
+        image: "/images/africa/zanzibar.webp",
         region: "East Africa",
         duration: "5 Days",
         description: "An island paradise of turquoise waters, spice farms, and rich history.",
@@ -114,7 +114,7 @@ export const Destinations: Destination[] = [
     {
         id: 6,
         name: "Cairo & Giza, Egypt",
-        image: "/images/africa/cairo.jpeg",
+        image: "/images/africa/cairo.webp",
         region: "North Africa",
         duration: "4 Days",
         description: "Explore the wonders of Ancient Egypt alongside bustling Cairo.",
@@ -133,7 +133,7 @@ export const Destinations: Destination[] = [
     {
         id: 7,
         name: "Serengeti National Park, Tanzania",
-        image: "/images/africa/serengeti.jpeg",
+        image: "/images/africa/serengeti.webp",
         region: "East Africa",
         duration: "4 Days",
         description: "The endless plains famous for the Great Migration and Big Five.",
@@ -152,7 +152,7 @@ export const Destinations: Destination[] = [
     {
         id: 8,
         name: "Seychelles",
-        image: "/images/africa/seychelles.jpeg",
+        image: "/images/africa/seychelles.webp",
         region: "Indian Ocean",
         duration: "6 Days",
         description: "An island nation with pristine beaches and lush forests.",
@@ -173,7 +173,7 @@ export const Destinations: Destination[] = [
     {
         id: 9,
         name: "Lalibela, Ethiopia",
-        image: "/images/africa/lalibela.jpeg",
+        image: "/images/africa/lalibela.webp",
         region: "East Africa",
         duration: "3 Days",
         description: "A spiritual hub with rock-hewn churches carved into stone.",
@@ -191,7 +191,7 @@ export const Destinations: Destination[] = [
     {
         id: 10,
         name: "Okavango Delta, Botswana",
-        image: "/images/africa/okavango.jpeg",
+        image: "/images/africa/okavango.webp",
         region: "Southern Africa",
         duration: "4 Days",
         description: "A lush wetland teeming with wildlife, best explored by canoe.",
@@ -210,7 +210,7 @@ export const Destinations: Destination[] = [
     {
         id: 11,
         name: "Volcanoes National Park, Rwanda",
-        image: "/images/africa/rwanda.jpeg",
+        image: "/images/africa/rwanda.webp",
         region: "East Africa",
         duration: "3 Days",
         description: "A rare chance to trek and see mountain gorillas up close.",
@@ -228,7 +228,7 @@ export const Destinations: Destination[] = [
     {
         id: 12,
         name: "Namib Desert, Namibia",
-        image: "/images/africa/namib.jpeg",
+        image: "/images/africa/namib.webp",
         region: "Southern Africa",
         duration: "4 Days",
         description: "A dramatic desert landscape with the world's tallest dunes.",

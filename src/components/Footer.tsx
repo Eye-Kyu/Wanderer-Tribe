@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
         {/* Brand */}
         <div className="flex flex-col items-center md:items-start">
-          <h2 className="text-2xl font-bold mb-4">Wanderer Tribe</h2>
+          <h2 className="text-xl font-light mb-4">Wanderer Tribe</h2>
           <Link href="/" className="flex items-center">
             <Image
               src="/images/Wanderer logo 1.png"
@@ -39,42 +39,42 @@ export default function Footer() {
         </div>
         {/* Destinations */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Destinations</h3>
+          <h3 className="text-lg md:text-base font-light mb-3">Destinations</h3>
           <div className="space-y-3 flex flex-col">
             <Link href="/Destinations/africa">
-              <p>Africa</p>
+              <p className="md:text-xs">Africa</p>
             </Link>
             <Link href="/Destinations/europe">
-              <p>Middle East</p>
+              <p className="md:text-xs">Middle East</p>
             </Link>
             <Link href="/Destinations/asia">
-              <p>Asia</p>
+              <p className="md:text-xs">Asia</p>
             </Link>
           </div>
         </div>
 
         {/* Company */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Company</h3>
+          <h3 className="text-lg md:text-base font-light mb-3">Company</h3>
 
           <div className="space-y-3 flex flex-col">
             <Link href="/About">
-              <p>About Us</p>
+              <p className="md:text-xs">About Us</p>
             </Link>
             <Link href="/Terms">
-              <p>Terms & Conditions</p>
+              <p className="md:text-xs">Terms & Conditions</p>
             </Link>
             <Link href="/Privacy">
-              <p>Privacy Policy</p>
+              <p className="md:text-xs">Privacy Policy</p>
             </Link>
           </div>
         </div>
 
         {/* Contact & Socials */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Connect</h3>
+          <h3 className="text-lg font-light md:text-base mb-3">Connect</h3>
           <Link href="/Contact">
-            <p className="text-gray-300 text-sm flex items-center gap-2 mb-3">
+            <p className="text-gray-300 text-sm flex  md:text-xs items-center gap-2 mb-3">
               <Mail className="w-4 h-4" /> contact@wanderertribe.com
             </p>
           </Link>

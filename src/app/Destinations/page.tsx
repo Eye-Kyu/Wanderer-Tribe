@@ -79,7 +79,7 @@ export default function Destinations() {
         cost: "$3,200",
         locations: "Maasai Mara",
         activities: "Game Drives, Hot Air Balloon, Maasai Village Visit",
-        image: "/images/africa/maasai-mara.jpeg",
+        image: "/images/africa/maasai-mara.webp",
       },
       {
         name: "Cape Town, South Africa",
@@ -89,7 +89,7 @@ export default function Destinations() {
         cost: "$3,500",
         locations: "Cape Town",
         activities: "Table Mountain, Robben Island, Wine Tasting",
-        image: "/images/africa/cape-town.jpeg",
+        image: "/images/africa/cape-town.webp",
       },
       {
         name: "Serengeti, Tanzania",
@@ -99,7 +99,7 @@ export default function Destinations() {
         cost: "$4,000",
         locations: "Serengeti",
         activities: "Wildlife Safari, Ngorongoro Crater, Cultural Tours",
-        image: "/images/africa/serengeti.jpeg",
+        image: "/images/africa/serengeti.webp",
       },
       {
         name: "Victoria Falls, Zambia/Zimbabwe",
@@ -109,7 +109,7 @@ export default function Destinations() {
         cost: "$3,300",
         locations: "Victoria Falls",
         activities: "Boat Cruise, Devil's Pool, Helicopter Tour",
-        image: "/images/africa/victoria-falls.jpeg",
+        image: "/images/africa/victoria-falls.webp",
       },
       {
         name: "Marrakech, Morocco",
@@ -119,7 +119,7 @@ export default function Destinations() {
         cost: "$3,100",
         locations: "Marrakech",
         activities: "Jemaa el-Fna, Bahia Palace, Sahara Excursion",
-        image: "/images/africa/lalibela.jpeg",
+        image: "/images/africa/lalibela.webp",
       },
     ],
     Asia: [
@@ -131,7 +131,7 @@ export default function Destinations() {
         cost: "$3,800",
         locations: "Kyoto",
         activities: "Fushimi Inari Shrine, Bamboo Forest, Tea Ceremony",
-        image: "/images/asia/kyoto.jpeg",
+        image: "/images/asia/kyoto.webp",
       },
       {
         name: "Tsushima, Japan",
@@ -171,7 +171,7 @@ export default function Destinations() {
         cost: "$3,700",
         locations: "Bali",
         activities: "Ubud Monkey Forest, Tanah Lot, Beach Relaxation",
-        image: "/images/bali.jpeg",
+        image: "/images/bali.webp",
       },
     ],
   };
@@ -185,14 +185,14 @@ export default function Destinations() {
         name: "The_Middle_East",
         description:
           "The Middle East, a crossroads of cultures, invites you to explore its ancient wonders and modern marvels. From the bustling souks of Marrakech to the futuristic skyline of Dubai, this region offers a rich tapestry of history, architecture, and cuisine.\nTravel tip: Visit during the cooler months for pleasant weather, and embrace local customs and traditions.",
-        image: "/images/middleeast/dubai.jpg",
+        image: "/images/middleeast/dubai.webp",
         link: "/Destinations/europe",
       },
       {
         name: "Africa",
         description:
           "Africa, the cradle of humanity, boasts wild safaris in Maasai Mara and scenic coastlines in Cape Town. Immerse in vibrant cultures, from Maasai dances to South African winelands. The continent's diverse landscapes range from savannahs to mountains.\nTravel tip: Pack lightweight clothing and sunscreen, and book safaris during the dry season for optimal wildlife viewing.",
-        image: "/images/discover-africa.jpg",
+        image: "/images/discover-africa.webp",
         link: "/Destinations/africa",
       },
       {
@@ -208,12 +208,12 @@ export default function Destinations() {
 
   const slides = [
     {
-      image: "/images/africa.jpg",
+      image: "/images/africa.webp",
       title: "Discover the World's Wonders",
       subtitle: "Adventure Awaits",
     },
     {
-      image: "/images/discover-africa.jpg",
+      image: "/images/discover-africa.webp",
       title: "Wild African Adventures",
       subtitle: "Safari and Beyond",
     },
@@ -333,7 +333,7 @@ export default function Destinations() {
                       onClick={() => setSelectedDestination(dest)}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all text-wanderer-moss duration-300 text-xs md:text-sm"
+                      className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all duration-300 text-xs md:text-sm md:border-dotted md:hover:border-solid md:border-2 md:border-black md:bg-transparent md:group-hover:bg-wanderer-moss/10"
                     >
                       <span className="text-xs md:text-base">📍</span>
                       <span className="whitespace-nowrap ">{dest.name}</span>

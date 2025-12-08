@@ -10,47 +10,47 @@ const activities = [
   {
     title: "African Safaris",
     desc: "Witness the Big Five in their natural habitat with luxury lodges under starlit skies.",
-    image: "/images/africa/serengeti.jpeg",
+    image: "/images/africa/serengeti.webp",
   },
   {
     title: "Tropical Beaches",
     desc: "Relax on pristine white sands and turquoise waters in secluded destinations.",
-    image: "/images/asia/maldives.jpeg",
+    image: "/images/asia/maldives.webp",
   },
   {
     title: "Culinary Delights",
     desc: "Taste world-class cuisine with private chefs and immersive food tours.",
-    image: "/images/luxury/bordeaux-wine.jpeg",
+    image: "/images/luxury/bordeaux-wine.webp",
   },
   {
     title: "Historic Sites",
     desc: "Step back in time exploring ancient ruins and UNESCO heritage wonders.",
-    image: "/images/africa/cairo.jpeg",
+    image: "/images/africa/cairo.webp",
   },
   {
     title: "Luxury Cruises",
     desc: "Sail across oceans and rivers aboard elegant yachts and premium liners.",
-    image: "/images/luxury/french-riviera-yacht.jpeg",
+    image: "/images/luxury/french-riviera-yacht.webp",
   },
   {
     title: "Mountain Adventures",
     desc: "Discover alpine trails, private lodges, and breathtaking summits.",
-    image: "/images/adventure/swiss-alps.jpeg",
+    image: "/images/adventure/swiss-alps.webp",
   },
   {
     title: "Cultural Journeys",
     desc: "Engage with traditions, art, and spiritual heritage across continents.",
-    image: "/images/asia-temple.jpg",
+    image: "/images/asia-temple.webp",
   },
   {
     title: "Desert Escapes",
     desc: "Experience starlit skies and golden dunes in luxury desert camps.",
-    image: "/images/luxury/dubai-desert.jpeg",
+    image: "/images/luxury/dubai-desert.webp",
   },
   {
     title: "Wildlife Encounters",
     desc: "Meet exotic wildlife through conservation-led safaris and guided treks.",
-    image: "/images/africa/okavango.jpeg",
+    image: "/images/africa/okavango.webp",
   },
   {
     title: "City Luxury",
@@ -65,7 +65,7 @@ const activities = [
   {
     title: "Adventure Sports",
     desc: "Dive, ski, paraglide, or surf in world-renowned adventure destinations.",
-    image: "/images/adventure/costa-rica-rafting.jpeg",
+    image: "/images/adventure/costa-rica-rafting.webp",
   },
 ];
 

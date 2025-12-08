@@ -33,7 +33,7 @@ export default function DestinationModal({ destination, onClose }: Props) {
           />
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 bg-wanderer-gold py-2 px-4 rounded-full"
+            className="absolute top-4 right-4 bg-white py-2 px-4 rounded-full"
           >
             ✕
           </button>

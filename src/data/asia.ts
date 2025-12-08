@@ -19,7 +19,7 @@ export const Destinations: Destination[] = [
     {
         id: 1,
         name: "Kyoto, Japan",
-        image: "/images/asia/kyoto.jpeg",
+        image: "/images/asia/kyoto.webp",
         duration: "5 Days",
         region: "East Asia",
         description: "The cultural heart of Japan, full of temples, gardens, and tea houses.",
@@ -39,7 +39,7 @@ export const Destinations: Destination[] = [
     {
         id: 2,
         name: "Bali, Indonesia",
-        image: "/images/asia/bali.jpeg",
+        image: "/images/asia/bali.webp",
         duration: "6 Days",
         region: "Southeast Asia",
         description: "A tropical paradise with beaches, rice terraces, and temples.",
@@ -60,7 +60,7 @@ export const Destinations: Destination[] = [
     {
         id: 3,
         name: "Dubai, UAE",
-        image: "/images/asia/dubai.jpeg",
+        image: "/images/asia/dubai.webp",
         duration: "4 Days",
         region: "Middle East",
         description: "A futuristic desert city with luxury, skyscrapers, and souks.",
@@ -79,7 +79,7 @@ export const Destinations: Destination[] = [
     {
         id: 4,
         name: "Bangkok, Thailand",
-        image: "/images/asia/bangkok.jpeg",
+        image: "/images/asia/bangkok.webp",
         duration: "5 Days",
         region: "Southeast Asia",
         description: "A bustling city of temples, street food, and nightlife.",
@@ -99,7 +99,7 @@ export const Destinations: Destination[] = [
     {
         id: 5,
         name: "Kathmandu, Nepal",
-        image: "/images/asia/kathmandu.jpeg",
+        image: "/images/asia/kathmandu.webp",
         duration: "4 Days",
         region: "South Asia",
         description: "A spiritual gateway to the Himalayas.",
@@ -118,7 +118,7 @@ export const Destinations: Destination[] = [
     {
         id: 6,
         name: "Beijing, China",
-        image: "/images/asia/beijing.jpeg",
+        image: "/images/asia/beijing.webp",
         duration: "5 Days",
         region: "East Asia",
         description: "Ancient wonders and modern megacity vibes.",
@@ -138,7 +138,7 @@ export const Destinations: Destination[] = [
     {
         id: 7,
         name: "Goa, India",
-        image: "/images/asia/goa.jpeg",
+        image: "/images/asia/goa.webp",
         duration: "5 Days",
         region: "South Asia",
         description: "A coastal paradise of beaches, parties, and Portuguese heritage.",
@@ -158,7 +158,7 @@ export const Destinations: Destination[] = [
     {
         id: 8,
         name: "Seoul, South Korea",
-        image: "/images/asia/seoul.jpeg",
+        image: "/images/asia/seoul.webp",
         duration: "5 Days",
         region: "East Asia",
         description: "A modern hub blending K-pop, palaces, and street food.",
@@ -178,7 +178,7 @@ export const Destinations: Destination[] = [
     {
         id: 9,
         name: "Maldives",
-        image: "/images/asia/maldives.jpeg",
+        image: "/images/asia/maldives.webp",
         duration: "6 Days",
         region: "South Asia",
         description: "Idyllic islands with luxury resorts and turquoise waters.",
@@ -199,7 +199,7 @@ export const Destinations: Destination[] = [
     {
         id: 10,
         name: "Hanoi & Ha Long Bay, Vietnam",
-        image: "/images/asia/halong.jpeg",
+        image: "/images/asia/halong.webp",
         duration: "5 Days",
         region: "Southeast Asia",
         description: "Bustling streets of Hanoi paired with Ha Long's limestone cliffs.",
@@ -219,7 +219,7 @@ export const Destinations: Destination[] = [
     {
         id: 11,
         name: "Singapore",
-        image: "/images/asia/singapore.jpeg",
+        image: "/images/asia/singapore.webp",
         duration: "4 Days",
         region: "Southeast Asia",
         description: "A futuristic city-state with gardens, skyscrapers, and street food.",
@@ -238,7 +238,7 @@ export const Destinations: Destination[] = [
     {
         id: 12,
         name: "Siem Reap, Cambodia",
-        image: "/images/asia/siemreap.jpeg",
+        image: "/images/asia/siemreap.webp",
         duration: "4 Days",
         region: "Southeast Asia",
         description: "Home of the majestic Angkor Wat temples.",

@@ -16,7 +16,7 @@ export default function AsiaPage() {
 
   return (
     <div className="bg-[#152523]">
-      <HeroImage src="/images/asia/beijing.jpeg" overlay="bg-black/50">
+      <HeroImage src="/images/asia/beijing.webp" overlay="bg-black/50">
         <div>
           <h1 className="text-5xl font-bold mb-3">Welcome to Wanderer</h1>
           <p className="text-lg">Discover breathtaking destinations</p>
@@ -42,7 +42,7 @@ export default function AsiaPage() {
         </div>
 
         {/* Masonry Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        <div className="columns-1 sm:columns-2 lg:columns-2 gap-3 space-y-6">
           {filteredDestinations.map((dest) => (
             <DestinationCard
               key={dest.id}
