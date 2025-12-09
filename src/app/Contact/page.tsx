@@ -5,6 +5,7 @@ import CallToAction from "@/components/CallToAction";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, Phone, MapPin, MessageCircle, Copy } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactPage() {
   const { showCta, openCta, closeCta } = useCtaModal();
@@ -69,20 +70,20 @@ export default function ContactPage() {
     {
       icon: <Phone className="w-5 h-5 text-[#8B5E34]" />,
       title: "Phone",
-      raw: "+254110036929",
+      raw: "+31 6 13227086",
       value: (
-        <a href="tel:+254110036929" className="hover:underline">
-          +254 110036929
+        <a href="tel:+31613227086" className="hover:underline">
+          +31 6 13227086
         </a>
       ),
     },
     {
-      icon: <MessageCircle className="w-5 h-5 text-[#8B5E34]" />,
+      icon: <FaWhatsapp className="w-7 h-7 text-green-500" />,
       title: "WhatsApp",
-      raw: "+254110036929",
+      raw: "+31 6 13227086",
       value: (
         <a
-          href="https://wa.me/254110036929"
+          href="https://wa.me/31613227086"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline"

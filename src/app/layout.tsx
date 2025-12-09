@@ -8,6 +8,7 @@ import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import PageLoader from "@/components/PageLoader";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -191,6 +192,8 @@ export default function RootLayout({
         <PageLoader>
           <CtaModalProvider>
             <Navbar />
+
+            <WhatsAppWidget />
             <main className="min-h-screen">{children}</main>
             <Footer />
           </CtaModalProvider>

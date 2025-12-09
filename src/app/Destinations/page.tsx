@@ -336,7 +336,9 @@ export default function Destinations() {
                       className="group inline-flex items-center gap-1 bg-neutral-200 font-medium px-1 py-1 rounded-2xl shadow-sm shadow-black/50 transition-all duration-300 text-xs md:text-sm md:border-dotted md:hover:border-solid md:border-2 md:border-black md:bg-transparent md:group-hover:bg-wanderer-moss/10"
                     >
                       <span className="text-xs md:text-base">📍</span>
-                      <span className="whitespace-nowrap ">{dest.name}</span>
+                      <span className="whitespace-nowrap  text-black">
+                        {dest.name}
+                      </span>
                     </motion.button>
                   ))}
                 </div>
