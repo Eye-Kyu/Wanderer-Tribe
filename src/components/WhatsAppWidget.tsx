@@ -9,7 +9,7 @@ export default function WhatsAppWidget() {
   const widgetRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
-  const phone = "254712345678"; // ← replace with your WhatsApp Business number (international format)
+  const phone = "31 6 13227086";
   const [message, setMessage] = useState("");
 
   // GSAP Entrance animation
