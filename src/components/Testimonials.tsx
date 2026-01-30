@@ -18,7 +18,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="relative py-20 px-6 md:px-12">
+    <section className="relative py-20 px-6 md:px-12 shadow-lg shadow-black/40 overflow-hidden rounded-b-3xl">
       {/* ✅ Background image with Next.js <Image /> */}
       <div className="absolute inset-0">
         <Image

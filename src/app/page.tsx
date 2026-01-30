@@ -55,7 +55,7 @@ export default function Home() {
         ease: "power1.out",
         duration: 1,
       },
-      0
+      0,
     );
 
     // second half: fade from 1 -> 0 and continue parallax up a bit more
@@ -67,7 +67,7 @@ export default function Home() {
         ease: "power1.in",
         duration: 1,
       },
-      0.6 // start this slightly later in the timeline so there's a visible plateau
+      0.6, // start this slightly later in the timeline so there's a visible plateau
     );
 
     tlRef.current = tl;
@@ -110,9 +110,9 @@ export default function Home() {
             style={{
               backgroundColor: "#254D32",
               backgroundImage: "url('/images/bgs/bgafricana.webp')",
-              backgroundSize: "400px 408px", // ✅ Adjust pattern density here
+              backgroundSize: "400px 408px", //  Adjust pattern density here
               backgroundRepeat: "repeat",
-              backgroundAttachment: "fixed", // ✅ optional: enhances parallax feel
+              backgroundAttachment: "fixed", // optional: enhances parallax feel
             }}
           />
 
@@ -134,7 +134,7 @@ export default function Home() {
             <DayItinerary />
           </div>
         </section>
-        <HotelShowcase />
+        {/*<HotelShowcase /> */}
       </div>
 
       {/* 6. Experiences & Activities */}
