@@ -5,7 +5,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import Lenis from "@studio-freight/lenis"; // ✅ import actual Lenis class
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,8 +13,6 @@ export default function AboutPage() {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const backupRef = useRef<HTMLDivElement>(null);
-
-  // ref to store chapter elements
   const chaptersRef = useRef<HTMLDivElement[]>([]);
 
   const chapters = useMemo(
@@ -54,59 +51,65 @@ export default function AboutPage() {
     [],
   );
 
-  // 🎞️ Cinematic Intro
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.3,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
+    // Cinematic Intro Timeline
+    const introTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: overlayRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    introTl.fromTo(
+      imageRef.current,
+      {
+        scale: 0.7,
+        borderRadius: "50%",
+        width: 400,
+        height: 350,
+      },
+      {
+        scale: 1.2,
+        borderRadius: "0%",
+        width: window.innerWidth,
+        height: window.innerHeight,
+        ease: "power3.inOut",
+        duration: 1,
+      },
+    );
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: overlayRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
+    introTl.to(
+      textRef.current,
+      {
+        opacity: 0,
+        y: -30,
+        duration: 0.9,
+        ease: "power2.inOut",
+      },
+      "-=0.8",
+    );
 
-      tl.fromTo(
-        imageRef.current,
-        { scale: 0.7, borderRadius: "50%" },
-        { scale: 1.2, borderRadius: "0%", ease: "power3.inOut", duration: 1 },
-      );
+    introTl.fromTo(
+      backupRef.current,
+      {
+        scale: 0.6,
+        opacity: 0,
+        y: 0,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        y: -30,
+        ease: "power3.inOut",
+        duration: 0.8,
+      },
+      "-=0.3",
+    );
 
-      tl.to(
-        textRef.current,
-        { opacity: 0, y: -30, duration: 0.9, ease: "power2.inOut" },
-        "-=0.8",
-      );
-
-      tl.fromTo(
-        backupRef.current,
-        { scale: 0.6, opacity: 0, y: 0 },
-        { scale: 1, opacity: 1, y: -30, ease: "power3.inOut", duration: 0.8 },
-        "-=0.3",
-      );
-    }, overlayRef);
-
-    return () => {
-      ctx.revert();
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
     // Parallax & Fade-In for chapters
     chaptersRef.current.forEach((chapterEl) => {
       const image = chapterEl.querySelector(".chapter-image");
@@ -114,67 +117,94 @@ export default function AboutPage() {
       const subtitle = chapterEl.querySelector(".chapter-subtitle");
       const content = chapterEl.querySelector(".chapter-content");
 
-      if (image)
-        gsap.to(image, {
-          yPercent: 15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: chapterEl,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-          willChange: "transform",
-        });
+      // Parallax for image
+      gsap.to(image, {
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: chapterEl,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+        willChange: "transform",
+      });
 
+      // Fade and slide-up for text elements
       [title, subtitle, content].forEach((el, i) => {
-        if (el)
-          gsap.fromTo(
-            el,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              ease: "power2.out",
-              duration: 0.6,
-              delay: i * 0.15,
-              scrollTrigger: {
-                trigger: chapterEl,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-              },
-              willChange: "opacity, transform",
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.6,
+            delay: i * 0.15,
+            scrollTrigger: {
+              trigger: chapterEl,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
             },
-          );
+            willChange: "opacity, transform",
+          },
+        );
       });
     });
 
     // CTA fade-in
-    [".cta-heading", ".cta-text", ".cta-button"].forEach((selector) => {
-      gsap.fromTo(
-        selector,
-        {
-          opacity: 0,
-          y: selector === ".cta-button" ? 0 : 20,
-          scale: selector === ".cta-button" ? 0.95 : 1,
+    gsap.fromTo(
+      ".cta-heading",
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".cta-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
         },
-        {
-          opacity: 1,
-          y: 0,
-          scale: selector === ".cta-button" ? 1 : undefined,
-          duration: 0.8,
-          delay: selector === ".cta-text" ? 0.2 : 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".cta-section",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          willChange: "opacity, transform",
-        },
-      );
-    });
+        willChange: "opacity, transform",
+      },
+    );
 
+    gsap.fromTo(
+      ".cta-text",
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".cta-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        willChange: "opacity",
+      },
+    );
+
+    gsap.fromTo(
+      ".cta-button",
+      { scale: 0.95, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".cta-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        willChange: "opacity, transform",
+      },
+    );
+
+    // Cleanup function to kill ScrollTriggers on unmount
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
@@ -190,15 +220,19 @@ export default function AboutPage() {
         <div
           ref={imageRef}
           className="relative overflow-hidden z-10"
-          style={{ width: 410, height: 350, borderRadius: "50%" }}
+          style={{
+            width: "410px",
+            height: "350px",
+            borderRadius: "50%",
+          }}
         >
           <Image
             src="/images/About/Abt.webp"
             alt="Wanderer Tribe"
-            sizes="100vw"
             fill
             priority
             quality={100}
+            sizes="100vw"
             className="object-cover"
           />
         </div>
@@ -233,7 +267,10 @@ export default function AboutPage() {
             }}
           >
             {/* Image Side */}
-            <div className="chapter-image relative w-full md:w-1/2 h-[40vh] sm:h-[50vh] md:h-[45vh] overflow-hidden will-change-transform">
+            <div
+              className="chapter-image relative w-full md:w-1/2 h-[40vh] sm:h-[50vh] md:h-[45vh] overflow-hidden will-change-transform"
+              style={{ willChange: "transform" }}
+            >
               <Image
                 src={chapter.image}
                 alt={chapter.title}
