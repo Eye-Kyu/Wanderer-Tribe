@@ -13,7 +13,81 @@ export default function AboutPage() {
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const backupRef = useRef<HTMLDivElement>(null);
-  const chaptersRef = useRef<HTMLDivElement[]>([]);
+
+  // 🎞️ Cinematic Intro
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.3,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: overlayRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      tl.fromTo(
+        imageRef.current,
+        {
+          scale: 0.7,
+          borderRadius: "50%",
+        },
+        {
+          scale: 1.2,
+          borderRadius: "0%",
+          ease: "power3.inOut",
+          duration: 1,
+        },
+      );
+
+      tl.to(
+        textRef.current,
+        {
+          opacity: 0,
+          y: -30,
+          duration: 0.9,
+          ease: "power2.inOut",
+        },
+        "-=0.8",
+      );
+
+      tl.fromTo(
+        backupRef.current,
+        {
+          scale: 0.6,
+          opacity: 0,
+          y: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: -30,
+          ease: "power3.inOut",
+          duration: 0.8,
+        },
+        "-=0.3",
+      );
+    }, overlayRef);
+
+    return () => {
+      ctx.revert();
+      lenis.destroy();
+    };
+  }, []);
 
   const chapters = useMemo(
     () => [
@@ -48,7 +122,7 @@ export default function AboutPage() {
         imagePosition: "left",
       },
     ],
-    []
+    [],
   );
 
   useEffect(() => {
@@ -79,7 +153,7 @@ export default function AboutPage() {
         height: window.innerHeight,
         ease: "power3.inOut",
         duration: 1,
-      }
+      },
     );
 
     introTl.to(
@@ -90,7 +164,7 @@ export default function AboutPage() {
         duration: 0.9,
         ease: "power2.inOut",
       },
-      "-=0.8"
+      "-=0.8",
     );
 
     introTl.fromTo(
@@ -107,7 +181,7 @@ export default function AboutPage() {
         ease: "power3.inOut",
         duration: 0.8,
       },
-      "-=0.3"
+      "-=0.3",
     );
 
     // Parallax & Fade-In for chapters
@@ -147,7 +221,7 @@ export default function AboutPage() {
               toggleActions: "play none none reverse",
             },
             willChange: "opacity, transform",
-          }
+          },
         );
       });
     });
@@ -167,7 +241,7 @@ export default function AboutPage() {
           toggleActions: "play none none reverse",
         },
         willChange: "opacity, transform",
-      }
+      },
     );
 
     gsap.fromTo(
@@ -184,7 +258,7 @@ export default function AboutPage() {
           toggleActions: "play none none reverse",
         },
         willChange: "opacity",
-      }
+      },
     );
 
     gsap.fromTo(
@@ -201,7 +275,7 @@ export default function AboutPage() {
           toggleActions: "play none none reverse",
         },
         willChange: "opacity, transform",
-      }
+      },
     );
 
     // Cleanup function to kill ScrollTriggers on unmount
@@ -227,8 +301,9 @@ export default function AboutPage() {
           }}
         >
           <Image
-            src="/images/ab2.webp"
+            src="/images/About/Abt.webp"
             alt="Wanderer Tribe"
+            sizes="100vw"
             fill
             priority
             quality={100}

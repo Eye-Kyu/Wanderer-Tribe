@@ -119,59 +119,118 @@ const MobileCarousel = ({ options }: { options: ItineraryOption[] }) => {
   );
 };
 
-/* -------------------- DESKTOP CAROUSEL -------------------- */
-const DesktopCarousel = ({ options }: { options: ItineraryOption[] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCards = 3;
-  const totalSlides = Math.ceil(options.length / visibleCards);
+/* -------------------- DESKTOP CAROUSEL -------------------- */ const DesktopCarousel =
+  ({ options }: { options: ItineraryOption[] }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const visibleCards = 3;
+    const carouselRef = useRef<HTMLDivElement>(null);
 
-  const handlePrev = () =>
-    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  const handleNext = () =>
-    setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+    const cardWidthPercentage = 100 / visibleCards;
 
-  return (
-    <>
-      <div className="hidden sm:flex max-w-7xl mx-auto gap-6 overflow-hidden">
-        {options
-          .slice(currentIndex * visibleCards, (currentIndex + 1) * visibleCards)
-          .map((opt, idx) => (
-            <CarouselCard key={idx} option={opt} isDesktop />
+    // Convert vertical mouse wheel → horizontal scroll
+    useEffect(() => {
+      const container = carouselRef.current;
+      if (!container) return;
+
+      const handleWheel = (e: WheelEvent) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+        }
+      };
+
+      container.addEventListener("wheel", handleWheel, { passive: false });
+
+      return () => {
+        container.removeEventListener("wheel", handleWheel);
+      };
+    }, []);
+
+    // Sync dots with manual scroll
+    useEffect(() => {
+      const container = carouselRef.current;
+      if (!container) return;
+
+      const handleScroll = () => {
+        const slideWidth = container.offsetWidth;
+        const newIndex = Math.round(container.scrollLeft / slideWidth);
+        setCurrentIndex(newIndex);
+      };
+
+      container.addEventListener("scroll", handleScroll);
+
+      return () => {
+        container.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+
+    const scrollToIndex = (index: number) => {
+      if (!carouselRef.current) return;
+
+      carouselRef.current.scrollTo({
+        left: index * carouselRef.current.offsetWidth,
+        behavior: "smooth",
+      });
+
+      setCurrentIndex(index);
+    };
+
+    const totalSlides = Math.ceil(options.length / visibleCards);
+
+    const handlePrev = () => {
+      const newIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+      scrollToIndex(newIndex);
+    };
+
+    const handleNext = () => {
+      const newIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
+      scrollToIndex(newIndex);
+    };
+
+    return (
+      <>
+        <div
+          ref={carouselRef}
+          className="hidden sm:flex max-w-7xl mx-auto gap-6 overflow-x-auto scroll-smooth hide-scrollbar"
+        >
+          {options.map((opt, idx) => (
+            <div key={idx} style={{ flex: `0 0 ${cardWidthPercentage}%` }}>
+              <CarouselCard option={opt} isDesktop />
+            </div>
           ))}
-      </div>
-      <div className="hidden sm:flex justify-between items-center mt-6 max-w-7xl mx-auto">
-        <div className="flex space-x-2">
-          {Array.from({ length: totalSlides }).map((_, i) => (
+        </div>
+
+        <div className="hidden sm:flex justify-between items-center mt-6 max-w-7xl mx-auto">
+          <div className="flex space-x-2">
+            {Array.from({ length: totalSlides }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToIndex(i)}
+                className={`w-3 h-3 rounded-full transition ${
+                  i === currentIndex ? "bg-wanderer-gold" : "bg-neutral-400"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex gap-4">
             <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              aria-label="current slide"
-              className={`w-3 h-3 rounded-full transition ${
-                i === currentIndex ? "bg-wanderer-gold" : "bg-neutral-400"
-              }`}
-            />
-          ))}
+              onClick={handlePrev}
+              className="p-3 text-white rounded-full button transition shadow-md"
+            >
+              <FaChevronLeft size={20} />
+            </button>
+            <button
+              onClick={handleNext}
+              className="p-3 text-white rounded-full button transition shadow-md"
+            >
+              <FaChevronRight size={20} />
+            </button>
+          </div>
         </div>
-        <div className="flex gap-4">
-          <button
-            onClick={handlePrev}
-            className="p-3 text-white rounded-full button transition shadow-md"
-            aria-label="Scroll left"
-          >
-            <FaChevronLeft size={20} />
-          </button>
-          <button
-            onClick={handleNext}
-            className="p-3 text-white rounded-full button transition shadow-md"
-            aria-label="Scroll right"
-          >
-            <FaChevronRight size={20} />
-          </button>
-        </div>
-      </div>
-    </>
-  );
-};
+      </>
+    );
+  };
 
 /* -------------------- MAIN COMPONENT -------------------- */
 const ItineraryOptions: React.FC = () => {
@@ -228,14 +287,14 @@ const ItineraryOptions: React.FC = () => {
       destination: "Olare, Kenya",
       includes: "Airfare, Full-board stay, Guided tours",
       excludes: "Spa services, Premium drinks",
-      image: "/images/luxury/south-africa-lodge.webp",
+      image: "/images/ole.jpg",
     },
     {
       title: "Wild Dreams - Talek River Camp",
       destination: "Talek, Kenya",
       includes: "Tents, Safaris, Park entry",
       excludes: "Private guides, Beverages",
-      image: "/images/africa.webp",
+      image: "/images/talek.jpg",
     },
   ];
 
