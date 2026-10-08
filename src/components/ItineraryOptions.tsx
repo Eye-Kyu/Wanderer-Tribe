@@ -299,7 +299,7 @@ const ItineraryOptions: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
+    <section className="relative overflow-hidden py-12 md:py-20">
       {/* ✅ Background tribal print images */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         {prints.map((p, i) => (
@@ -323,7 +323,7 @@ const ItineraryOptions: React.FC = () => {
         ))}
       </div>
 
-      <div className="space-y-4 md:space-y-9 md:pb-10">
+      <div className="space-y-4 md:space-y-9 px-5 pb-8 md:pb-10">
         <h5 className="text-2xl text-center">Wild Wanderer</h5>
         <motion.h2
           className="font-heading text-wanderer-green text-center mb-6 relative z-10"
@@ -333,7 +333,7 @@ const ItineraryOptions: React.FC = () => {
         >
           Unleash Your Wandering Pilgrimage
         </motion.h2>
-        <p className="text-center max-w-xl mx-auto mb-14 relative z-10 pb-6">
+        <p className="text-center max-w-xl mx-auto relative z-10 md:pb-6">
           Dive into an itinerary curated with the charm nature offers, tranquil
           escapes, and boundless exploration.
         </p>

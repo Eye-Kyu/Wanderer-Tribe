@@ -124,7 +124,7 @@ export default function ThailandItineraryTimeline() {
   ];
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-12 md:py-16">
+    <div className="relative w-full max-w-5xl mx-auto sm:px-6 lg:px-10 md:py-16">
       <Timeline data={data} />
     </div>
   );

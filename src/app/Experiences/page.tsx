@@ -63,7 +63,7 @@ export default function ExperiencesPage() {
   return (
     <div className="bg-[#152523]">
       <section
-        className="relative min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto space-y-16 sm:space-y-20"
+        className="relative min-h-screen pt-24 pb-14 sm:py-20 md:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto space-y-10 sm:space-y-20"
         style={{
           backgroundImage: "url('/images/faint-map-pattern.png')",
           backgroundSize: "cover",
@@ -109,7 +109,7 @@ export default function ExperiencesPage() {
               </div>
 
               {/* Text Section */}
-              <div className="w-full lg:w-1/2 p-3 sm:p-8 lg:p-12 flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left md:bg-gradient-to-br from-[#000]/30 to-[#FAF9F6]/20 bg-wanderer-moss lg:bg-transparent">
+              <div className="w-full lg:w-1/2 px-5 py-6 sm:p-8 lg:p-12 flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left md:bg-gradient-to-br from-[#000]/30 to-[#FAF9F6]/20 bg-wanderer-moss lg:bg-transparent">
                 <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl md:font-light font-semibold text-wanderer-ivory">
                   {exp.title}
                 </h2>

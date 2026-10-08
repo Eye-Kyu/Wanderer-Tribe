@@ -53,7 +53,7 @@ export default function WhyChooseUs() {
   }, [bp]);
 
   return (
-    <section className="relative py-24 text-white overflow-hidden">
+    <section className="relative py-14 md:py-24 text-white overflow-hidden">
       {/* Background image */}
       <div
         className="absolute inset-0 bg-fixed bg-cover bg-center opacity-20 mix-blend-difference"
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
       />
 
       {/* Content Box */}
-      <div className="relative z-10 max-w-7xl mx-auto shadow-lg shadow-black w-11/12 bg-white/90 rounded-3xl py-16 px-6 md:px-16">
+      <div className="relative z-10 max-w-7xl mx-auto shadow-lg shadow-black w-[calc(100%-2rem)] md:w-11/12 bg-white/90 rounded-2xl md:rounded-3xl py-10 px-5 md:py-16 md:px-16">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

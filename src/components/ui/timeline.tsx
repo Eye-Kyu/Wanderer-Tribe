@@ -63,11 +63,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-white/20 backdrop-blur-sm shadow-lg rounded-2xl dark:bg-neutral-950 font-sans md:px-9 relative overflow-visible"
     >
       {/* Header */}
-      <div className="mx-auto pt-20 px-4 md:px-8 lg:px-10">
+      <div className="mx-auto pt-8 md:pt-20 px-4 md:px-8 lg:px-10">
         <p className="border md:py-4 md:px-2 px-2 md:w-52 font-light text-white text-xs w-20 bg-wanderer-rust rounded-full md:text-lg">
           Featured Destination
         </p>
-        <h2 className="text-2xl md:text-5xl font-bold text-center pt-6 text-wanderer-ivory mb-12">
+        <h2 className="text-2xl md:text-5xl font-bold text-center pt-6 text-wanderer-ivory mb-6 md:mb-12">
           Thailand 10D/9N - Phuket • Pattaya • Bangkok
         </h2>
       </div>
@@ -86,7 +86,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             >
               {/* Marker Section */}
               <div
-                className={`z-10 flex flex-col items-center md:w-1/2 ${
+                className={`z-10 flex flex-col items-start pl-1 md:pl-0 md:w-1/2 ${
                   isLeft ? "md:items-end" : "md:items-start"
                 }`}
               >
@@ -100,11 +100,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
               {/* Content Section */}
               <div
-                className={`relative w-full md:w-1/2 px-4 z-40 overflow-visible ${
-                  isLeft ? "md:pl-10" : "md:pr-10 text-right"
+                className={`relative w-full md:w-1/2 pl-12 pr-4 md:px-4 -mt-10 md:mt-0 z-40 overflow-visible ${
+                  isLeft ? "md:pl-10" : "md:pr-10 md:text-right"
                 }`}
               >
-                <h3 className="md:hidden block text-2xl mb-4 font-bold text-wanderer-ivory">
+                <h3 className="md:hidden flex items-center min-h-10 text-2xl mb-4 font-bold text-wanderer-ivory">
                   {item.title}
                 </h3>
                 <div className="relative w-full min-h-[280px] sm:min-h-[320px] flex flex-col justify-center">

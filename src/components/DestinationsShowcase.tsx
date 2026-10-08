@@ -26,8 +26,8 @@ const destinations = [
 
 export default function DestinationsShowcase() {
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto text-center mb-12">
+    <section className="py-12 md:py-16">
+      <div className="max-w-7xl mx-auto text-center mb-8 md:mb-12 px-5">
         <h2 className="font-heading mb-4">
           Explore Our Signature Destinations
         </h2>
@@ -37,7 +37,7 @@ export default function DestinationsShowcase() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8 px-6 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-6 max-w-7xl mx-auto">
         {destinations.map((d, idx) => (
           <Link key={idx} href={d.link}>
             <motion.div

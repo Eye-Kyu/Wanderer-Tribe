@@ -7,8 +7,15 @@ export default function Loader() {
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
       <motion.div
-        animate={{ scale: [0.8, 1.1, 0.9, 1] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        initial={{ scale: 0.92, opacity: 0.75 }}
+        animate={{ scale: 1.05, opacity: 1 }}
+        transition={{
+          duration: 1.2,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+        }}
+        style={{ willChange: "transform, opacity" }}
       >
         <Image
           src="/images/Wanderer logo 1.png"

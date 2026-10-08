@@ -14,9 +14,36 @@ import {
   FaGem,
   FaBars,
   FaTimes,
+  FaChevronDown,
 } from "react-icons/fa";
 import { useCtaModal } from "@/context/CTAModalContext";
 import { usePathname } from "next/navigation";
+
+const mobileLinks = [
+  {
+    href: "/Destinations",
+    label: "Destinations",
+    children: [
+      { href: "/Destinations/africa", label: "Africa", icon: FaGlobeAfrica },
+      { href: "/Destinations/europe", label: "Middle East", icon: FaGlobeEurope },
+      { href: "/Destinations/asia", label: "Asia", icon: FaGlobeAsia },
+    ],
+  },
+  {
+    href: "/Experiences",
+    label: "Experiences",
+    children: [
+      { href: "/Experiences/wellness", label: "Wellness Retreats", icon: FaSpa },
+      { href: "/Experiences/adventure", label: "Adventure Travel", icon: FaHiking },
+      { href: "/Experiences/luxury", label: "Luxury Escapes", icon: FaGem },
+    ],
+  },
+  { href: "/About", label: "About" },
+  { href: "/Contact", label: "Contact" },
+];
+
+// Menu reveals as a circle growing out of the hamburger button
+const menuOrigin = "at calc(100% - 2.5rem) 2.5rem";
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -24,6 +51,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolledUp, setScrolledUp] = useState(false);
   const [, setActiveDropdown] = useState<string | null>(null);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   const { openCta } = useCtaModal();
   const pathname = usePathname();
@@ -41,10 +69,15 @@ export default function Navbar() {
     }
   };
 
-  const menuRef = useRef<HTMLDivElement>(null);
-  const linkRefs = useRef<HTMLAnchorElement[]>([]);
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setOpenSubmenu(null);
+  };
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
+
   const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
   const dropdownTimelines = useRef<Record<string, gsap.core.Timeline>>({});
   const idleTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -102,34 +135,22 @@ export default function Navbar() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // --- GSAP Mobile Menu Animation ---
+  // --- Mobile menu: lock page scroll and close on Escape while open ---
   useEffect(() => {
-    if (!menuRef.current) return;
-    if (!tlRef.current) {
-      tlRef.current = gsap.timeline({ paused: true });
-      tlRef.current
-        .to(menuRef.current, {
-          clipPath: "circle(150% at 100% 0)",
-          duration: 0.8,
-          ease: "power3.inOut",
-          pointerEvents: "auto",
-        })
-        .fromTo(
-          linkRefs.current,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: "power3.out",
-          },
-          "-=0.3"
-        );
-    }
-
-    if (mobileMenuOpen) tlRef.current.play();
-    else tlRef.current.reverse();
+    if (!mobileMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setOpenSubmenu(null);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKey);
+    };
   }, [mobileMenuOpen]);
 
   // --- Dropdown Animations ---
@@ -199,28 +220,30 @@ export default function Navbar() {
         }`}
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
+        <div className="max-w-7xl mx-auto px-5 md:px-6 flex items-center justify-between h-full">
           {/* Mobile Navbar */}
           <div className="flex w-full items-center justify-between md:hidden">
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/Wanderer logo 1.png"
                 alt="wanderer-tribe-logo"
-                width={90}
-                height={25}
+                width={72}
+                height={72}
                 className="object-contain"
               />
             </Link>
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="text-black z-[400]"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+              className={`-mr-2 flex h-11 w-11 items-center justify-center rounded-full transition-colors ${
+                scrolledUp
+                  ? "text-black"
+                  : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
+              }`}
             >
-              {mobileMenuOpen ? (
-                <FaTimes size={20} className="transition-all" />
-              ) : (
-                <FaBars size={24} className="transition-all" />
-              )}
+              <FaBars size={22} />
             </button>
           </div>
 
@@ -340,42 +363,137 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
-        <div
-          ref={menuRef}
-          className="fixed inset-0 bg-wanderer-forest text-white font-extralight flex flex-col justify-center items-center gap-8 text-md md:hidden z-[300] h-screen"
-          style={{ clipPath: "circle(0% at 100% 0)", pointerEvents: "none" }}
-        >
-          {[
-            { href: "/Destinations", label: "Destinations" },
-            { href: "/Experiences", label: "Experiences" },
-            { href: "/About", label: "About" },
-            { href: "/Contact", label: "Contact" },
-          ].map((link, i) => (
-            <Link
-              key={i}
-              href={link.href}
-              ref={(el) => {
-                if (el) linkRefs.current[i] = el;
-              }}
-              className="opacity-0 translate-y-10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <button
-            ref={(el) => {
-              if (el) linkRefs.current[4] = el as unknown as HTMLAnchorElement;
-            }}
-            className="bg-primary button2 text-white py-1 px-2 rounded-2xl hover:bg-wanderer-rust hover:text-wanderer-green transition opacity-0 translate-y-10"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Book Now
-          </button>
-        </div>
       </motion.nav>
+
+      {/* --- Mobile Menu Overlay (outside the nav so its transform can't clip it) --- */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            className="md:hidden fixed inset-0 z-[10000] h-[100dvh] flex flex-col bg-wanderer-forest text-wanderer-ivory"
+            initial={{ clipPath: `circle(0% ${menuOrigin})` }}
+            animate={{ clipPath: `circle(150% ${menuOrigin})` }}
+            exit={{ clipPath: `circle(0% ${menuOrigin})` }}
+            transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
+          >
+            {/* Top bar mirrors the navbar so the close button sits where the hamburger was */}
+            <div className="flex h-20 shrink-0 items-center justify-between px-5 border-b border-wanderer-ivory/10">
+              <Link href="/" onClick={closeMobileMenu} className="flex items-center">
+                <Image
+                  src="/images/Wanderer logo 1.png"
+                  alt="wanderer-tribe-logo"
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                />
+              </Link>
+              <button
+                onClick={closeMobileMenu}
+                aria-label="Close menu"
+                className="-mr-2 flex h-11 w-11 items-center justify-center rounded-full border border-wanderer-ivory/25 transition-colors active:bg-wanderer-ivory/10"
+              >
+                <FaTimes size={18} />
+              </button>
+            </div>
+
+            {/* Links */}
+            <nav className="flex-1 overflow-y-auto px-6 pt-4" aria-label="Mobile navigation">
+              <ul>
+                {mobileLinks.map((link, i) => {
+                  const expanded = openSubmenu === link.href;
+                  return (
+                    <motion.li
+                      key={link.href}
+                      className="border-b border-wanderer-ivory/15"
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 + i * 0.07, duration: 0.45, ease: "easeOut" }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href={link.href}
+                          onClick={closeMobileMenu}
+                          className={`flex-1 py-4 font-[Stardom] text-[1.9rem] leading-tight transition-colors ${
+                            isActive(link.href) ? "text-wanderer-gold" : "active:text-wanderer-gold"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                        {link.children && (
+                          <button
+                            onClick={() => setOpenSubmenu(expanded ? null : link.href)}
+                            aria-label={`${expanded ? "Hide" : "Show"} ${link.label} links`}
+                            aria-expanded={expanded}
+                            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-full text-wanderer-ivory/70 active:bg-wanderer-ivory/10"
+                          >
+                            <FaChevronDown
+                              size={14}
+                              className={`transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+                            />
+                          </button>
+                        )}
+                      </div>
+
+                      <AnimatePresence initial={false}>
+                        {link.children && expanded && (
+                          <motion.ul
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            className="overflow-hidden"
+                          >
+                            {link.children.map(({ href, label, icon: Icon }) => (
+                              <li key={href}>
+                                <Link
+                                  href={href}
+                                  onClick={closeMobileMenu}
+                                  className={`flex items-center gap-3 py-2.5 pl-1 text-base font-light transition-colors ${
+                                    isActive(href) ? "text-wanderer-gold" : "text-wanderer-ivory/80 active:text-wanderer-gold"
+                                  }`}
+                                >
+                                  <Icon className="shrink-0 text-wanderer-gold/80" size={15} />
+                                  {label}
+                                </Link>
+                              </li>
+                            ))}
+                            <li className="h-3" aria-hidden="true" />
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            {/* Call to action */}
+            <motion.div
+              className="shrink-0 px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 + mobileLinks.length * 0.07, duration: 0.45, ease: "easeOut" }}
+            >
+              <button
+                onClick={() => {
+                  closeMobileMenu();
+                  // wait for the menu to close and scroll to unlock before scrolling to the form
+                  setTimeout(handleTravelEnquiry, 400);
+                }}
+                className="w-full rounded-full bg-wanderer-gold py-3.5 text-base font-medium text-wanderer-mahogany transition-colors active:bg-wanderer-ivory"
+              >
+                Travel Enquiry
+              </button>
+              <p className="mt-4 text-center text-xs text-wanderer-ivory/60">
+                Discover wonders across Africa, Asia &amp; the Middle East
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

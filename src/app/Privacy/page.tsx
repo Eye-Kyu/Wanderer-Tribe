@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 
 export default function PrivacyPage() {
   return (
-    <section className="min-h-screen bg-wanderer-moss text-neutral-800 py-16 px-6 md:pt-28">
+    <section className="min-h-screen bg-wanderer-moss text-neutral-800 pt-24 pb-12 px-4 sm:px-6 md:pt-28 md:pb-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl p-10"
+        className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl sm:rounded-3xl px-5 py-8 sm:p-10"
       >
-        <h1 className="text-4xl font-heading text-wanderer-gold mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl font-heading text-wanderer-gold mb-8 text-center">
           Wanderer Tribe - Privacy Policy
         </h1>
 
