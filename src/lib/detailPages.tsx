@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import TripDetail from "@/components/TripDetail";
+import JsonLd from "@/components/JsonLd";
+import { pageMeta, clip, breadcrumbJsonLd, tripJsonLd } from "@/lib/seo";
 import {
   getDestinations,
   getDestinationBySlug,
@@ -25,13 +27,42 @@ export function destinationRoute(region: DestinationPage) {
       const found = await getDestinationBySlug(region, (await params).slug);
       if (!found) return {};
       const d = found.destination;
-      return { title: d.name, description: d.description, openGraph: { images: d.image ? [d.image] : [] } };
+      return pageMeta({
+        title: `${d.name}: ${d.duration} Itinerary`,
+        description: clip(`${d.description} ${d.whyVisit} Highlights: ${d.highlights.join(", ")}.`),
+        path: destinationHref(region, d.name),
+        image: d.image || undefined,
+        imageAlt: d.name,
+        type: "article",
+      });
     },
     async Page({ params }: Params) {
       const found = await getDestinationBySlug(region, (await params).slug);
       if (!found) notFound();
       const { destination: d, others } = found;
+      const path = destinationHref(region, d.name);
       return (
+        <>
+        <JsonLd
+          data={[
+            tripJsonLd({
+              name: d.name,
+              description: d.description,
+              path,
+              image: d.image,
+              duration: d.duration,
+              touristType: d.tags,
+              itinerary: d.itinerary,
+              place: d.name,
+            }),
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Destinations", path: "/Destinations" },
+              { name: meta.label, path: meta.href },
+              { name: d.name, path },
+            ]),
+          ]}
+        />
         <TripDetail
           crumbs={[
             { href: "/Destinations", label: "Destinations" },
@@ -65,6 +96,7 @@ export function destinationRoute(region: DestinationPage) {
             })),
           }}
         />
+        </>
       );
     },
   };
@@ -82,13 +114,41 @@ export function experienceRoute(category: ExperienceCategory) {
       const found = await getExperienceBySlug(category, (await params).slug);
       if (!found) return {};
       const e = found.experience;
-      return { title: e.name, description: e.description, openGraph: { images: e.image ? [e.image] : [] } };
+      return pageMeta({
+        title: `${e.name} | ${meta.title}`,
+        description: clip(`${e.description} ${e.location}, ${e.duration}. Highlights: ${e.highlights.join(", ")}.`),
+        path: experienceHref(category, e.name),
+        image: e.image || undefined,
+        imageAlt: e.name,
+        type: "article",
+      });
     },
     async Page({ params }: Params) {
       const found = await getExperienceBySlug(category, (await params).slug);
       if (!found) notFound();
       const { experience: e, others } = found;
+      const path = experienceHref(category, e.name);
       return (
+        <>
+        <JsonLd
+          data={[
+            tripJsonLd({
+              name: e.name,
+              description: e.description,
+              path,
+              image: e.image,
+              duration: e.duration,
+              touristType: e.tags,
+              place: e.location,
+            }),
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Experiences", path: "/Experiences" },
+              { name: meta.title, path: meta.href },
+              { name: e.name, path },
+            ]),
+          ]}
+        />
         <TripDetail
           crumbs={[
             { href: "/Experiences", label: "Experiences" },
@@ -118,6 +178,7 @@ export function experienceRoute(category: ExperienceCategory) {
             })),
           }}
         />
+        </>
       );
     },
   };

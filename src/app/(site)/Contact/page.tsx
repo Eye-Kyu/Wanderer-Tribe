@@ -1,6 +1,7 @@
 "use client";
 
 import { useCtaModal } from "@/context/CTAModalContext";
+import { EMAIL } from "@/lib/email";
 import { useState } from "react";
 import { Check, ChevronDown, Copy, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
@@ -57,10 +58,10 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      raw: "info@wanderertribe.com",
+      raw: EMAIL.info,
       value: (
-        <a href="mailto:info@wanderertribe.com" className="link">
-          info@wanderertribe.com
+        <a href={`mailto:${EMAIL.info}`} className="link">
+          {EMAIL.info}
         </a>
       ),
     },

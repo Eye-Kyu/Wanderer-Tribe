@@ -1,5 +1,8 @@
 import "./globals.css";
 import "./base.css";
+import { SITE_URL } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, organizationJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import { Metadata } from "next";
 import Script from "next/script";
 import { Instrument_Sans } from "next/font/google";
@@ -13,14 +16,14 @@ const instrument = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wanderertribe.ke"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default:
       "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
     template: "%s | Wanderer Tribe",
   },
   description:
-    "Wanderer Tribe curates life-changing journeys across Africa, Asia, and the Middle East. Explore luxury escapes, cultural adventures, and offbeat destinations crafted for the modern explorer.",
+    "Tailored trips across Africa, Asia and the Middle East: safaris, cultural journeys, wellness retreats and luxury escapes, planned day by day by Wanderer Tribe.",
   keywords: [
     "Wanderer Tribe",
     "luxury travel",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     "guided tours",
     "travel experiences",
   ],
-  authors: [{ name: "Wanderer Tribe" /* url: "https://wanderertribe.ke"*/ }],
+  authors: [{ name: "Wanderer Tribe" /* url: SITE_URL */ }],
   creator: "Wanderer Tribe",
   publisher: "Wanderer Tribe",
   robots: {
@@ -49,41 +52,29 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: { canonical: "https://wanderertribe.ke" },
   openGraph: {
-    title:
-      "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
+    title: "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
     description:
-      "Discover extraordinary destinations and authentic adventures across Africa, Asia, and the Middle East with Wanderer Tribe — where culture meets luxury.",
-    url: "https://wanderertribe.ke",
+      "Tailored trips across Africa, Asia and the Middle East: safaris, cultural journeys, wellness retreats and luxury escapes.",
+    url: "/",
     siteName: "Wanderer Tribe",
-    images: [
-      {
-        url: "/images/Wanderer logo 1.png",
-        width: 1200,
-        height: 630,
-        alt: "Wanderer Tribe — Explore Africa, Asia & The Middle East",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
+    title: "Wanderer Tribe | Discover Wonders Across Africa, Asia & The Middle East",
     description:
-      "Travel deeper. Explore farther. Experience unforgettable adventures with Wanderer Tribe.",
-    site: "@wanderertribe",
-    creator: "@wanderertribe",
-    images: ["/images/Wanderer logo 1.png"],
+      "Tailored trips across Africa, Asia and the Middle East: safaris, cultural journeys, wellness retreats and luxury escapes.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
   category: "Travel & Tourism",
   icons: {
     icon: [
-      { url: "/favicon/favicon.ico" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
     ],
     apple: { url: "/favicon/apple-touch-icon.png", sizes: "180x180" },
     shortcut: "/favicon/favicon.ico",
@@ -110,9 +101,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preload critical media for faster LCP */}
-        <link rel="preload" href="/images/hero-poster.webp" as="image" fetchPriority="high" />
-
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link
@@ -141,28 +129,8 @@ export default function RootLayout({
           }}
         />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              url: "https://wanderertribe.ke",
-              name: "WANDERER TRIBE", // Uppercase here for search results
-              alternateName: "Wanderer Tribe",
-              potentialAction: {
-                "@type": "SearchAction",
-                target:
-                  "https://wanderertribe.ke/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
+        <JsonLd data={organizationJsonLd()} />
 
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" />
-        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
 
         {/* Manually add theme-color and color-scheme meta tags */}
         <meta name="theme-color" content="#254D32" />

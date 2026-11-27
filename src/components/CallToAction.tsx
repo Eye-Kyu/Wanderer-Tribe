@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { EMAIL } from "@/lib/email";
 import { useEffect, useId, useState } from "react";
 import { ChevronDown, Mail, MessageCircle } from "lucide-react";
 import type { CtaPrefill } from "@/context/CTAModalContext";
@@ -201,8 +202,8 @@ export default function CallToAction({ variant = "section", prefill = null }: Pr
             <div>
               <dt className="text-sm text-quiet">Write to us</dt>
               <dd>
-                <a className="link inline-flex items-center gap-2 py-2" href="mailto:contact@wanderertribe.com">
-                  <Mail aria-hidden="true" size={16} /> contact@wanderertribe.com
+                <a className="link inline-flex items-center gap-2 py-2" href={`mailto:${EMAIL.contact}`}>
+                  <Mail aria-hidden="true" size={16} /> {EMAIL.contact}
                 </a>
               </dd>
             </div>

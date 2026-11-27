@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
+import { EMAIL } from "@/lib/email";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy Policy",
-  description: "How Wanderer Tribe collects, uses and protects your information.",
-};
+  description: "How Wanderer Tribe collects, uses and protects your personal information when you visit the site, enquire or book a trip.",
+  path: "/Privacy",
+});
 
 export default function PrivacyPage() {
   return (
@@ -102,8 +105,8 @@ export default function PrivacyPage() {
             </h2>
             <p>
               Depending on your location, you may have rights to access, correct, or delete your personal data. To exercise these rights, contact us at{" "}
-              <a href="mailto:privacy@wanderertribe.com" className="link">
-                privacy@wanderertribe.com
+              <a href={`mailto:${EMAIL.privacy}`} className="link">
+                {EMAIL.privacy}
               </a>.
             </p>
           </section>
@@ -141,8 +144,8 @@ export default function PrivacyPage() {
             </h2>
             <p>
               For questions, concerns, or data requests, please reach out to us at{" "}
-              <a href="mailto:privacy@wanderertribe.com" className="link">
-                privacy@wanderertribe.com
+              <a href={`mailto:${EMAIL.privacy}`} className="link">
+                {EMAIL.privacy}
               </a>.
             </p>
           </section>

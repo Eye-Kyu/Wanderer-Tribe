@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { EMAIL } from "@/lib/email";
 import Link from "next/link";
 import { Facebook, Instagram, Mail } from "lucide-react";
 
@@ -63,7 +64,7 @@ export default function Footer() {
           <ul className="grid gap-1">
             <li>
               <Link href="/Contact" className="footer-link inline-flex items-center gap-2">
-                <Mail aria-hidden="true" size={16} /> contact@wanderertribe.com
+                <Mail aria-hidden="true" size={16} /> {EMAIL.contact}
               </Link>
             </li>
             <li>

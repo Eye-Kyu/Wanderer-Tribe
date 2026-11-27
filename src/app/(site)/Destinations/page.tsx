@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -8,10 +9,13 @@ import { getDestinations } from "@/sanity/lib/content";
 import { REGIONS, slugify, destinationHref } from "@/lib/travel";
 import { priceGuide, regionNotes } from "@/data/priceGuide";
 
-export const metadata: Metadata = {
-  title: "Destinations",
-  description: "Trips across Africa, Asia and the Middle East, with featured trip lengths and costs.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Destinations in Africa, Asia & the Middle East",
+  description: "Compare trips across Africa, Asia and the Middle East, with featured trip lengths and costs, travel tips by region and a day-by-day plan for every destination.",
+  path: "/Destinations",
+  image: "/images/africa.webp",
+  imageAlt: "A hot air balloon over the savannah",
+});
 
 // Re-check Sanity for edits every 60s (must be a literal; keep in sync with REVALIDATE_SECONDS).
 export const revalidate = 60;

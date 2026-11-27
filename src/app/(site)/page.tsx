@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
+import { preload } from "react-dom";
 import Hero from "@/components/Hero";
+import { pageMeta } from "@/lib/seo";
 import RegionIndex from "@/components/home/RegionIndex";
 import PhotoBand from "@/components/home/PhotoBand";
 import ItineraryRows from "@/components/home/ItineraryRows";
@@ -12,7 +15,15 @@ import { REGIONS, CATEGORIES, destinationHref } from "@/lib/travel";
 // Re-check Sanity for edits every 60s (must be a literal; keep in sync with REVALIDATE_SECONDS).
 export const revalidate = 60;
 
+export const metadata: Metadata = pageMeta({
+  description:
+    "Tailored trips across Africa, Asia and the Middle East: Maasai Mara safaris, a 10-day Thailand itinerary, wellness retreats and luxury escapes, planned day by day.",
+  path: "/",
+});
+
 export default async function Home() {
+  // The hero video's poster is the first paint; fetch it first
+  preload("/images/hero-poster.webp", { as: "image", fetchPriority: "high" });
   const [regionLists, experienceLists] = await Promise.all([
     Promise.all(REGIONS.map((r) => getDestinations(r.key))),
     Promise.all(CATEGORIES.map((c) => getExperiences(c.key))),

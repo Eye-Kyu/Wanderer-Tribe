@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
+import { EMAIL } from "@/lib/email";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Terms & Conditions",
-  description: "The terms that apply when you book or use Wanderer Tribe.",
-};
+  description: "The terms that apply when you book a trip or use the Wanderer Tribe website: eligibility, bookings and payments, cancellations and your responsibilities.",
+  path: "/Terms",
+});
 
 export default function TermsPage() {
   return (
@@ -123,8 +126,8 @@ export default function TermsPage() {
             </h2>
             <p>
               If you have any questions about these Terms, please contact us at{" "}
-              <a href="mailto:support@wanderertribe.com" className="link">
-                support@wanderertribe.com
+              <a href={`mailto:${EMAIL.support}`} className="link">
+                {EMAIL.support}
               </a>.
             </p>
           </section>

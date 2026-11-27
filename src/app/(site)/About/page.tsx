@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "Why Wanderer Tribe was founded, how we plan trips, and what we are opening next.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "About Us",
+  description: "Why Wanderer Tribe was founded, how we plan tailored trips across Africa, Asia and the Middle East, and the places we are opening next.",
+  path: "/About",
+  image: "/images/About/Abt.webp",
+  imageAlt: "A Cape buffalo with oxpeckers on the savannah",
+});
 
 // The founders' words, kept; dashes set as commas and full stops.
 const chapters = [

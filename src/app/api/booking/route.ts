@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { EMAIL, sender } from "@/lib/email";
+import { SITE_URL, SITE_HOST, LOGO_URL } from "@/lib/site";
 import { Resend } from "resend";
 
 export async function POST(req: Request) {
@@ -10,14 +12,14 @@ export async function POST(req: Request) {
 
         // === 1. Send inquiry to internal inboxes ===
         await resend.emails.send({
-            from: "Wanderer Tribe <booking@wanderertribe.ke>",
-            to: ["booking@wanderertribe.ke", "info@wanderertribe.ke"],
+            from: sender(EMAIL.booking),
+            to: [EMAIL.booking, EMAIL.info],
             replyTo: email,
             subject,
             html: `
         <div style="font-family: 'Segoe UI', sans-serif; color: #333; max-width:600px; margin:auto; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.05); padding:20px;">
           <div style="text-align:center; padding:10px 0;">
-            <img src="https://wanderertribe.ke/favicon/logo.png" alt="Wanderer Tribe" width="100" />
+            <img src="${LOGO_URL}" alt="Wanderer Tribe" width="100" />
           </div>
           <h2 style="color:#1A4D2E;">🌍 New Trip Booking Inquiry</h2>
           <p><strong>Name:</strong> ${firstName} ${lastName}</p>
@@ -35,14 +37,14 @@ export async function POST(req: Request) {
 
         // === 2. Auto-reply confirmation email to client ===
         await resend.emails.send({
-            from: "Wanderer Tribe <booking@wanderertribe.ke>",
+            from: sender(EMAIL.booking),
             to: email,
             subject: "Your Wanderer Tribe inquiry has been received 🌿",
             html: `
         <div style="font-family:'Segoe UI',sans-serif; color:#333; max-width:600px; margin:auto; background:#f9fbfa; border-radius:10px; overflow:hidden;">
           <!-- Header -->
           <div style="background:#1A4D2E; color:#fff; text-align:center; padding:20px;">
-            <img src="https://wanderertribe.ke/favicon/logo.png" alt="Wanderer Tribe" width="90" style="margin-bottom:10px;" />
+            <img src="${LOGO_URL}" alt="Wanderer Tribe" width="90" style="margin-bottom:10px;" />
             <h1 style="margin:0; font-size:22px;">Wanderer Tribe</h1>
             <p style="margin:5px 0 0; font-size:14px; letter-spacing:0.5px;">Discover Wonders Around the World</p>
           </div>
@@ -55,9 +57,9 @@ export async function POST(req: Request) {
             <p style="margin-top:1em;">Until then, feel free to explore our destinations across <strong>Africa, Asia, and the Middle East</strong> — your next great escape might just be waiting there 🌍</p>
 
             <div style="margin-top:20px; text-align:center;">
-              <a href="https://wanderertribe.ke" 
+              <a href="${SITE_URL}" 
                  style="background:#1A4D2E; color:#fff; padding:12px 20px; border-radius:30px; text-decoration:none; font-weight:bold;">
-                 Visit WandererTribe.ke
+                 Visit ${SITE_HOST}
               </a>
             </div>
           </div>
@@ -68,7 +70,7 @@ export async function POST(req: Request) {
             <p>
               <a href="https://www.instagram.com/" style="color:#1A4D2E; text-decoration:none; margin:0 6px;">Instagram</a> •
               <a href="https://www.facebook.com/" style="color:#1A4D2E; text-decoration:none; margin:0 6px;">Facebook</a> •
-              <a href="https://wanderertribe.ke" style="color:#1A4D2E; text-decoration:none; margin:0 6px;">Website</a>
+              <a href="${SITE_URL}" style="color:#1A4D2E; text-decoration:none; margin:0 6px;">Website</a>
             </p>
             <p>© ${new Date().getFullYear()} Wanderer Tribe. All rights reserved.</p>
           </div>

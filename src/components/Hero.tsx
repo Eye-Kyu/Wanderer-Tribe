@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={isMobile ? "/images/hero-poster-mobile.webp" : "/images/hero-poster.webp"}
           src={isMobile ? "/videos/mobile-landing.webm" : "/videos/Landing-page.webm"}
         />

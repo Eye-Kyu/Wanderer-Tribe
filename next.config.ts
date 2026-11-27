@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Smaller files for the same photos: AVIF first, then WebP
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",

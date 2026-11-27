@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { EMAIL, sender } from "@/lib/email";
+import { SITE_URL, SITE_HOST } from "@/lib/site";
 import { Resend } from "resend";
 
 export async function POST(req: Request) {
@@ -31,7 +33,7 @@ export async function POST(req: Request) {
           <tr>
             <td style="background:#0E2A2A; color:#FAF6EF; text-align:center; padding:16px; font-size:12px;">
               &copy; ${new Date().getFullYear()} Wanderer Tribe. All rights reserved.<br>
-              <a href="https://wanderertribe.ke" style="color:#B5661F; text-decoration:none;">wanderertribe.ke</a>
+              <a href="${SITE_URL}" style="color:#B5661F; text-decoration:none;">${SITE_HOST}</a>
             </td>
           </tr>
         </table>
@@ -51,8 +53,8 @@ export async function POST(req: Request) {
     `;
 
         await resend.emails.send({
-            from: "Wanderer Tribe <info@wanderertribe.ke>",
-            to: "info@wanderertribe.ke",
+            from: sender(EMAIL.info),
+            to: EMAIL.info,
             replyTo: email,
             subject: `New ${category || "contact"} inquiry from ${name}`,
             html: generateEmailHTML("New Website Inquiry", adminContent),
@@ -71,7 +73,7 @@ export async function POST(req: Request) {
     `;
 
         await resend.emails.send({
-            from: "Wanderer Tribe <info@wanderertribe.ke>",
+            from: sender(EMAIL.info),
             to: email,
             subject: "We've received your message 🌍",
             html: generateEmailHTML(

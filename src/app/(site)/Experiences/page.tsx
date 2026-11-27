@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import EnquireBand from "@/components/EnquireBand";
 import { getExperiences } from "@/sanity/lib/content";
 import { CATEGORIES } from "@/lib/travel";
 
-export const metadata: Metadata = {
-  title: "Experiences",
-  description: "Wellness retreats, adventure travel and luxury escapes, planned around you.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Travel Experiences: Adventure, Luxury & Wellness",
+  description: "Adventure travel, luxury escapes and wellness retreats from Bali to the Maldives, the Inca Trail and the Swiss Alps, each tailored to how you like to travel.",
+  path: "/Experiences",
+  image: "/images/adventure/inca-trail.webp",
+  imageAlt: "Hikers on the Inca Trail",
+});
 
 // Re-check Sanity for edits every 60s (must be a literal; keep in sync with REVALIDATE_SECONDS).
 export const revalidate = 60;
