@@ -3,6 +3,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Experience } from "@/types/experience";
 import { experienceHref } from "@/lib/travel";
@@ -62,6 +63,7 @@ export default function ExperiencePageLayout({ title, subtitle, heroImage, exper
                 <Link href={experienceHref(category, exp.name)} className="trip-card">
                   <span className="photo relative block aspect-[4/5] overflow-hidden">
                     <Image src={exp.image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" className="object-cover" />
+                    <span className="card-cue" aria-hidden="true"><ArrowUpRight size={18} /></span>
                   </span>
                   <span className="flex flex-col gap-2 pt-4">
                     <span className="font-display text-title trip-card-title">{exp.name}</span>

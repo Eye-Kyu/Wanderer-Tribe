@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import EnquireButton from "./EnquireButton";
 import StickyEnquire from "./StickyEnquire";
@@ -115,6 +116,7 @@ export default function TripDetail(p: TripDetailProps) {
                   <Link href={m.href} className="trip-card">
                     <span className="photo relative block aspect-[4/3] overflow-hidden">
                       <Image src={m.image} alt="" fill sizes="(min-width: 1024px) 30vw, 100vw" className="object-cover" />
+                    <span className="card-cue" aria-hidden="true"><ArrowUpRight size={18} /></span>
                     </span>
                     <span className="flex flex-col gap-1 pt-4">
                       <span className="font-display text-title trip-card-title">{m.name}</span>

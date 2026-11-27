@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import PriceGuide from "@/components/PriceGuide";
 import EnquireBand from "@/components/EnquireBand";
@@ -54,6 +55,7 @@ export default async function DestinationsPage() {
                 <Link href={r.href} className="trip-card">
                   <span className="photo relative block aspect-[4/5] overflow-hidden">
                     <Image src={regionNotes[r.key].image} alt="" fill sizes="(min-width: 768px) 30vw, 100vw" className="object-cover" />
+                    <span className="card-cue" aria-hidden="true"><ArrowUpRight size={18} /></span>
                   </span>
                   <span className="flex flex-col gap-2 pt-5">
                     <span className="font-display text-display-s leading-none trip-card-title">{r.label}</span>

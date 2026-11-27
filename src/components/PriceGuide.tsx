@@ -1,6 +1,7 @@
 "use client";
 import { useId, useRef, useState } from "react";
 import Link from "next/link";
+import { useTabIndicator } from "@/lib/useTabIndicator";
 
 export interface PriceTab {
   key: string;
@@ -11,6 +12,7 @@ export interface PriceTab {
 /** Switcher + table: the owner's featured trips with length and cost, by region. */
 export default function PriceGuide({ tabs }: { tabs: PriceTab[] }) {
   const [active, setActive] = useState(0);
+  const { listRef, pillRef } = useTabIndicator(active);
   const uid = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -30,7 +32,8 @@ export default function PriceGuide({ tabs }: { tabs: PriceTab[] }) {
             <h2 id={`${uid}-title`}>Featured trips and costs</h2>
             <p className="lead text-ink-2">Every trip is tailored, so these are where planning starts.</p>
           </div>
-          <div role="tablist" aria-label="Region" className="tabs">
+          <div ref={listRef} role="tablist" aria-label="Region" className="tabs">
+            <span ref={pillRef} className="tab-pill" aria-hidden="true" />
             {tabs.map((t, i) => (
               <button
                 key={t.key}
