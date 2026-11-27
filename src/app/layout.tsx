@@ -1,13 +1,15 @@
 import "./globals.css";
+import "./base.css";
 import { Metadata } from "next";
 import Script from "next/script";
-import { Inter } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const inter = Inter({
+const instrument = Instrument_Sans({
   subsets: ["latin"],
-  display: "swap", // 🚀 prevents render-blocking font load
+  display: "swap",
+  variable: "--font-instrument",
 });
 
 export const metadata: Metadata = {
@@ -109,31 +111,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Preload critical media for faster LCP */}
-        <link rel="preload" href="/images/costa-rica-resort.jpeg" as="image" />
-        <link rel="preload" href="/videos/mobile-landing.mp4" as="video" />
-        <link rel="preload" href="/videos/Landing-page.mp4" as="video" />
+        <link rel="preload" href="/images/hero-poster.webp" as="image" fetchPriority="high" />
 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link
           rel="preload"
-          as="font"
-          href="/_next/static/media/inter-latin-400-normal.woff2"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
           href="/fonts/Stardom_Complete/Fonts/OTF/Stardom-Regular.otf"
           as="font"
           type="font/otf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Adrian.ttf"
-          as="font"
-          type="font/ttf"
           crossOrigin="anonymous"
         />
 
@@ -179,11 +165,11 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
 
         {/* Manually add theme-color and color-scheme meta tags */}
-        <meta name="theme-color" content="#008080" />
-        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#254D32" />
+        <meta name="color-scheme" content="light" />
       </head>
 
-      <body className={inter.className}>
+      <body className={instrument.variable}>
         {children}
 
         <Analytics />

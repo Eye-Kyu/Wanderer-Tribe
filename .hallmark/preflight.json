@@ -1,0 +1,11 @@
+{ "scanned": "2026-11-27",
+  "findings": {
+    "fonts": "Stardom OTF heading face (globals.css:6); Montserrat body named but never loaded (globals.css:69); Inter via next/font (layout.tsx:4); Africana (globals.css:11, dropped by the user)",
+    "palette": "tailwind.config.js wanderer.*: forest #254D32, moss #3C6E47, bronze #9A6B4F, gold #CDA869, ivory #F5E5C0, rust #D56F3E, mahogany #2C1810; shadcn HSL vars in globals.css :root",
+    "motion": "gsap 3 + ScrollTrigger, framer-motion 12, lenis, react-parallax-tilt (package.json)",
+    "spacing": "Tailwind default scale",
+    "framework": "Next.js 16 app router, Tailwind 3, Sanity CMS (src/sanity)"
+  },
+  "preserve": ["forest/rust/gold palette (user)", "Stardom heading face (user)", "logo", "testimonials as found (user)", "all routes, forms, API calls, Sanity fetch, WhatsApp, CTA modal"],
+  "introduce": ["editorial shape", "tokens.css + base.css", "detail routes per destination and experience (user approved)", "hero discipline", "gates"]
+}

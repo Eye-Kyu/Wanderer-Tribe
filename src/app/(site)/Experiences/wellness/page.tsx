@@ -13,6 +13,7 @@ export default async function WellnessPage() {
       subtitle="Reconnect, rejuvenate, and find inner balance in breathtaking destinations."
       heroImage="/images/bali-yoga.jpeg"
       experiences={wellnessExperiences}
+      category="wellness"
     />
   );
 }

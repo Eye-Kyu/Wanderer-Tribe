@@ -12,8 +12,9 @@ export default async function LuxuryPage() {
     <ExperiencePageLayout
       title="Luxury Escapes"
       subtitle="Indulge in unparalleled comfort, elegance, and exclusive experiences."
-      heroImage="/images/luxury/french-riviera-yacht.jpeg"
+      heroImage="/images/luxury/french-riviera-yacht.webp"
       experiences={luxuryExperiences}
+      category="luxury"
     />
   );
 }

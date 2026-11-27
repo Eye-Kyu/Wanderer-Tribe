@@ -9,7 +9,28 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Hallmark tokens (src/app/tokens.css): use these names on redesigned pages
+      fontFamily: {
+        display: ["var(--font-display)"],
+        body: ["var(--font-body)"],
+      },
+      fontSize: {
+        display: ["var(--text-display)", { lineHeight: "1.02" }],
+        "display-s": ["var(--text-display-s)", { lineHeight: "1.05" }],
+        section: ["var(--text-section)", { lineHeight: "1.05" }],
+        title: ["var(--text-title)", { lineHeight: "1.2" }],
+        lead: ["var(--text-lead)", { lineHeight: "1.45" }],
+      },
+      maxWidth: { page: "var(--container)" },
       colors: {
+        paper: { DEFAULT: "var(--color-paper)", 2: "var(--color-paper-2)", 3: "var(--color-paper-3)" },
+        ink: { DEFAULT: "var(--color-ink)", 2: "var(--color-ink-2)" },
+        quiet: "var(--color-muted)",
+        rule: "var(--color-rule)",
+        signal: { DEFAULT: "var(--color-accent)", ink: "var(--color-accent-ink)" },
+        field: { DEFAULT: "var(--color-field)", 2: "var(--color-field-2)", ink: "var(--color-field-ink)", muted: "var(--color-field-muted)" },
+        seal: "var(--color-seal)",
+        scrim: "var(--color-scrim)",
         neutral: {
           '100': '#f5f5f5',
           '200': '#e5e5e5',

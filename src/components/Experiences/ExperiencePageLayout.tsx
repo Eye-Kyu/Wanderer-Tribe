@@ -1,85 +1,81 @@
 // src/components/Experiences/ExperiencePageLayout.tsx
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import ExperienceHero from "./ExperienceHero";
-import ExperienceCard from "./ExperienceCard";
-import ExperienceModal from "./ExperienceModal";
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Experience } from "@/types/experience";
+import { experienceHref } from "@/lib/travel";
 
 interface Props {
   title: string;
   subtitle: string;
   heroImage: string;
   experiences: Experience[];
+  /** URL segment of this category, for the detail links. */
+  category: string;
 }
 
-export default function ExperiencePageLayout({
-  title,
-  subtitle,
-  heroImage,
-  experiences,
-}: Props) {
-  const [selected, setSelected] = useState<number | null>(null);
+export default function ExperiencePageLayout({ title, subtitle, heroImage, experiences, category }: Props) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  // Collect all unique tags for the dropdown
-  const allTags = Array.from(new Set(experiences.flatMap((exp) => exp.tags)));
-
-  const filteredExperiences = activeTag
-    ? experiences.filter((exp) => exp.tags.includes(activeTag))
-    : experiences;
+  // Collect all unique tags for the filter
+  const allTags = useMemo(() => Array.from(new Set(experiences.flatMap((exp) => exp.tags))).sort(), [experiences]);
+  const filteredExperiences = activeTag ? experiences.filter((exp) => exp.tags.includes(activeTag)) : experiences;
 
   return (
-    <div className="bg-[#152523] space-y-9">
-      <ExperienceHero title={title} subtitle={subtitle} image={heroImage} />
-
-      {/* Tag Filter Dropdown */}
-      <div className="flex justify-center mb-8 space-x-4 ">
-        <select
-          value={activeTag || ""}
-          onChange={(e) =>
-            setActiveTag(e.target.value === "" ? null : e.target.value)
-          }
-          className="px-4 md:px-5 py-2 rounded-lg text-bronze bg-wanderer-ivory"
-        >
-          <option value="">All Experiences</option>
-          {allTags.map((tag) => (
-            <option key={tag} value={tag} className="bg-wanderer-gold">
-              {tag.charAt(0).toUpperCase() + tag.slice(1)}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Experiences Grid */}
-      <section className="py-12 max-w-7xl mx-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTag || "all"}
-            className="columns-1 sm:columns-2 lg:columns-2 gap-6 space-y-11"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            {filteredExperiences.map((exp, idx) => (
-              <ExperienceCard
-                key={exp.id}
-                experience={exp}
-                onSelect={() => setSelected(idx)}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+    <>
+      <section className="banner" aria-labelledby="experience-title">
+        <div className="banner-media" aria-hidden="true">
+          <Image src={heroImage} alt="" fill priority sizes="100vw" className="object-cover" />
+        </div>
+        <div className="container banner-inner">
+          <div className="banner-plate">
+            <h1 id="experience-title">{title}</h1>
+            <p className="lead text-ink-2">{subtitle}</p>
+          </div>
+        </div>
       </section>
 
-      {selected !== null && (
-        <ExperienceModal
-          experience={filteredExperiences[selected]}
-          onClose={() => setSelected(null)}
-        />
-      )}
-    </div>
+      <section aria-label={`${title}: experiences`} className="py-[var(--section-gap-s)]">
+        <div className="container flex flex-col gap-12">
+          <div className="flex flex-col gap-3">
+            <p id="exp-filter-label" className="text-sm text-quiet">Filter by interest</p>
+            <div role="group" aria-labelledby="exp-filter-label" className="chip-row">
+              <button type="button" className="chip" aria-pressed={activeTag === null} onClick={() => setActiveTag(null)}>
+                All
+              </button>
+              {allTags.map((tag) => (
+                <button key={tag} type="button" className="chip" aria-pressed={activeTag === tag} onClick={() => setActiveTag(tag)}>
+                  {tag}
+                </button>
+              ))}
+            </div>
+            <p role="status" className="text-sm text-quiet">
+              {filteredExperiences.length} of {experiences.length} shown
+            </p>
+          </div>
+
+          <ul key={activeTag ?? "all"} className="trip-grid grid gap-x-[var(--gap-columns)] gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredExperiences.map((exp) => (
+              <li key={exp.name}>
+                <Link href={experienceHref(category, exp.name)} className="trip-card">
+                  <span className="photo relative block aspect-[4/5] overflow-hidden">
+                    <Image src={exp.image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw" className="object-cover" />
+                  </span>
+                  <span className="flex flex-col gap-2 pt-4">
+                    <span className="font-display text-title trip-card-title">{exp.name}</span>
+                    <span className="text-ink-2">{exp.description}</span>
+                    <span className="text-sm text-quiet">
+                      {exp.location}, {exp.duration}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }
