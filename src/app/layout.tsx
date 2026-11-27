@@ -2,13 +2,8 @@ import "./globals.css";
 import { Metadata } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Header";
-import Footer from "@/components/Footer";
-import { CtaModalProvider } from "@/context/CTAModalContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import PageLoader from "@/components/PageLoader";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -189,15 +184,7 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <PageLoader>
-          <CtaModalProvider>
-            <Navbar />
-
-            <WhatsAppWidget />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </CtaModalProvider>
-        </PageLoader>
+        {children}
 
         <Analytics />
         <SpeedInsights />
