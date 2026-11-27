@@ -1,28 +1,42 @@
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import {
-  Mail,
-  User,
-  MessageSquare,
-  Calendar,
-  Users,
-  Clock,
-} from "lucide-react";
-import { useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { ChevronDown, Mail, MessageCircle } from "lucide-react";
+import type { CtaPrefill } from "@/context/CTAModalContext";
 
-export default function CallToAction() {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    travellers: "",
-    date: "",
-    length: "",
-    details: "",
-  });
+interface Props {
+  /** "section" is the home page close (photo + contact facts); "dialog" is the modal body. */
+  variant?: "section" | "dialog";
+  prefill?: CtaPrefill | null;
+}
 
+const emptyForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  travellers: "",
+  date: "",
+  length: "",
+  details: "",
+};
+
+export default function CallToAction({ variant = "section", prefill = null }: Props) {
+  const [form, setForm] = useState(emptyForm);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [sending, setSending] = useState(false);
+  const uid = useId();
+  const id = (name: string) => `${uid}-${name}`;
+
+  // Planner or trip page values land in the matching fields
+  useEffect(() => {
+    if (!prefill) return;
+    setForm((f) => ({
+      ...f,
+      travellers: prefill.travellers ?? f.travellers,
+      length: prefill.length ?? f.length,
+      details: prefill.details && !f.details ? prefill.details : f.details,
+    }));
+  }, [prefill]);
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
@@ -38,6 +52,9 @@ export default function CallToAction() {
     if (!form.length) newErrors.length = "Select trip length";
     if (!form.details.trim()) newErrors.details = "Please provide trip details";
     setErrors(newErrors);
+    // A failed submit focuses the first invalid field
+    const first = Object.keys(newErrors)[0];
+    if (first) document.getElementById(id(first))?.focus();
     return Object.keys(newErrors).length === 0;
   };
 
@@ -45,6 +62,7 @@ export default function CallToAction() {
     e.preventDefault();
     if (!validate()) return;
 
+    setSending(true);
     try {
       const res = await fetch("/api/booking", {
         method: "POST",
@@ -57,15 +75,7 @@ export default function CallToAction() {
         alert(
           "Your booking request has been sent! Check your email for confirmation."
         );
-        setForm({
-          firstName: "",
-          lastName: "",
-          email: "",
-          travellers: "",
-          date: "",
-          length: "",
-          details: "",
-        });
+        setForm(emptyForm);
         setErrors({});
       } else {
         alert("Something went wrong. Please try again later.");
@@ -73,222 +83,141 @@ export default function CallToAction() {
     } catch (err) {
       console.error(err);
       alert("Failed to send your booking request.");
+    } finally {
+      setSending(false);
     }
   };
 
+  const set = (key: keyof typeof emptyForm) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+      setForm({ ...form, [key]: e.target.value });
+
+  const fieldProps = (key: keyof typeof emptyForm) => ({
+    id: id(key),
+    name: key,
+    value: form[key],
+    onChange: set(key),
+    "aria-invalid": errors[key] ? ("true" as const) : undefined,
+    "aria-describedby": errors[key] ? id(`${key}-error`) : undefined,
+    className: "field-input",
+  });
+
+  const Error = ({ name }: { name: string }) => (
+    <p id={id(`${name}-error`)} className="field-error">
+      {errors[name] ?? ""}
+    </p>
+  );
+
+  const formEl = (
+    <form noValidate onSubmit={handleSubmit} className="grid gap-x-4 gap-y-1 sm:grid-cols-2">
+      <div>
+        <label htmlFor={id("firstName")} className="field-label">First name</label>
+        <input type="text" autoComplete="given-name" {...fieldProps("firstName")} />
+        <Error name="firstName" />
+      </div>
+      <div>
+        <label htmlFor={id("lastName")} className="field-label">Last name</label>
+        <input type="text" autoComplete="family-name" {...fieldProps("lastName")} />
+        <Error name="lastName" />
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor={id("email")} className="field-label">Email</label>
+        <input type="email" inputMode="email" autoComplete="email" {...fieldProps("email")} />
+        <Error name="email" />
+      </div>
+      <div>
+        <label htmlFor={id("travellers")} className="field-label">Travellers</label>
+        <div className="select-wrap">
+          <select {...fieldProps("travellers")}>
+          <option value="">Number of travellers</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3-5</option>
+          <option>6-10</option>
+          <option>10+</option>
+        </select>
+          <ChevronDown aria-hidden="true" size={18} />
+        </div>
+        <Error name="travellers" />
+      </div>
+      <div>
+        <label htmlFor={id("length")} className="field-label">Trip length</label>
+        <div className="select-wrap">
+          <select {...fieldProps("length")}>
+          <option value="">Trip length (weeks)</option>
+          <option>1 Week</option>
+          <option>2 Weeks</option>
+          <option>3 Weeks</option>
+          <option>4 Weeks+</option>
+        </select>
+          <ChevronDown aria-hidden="true" size={18} />
+        </div>
+        <Error name="length" />
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor={id("date")} className="field-label">Travel date</label>
+        <input type="date" {...fieldProps("date")} />
+        <Error name="date" />
+      </div>
+      <div className="sm:col-span-2">
+        <label htmlFor={id("details")} className="field-label">About your trip</label>
+        <textarea
+          rows={4}
+          placeholder="Where you would like to go, and what you would love to do there"
+          {...fieldProps("details")}
+          className="field-input resize-y"
+        />
+        <Error name="details" />
+      </div>
+      <div className="sm:col-span-2 pt-2">
+        <button type="submit" className="btn btn-primary w-full sm:w-auto" disabled={sending}>
+          {sending ? "Sending…" : "Send my enquiry"}
+        </button>
+      </div>
+    </form>
+  );
+
+  if (variant === "dialog") return formEl;
+
   return (
-    <section
-      id="cta"
-      className="py-12 sm:py-16 px-4 sm:px-6 md:px-10 bg-gradient-to-b  to-[#e4a762]"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-6xl mx-auto bg-white rounded-lg shadow-black shadow-md overflow-hidden flex flex-col md:grid md:grid-cols-2"
-      >
-        {/* Left side - Image */}
-        <div className="relative h-52 sm:h-72 md:h-auto md:block">
-          <Image
-            src="/images/contact-bg.webp"
-            alt="Curated Travel Experience"
-            fill
-            className="object-cover w-full h-full"
-          />
-        </div>
-
-        {/* Right side - Content + Form */}
-        <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center">
-          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl text-wanderer-rust mb-4">
-            Plan Your Curated Experience
-          </h2>
-          <p className="text-sm sm:text-base text-[#333333]/80 mb-8 leading-relaxed">
-            Every trip we design is unique, personalized, and tailored to your
-            desires. Share your vision, and let us create an unforgettable
-            journey — crafted just for you.
+    <section id="cta" className="bg-paper-2 py-[var(--section-gap)]">
+      <div className="container grid gap-x-[var(--gap-columns)] gap-y-12 lg:grid-cols-12">
+        <div className="lg:col-span-5 flex flex-col gap-6">
+          <h2>Plan your curated experience</h2>
+          <p className="lead text-ink-2">
+            Every trip we design is tailored to you. Tell us when, for how long and with whom, and we
+            will plan the rest.
           </p>
-
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* First + Last Name */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="relative">
-                <User
-                  className="absolute top-4 left-4 text-[#2F4F2F]"
-                  size={18}
-                />
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  value={form.firstName}
-                  onChange={(e) =>
-                    setForm({ ...form, firstName: e.target.value })
-                  }
-                  className={`w-full pl-12 pr-4 py-3 rounded-md border ${
-                    errors.firstName ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-                />
-                {errors.firstName && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">
-                    {errors.firstName}
-                  </p>
-                )}
-              </div>
-              <div className="relative">
-                <User
-                  className="absolute top-4 left-4 text-[#2F4F2F]"
-                  size={18}
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  value={form.lastName}
-                  onChange={(e) =>
-                    setForm({ ...form, lastName: e.target.value })
-                  }
-                  className={`w-full pl-12 pr-4 py-3 rounded-md border ${
-                    errors.lastName ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-                />
-                {errors.lastName && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">
-                    {errors.lastName}
-                  </p>
-                )}
-              </div>
+          <div data-slot="enquiry" data-alt="A guest moment from one of your trips" className="photo aspect-[4/3] mt-2">
+            <Image
+              src="/images/contact-bg.webp"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <dl className="grid gap-4 sm:grid-cols-2 border-t border-rule pt-6">
+            <div>
+              <dt className="text-sm text-quiet">Write to us</dt>
+              <dd>
+                <a className="link inline-flex items-center gap-2 py-2" href="mailto:contact@wanderertribe.com">
+                  <Mail aria-hidden="true" size={16} /> contact@wanderertribe.com
+                </a>
+              </dd>
             </div>
-
-            {/* Email */}
-            <div className="relative">
-              <Mail
-                className="absolute top-4 left-4 text-[#2F4F2F]"
-                size={18}
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">
-                  {errors.email}
-                </p>
-              )}
+            <div>
+              <dt className="text-sm text-quiet">WhatsApp</dt>
+              <dd>
+                <a className="link inline-flex items-center gap-2 py-2" href="https://wa.me/31613227086">
+                  <MessageCircle aria-hidden="true" size={16} /> +31 6 1322 7086
+                </a>
+              </dd>
             </div>
-
-            {/* Number of Travellers */}
-            <div className="relative">
-              <Users
-                className="absolute top-4 left-4 text-[#2F4F2F]"
-                size={18}
-              />
-              <select
-                value={form.travellers}
-                onChange={(e) =>
-                  setForm({ ...form, travellers: e.target.value })
-                }
-                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
-                  errors.travellers ? "border-red-500" : "border-gray-300"
-                } bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-              >
-                <option value="">Number of Travellers</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3-5</option>
-                <option>6-10</option>
-                <option>10+</option>
-              </select>
-              {errors.travellers && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">
-                  {errors.travellers}
-                </p>
-              )}
-            </div>
-
-            {/* Travel Date */}
-            <div className="relative">
-              <Calendar
-                className="absolute top-4 left-4 text-[#2F4F2F]"
-                size={18}
-              />
-              <input
-                type="date"
-                value={form.date}
-                onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className={`peer w-full pl-12 pr-4 py-3 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base ${
-                  !form.date ? "text-transparent" : "text-[#333333]"
-                }`}
-              />
-              {!form.date && (
-                <span className="absolute left-12 top-3 text-gray-400 pointer-events-none text-sm sm:text-base">
-                  Travel date (if known)
-                </span>
-              )}
-            </div>
-
-            {/* Trip Length */}
-            <div className="relative">
-              <Clock
-                className="absolute top-4 left-4 text-[#2F4F2F]"
-                size={18}
-              />
-              <select
-                value={form.length}
-                onChange={(e) => setForm({ ...form, length: e.target.value })}
-                className={`w-full pl-12 pr-4 py-3 rounded-md border ${
-                  errors.length ? "border-red-500" : "border-gray-300"
-                } bg-white focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-              >
-                <option value="">Trip Length (Weeks)</option>
-                <option>1 Week</option>
-                <option>2 Weeks</option>
-                <option>3 Weeks</option>
-                <option>4 Weeks+</option>
-              </select>
-              {errors.length && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">
-                  {errors.length}
-                </p>
-              )}
-            </div>
-
-            {/* Message */}
-            <div className="relative">
-              <MessageSquare
-                className="absolute top-4 left-4 text-[#2F4F2F]"
-                size={18}
-              />
-              <textarea
-                placeholder="Tell us more about your dream trip..."
-                value={form.details}
-                onChange={(e) => setForm({ ...form, details: e.target.value })}
-                className={`w-full pl-12 pr-4 py-3 h-24 sm:h-28 resize-none rounded-md border ${
-                  errors.details ? "border-red-500" : "border-gray-300"
-                } focus:outline-none focus:ring-2 focus:ring-[#D2691E] text-[#333333] text-sm sm:text-base`}
-              />
-              {errors.details && (
-                <p className="text-red-500 text-xs sm:text-sm mt-1">
-                  {errors.details}
-                </p>
-              )}
-            </div>
-
-            {/* Submit */}
-            <motion.button
-              type="submit"
-              className="w-full py-3 rounded-md bg-wanderer-green text-white font-medium tracking-wide hover:bg-wanderer-teal transition-colors ease-in-out duration-300 text-sm sm:text-base"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              aria-label="Start your journey"
-            >
-              Start Your Journey
-            </motion.button>
-          </form>
+          </dl>
         </div>
-      </motion.div>
+        <div className="lg:col-span-6 lg:col-start-7 lg:pt-3">{formEl}</div>
+      </div>
     </section>
   );
 }
